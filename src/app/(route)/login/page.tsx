@@ -4,6 +4,7 @@ import { Input } from "@/app/_components/components/inputbox";
 import { NextButton, TextButton } from "@/app/_components/components/buttons";
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { useToast } from "@/app/_class/tost";
 
 export default function Login() {
   // const [findID, setFindID] = useState(false);
@@ -19,6 +20,8 @@ export default function Login() {
   const pathname = usePathname();
   const router = useRouter();
 
+  const { ToastComponent, showToast } = useToast();
+
   useEffect(() => {
     window.scrollTo();
   }, [page]);
@@ -27,6 +30,9 @@ export default function Login() {
     case "":
       const handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+
+        showToast("존재하지 않는 사용자 입니다!", 2000);
+
         // if (formRight){
         //     if (router) {
         //       router.push("/banner/IdeaManage");
@@ -41,7 +47,7 @@ export default function Login() {
       return (
         <div className="h-screen bg-white flex justify-center items-center relative z-[10]">
           <div className="w-full h-[230px] bg-[url('/wave.svg')] fixed bottom-0 z-[-1]"></div>
-
+          <ToastComponent />
           <div className="flex flex-col items-center box-border justify-evenly z-10">
             <Image
               src="/Logo.svg"
@@ -285,20 +291,6 @@ export default function Login() {
               className="flex flex-col items-center"
             >
               <Input
-                value={password}
-                type="password"
-                onChange={(e) => setPassword(e.target.value)}
-                label="현재 비밀번호"
-                placeholder="현재 비밀번호를 입력해주세요."
-                className="mt-[49px]"
-              />
-              {/* 대조해보기 
-              첫입력시 password get후 beforePassword에 저장
-              ->매 입력마다 password와 beforePassword비교 
-              -> 차이없을 때 오류메시지 안보이게
-
-              */}
-              <Input
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
                 label="새로운 비밀번호"
@@ -322,7 +314,7 @@ export default function Login() {
                 text="비밀번호 재설정"
                 type="submit"
                 className="mt-[35px] "
-                onClick={() => setPage("returnPW")}
+                onClick={() => setPage("")}
                 //api작업시 onClick삭제
               ></NextButton>
             </form>
