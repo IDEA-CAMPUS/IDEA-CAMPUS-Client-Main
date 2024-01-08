@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 
 interface KeywordProps {
@@ -13,7 +15,7 @@ const KeywordButton: React.FC<KeywordProps> = ({ title }) => {
   return (
     <button
       className={`w-20 h-8 p-1 text-sm border-2 border-[#B034F7] rounded-3xl ${
-        isClicked ? "bg-[#B034F7]" : "bg-white"
+        isClicked ? "bg-purple-300" : "bg-white"
       } text-black`}
       type="button"
       onClick={handleisClicked}

@@ -122,12 +122,10 @@ const ProjectGalley = () => {
               onClick={() => handleTextButtonClick("view")}
             />
           </div>
-          <button
-            className="w-20 h-9 p-1 text-xs bg-purple-300 hover:bg-purple-500 rounded-xl text-white"
-            type="button"
-          >
-            등록하기
-          </button>{" "}
+          {/* 핸들러 구현 */}
+          <div>
+            <SubmitButton title="등록 하기" />
+          </div>
         </div>
         <div className="mt-10 ml-10 mr-10">
           {chunkedContents.map((chunk, chunkIndex) => (

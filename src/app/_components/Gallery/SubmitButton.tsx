@@ -1,17 +1,18 @@
 import React from "react";
 
 interface SubmitProps {
-  color: string;
-  hoverColor: string;
+  title: string;
+  onClick?: () => void;
 }
 
-const SubmitButton: React.FC<SubmitProps> = ({ color, hoverColor }) => {
+const SubmitButton: React.FC<SubmitProps> = ({ title, onClick }) => {
   return (
     <button
-      className={`w-20 h-9 p-1 text-xs bg-${color} hover:bg-${hoverColor} rounded-xl text-white`}
+      className="w-20 h-9 p-1 text-xs bg-purple-300 hover:bg-purple-500 rounded-xl text-white"
       type="button"
+      onClick={onClick}
     >
-      등록하기
+      {title}
     </button>
   );
 };
