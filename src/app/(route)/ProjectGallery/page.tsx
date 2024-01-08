@@ -59,7 +59,7 @@ const ProjectGalley = () => {
   );
 
   return (
-    <main className="bg-white w-fit text-black flex flex-col items-center mx-auto">
+    <main className="bg-white w-full text-black flex flex-col items-center mx-auto">
       <div className="items-start">
         <Image
           className="flex-shrink-0"

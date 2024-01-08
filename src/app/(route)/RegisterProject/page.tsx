@@ -56,7 +56,7 @@ const RegisterProject = () => {
   };
 
   return (
-    <main className="bg-white w-fit h-auto text-black flex flex-col items-center mx-auto">
+    <main className="bg-white h-auto text-black flex flex-col items-center mx-auto">
       <div className="items-start">
         <Image
           src={ProjectGalleryRegisterBackGround}
