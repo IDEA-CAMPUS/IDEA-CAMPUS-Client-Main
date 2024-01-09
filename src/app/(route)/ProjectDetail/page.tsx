@@ -60,10 +60,10 @@ const ProjectDetail = () => {
           </p>
         </div>
 
-        <div className="flex items-center justify-center mt-10">
-          <div className="flex">
+        <div className="flex flex-col items-center justify-center mt-10">
+          <div className="flex items-center">
             {/* Previous Image */}
-            <div className="absolute left-[350px] mt-[150px] transform -translate-y-1/2 w-[250px] h-[250px] rounded-xl bg-white">
+            <div className="flex w-[250px] mr-[-50px] h-[250px] rounded-xl bg-white">
               <Image
                 src={
                   images[
@@ -88,7 +88,7 @@ const ProjectDetail = () => {
             </div>
 
             {/* Next Image */}
-            <div className="absolute right-[350px] mt-[150px] transform -translate-y-1/2 w-[250px] h-[250px] rounded-xl bg-white">
+            <div className="right-[350px] w-[250px] ml-[-50px] h-[250px] rounded-xl bg-white">
               <Image
                 src={
                   images[
@@ -103,7 +103,7 @@ const ProjectDetail = () => {
               />
             </div>
           </div>
-          <div className="absolute flex items-center justify-between space-x-48 z-20">
+          <div className="flex items-center mt-[-170px] justify-between space-x-48 z-20">
             <button className="flex items-center p-4" onClick={goToPrevious}>
               <Image src={PreviousButton} alt="nextButton" />
             </button>
@@ -112,7 +112,7 @@ const ProjectDetail = () => {
             </button>
           </div>
         </div>
-        <p className="text-xl mt-10 text-white">
+        <p className="text-xl mt-40 text-white">
           프로젝트에 대한 간단한 설명입니다.
           <br />이 칸을 다 채우면 50자가 됩니다.제한설정ㄱㄱ
         </p>
@@ -151,7 +151,7 @@ const ProjectDetail = () => {
                 <p className="mt-5 ml-12 text-black text-lg">
                   클릭 시 해당 주소로 이동합니다.
                 </p>
-                <div className="mt-6 ml-24 flex space-x-4">
+                <div className="mt-6 ml-24 mb-10 flex space-x-4">
                   <div className="flex">
                     <Image src={GitHubButton} alt="GitHubButton" />
                   </div>
@@ -171,7 +171,7 @@ const ProjectDetail = () => {
         </div>
 
         {/* 바뀐 거 있나 확인 */}
-        <div className="items-center justify-center mb-20 mt-32 flex space-x-5">
+        <div className="items-center justify-center mb-20 mt-24 flex space-x-5">
           <FixButton title="취소하기" onClick={handleUpload} />
           <FixButton title="삭제하기" onClick={handleUpload} />
         </div>
