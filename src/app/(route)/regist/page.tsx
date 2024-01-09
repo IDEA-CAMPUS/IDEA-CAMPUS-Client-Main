@@ -4,7 +4,7 @@ import { CheckBox, Input } from "@/app/_components/components/inputbox";
 import { NextButton, TextButton } from "@/app/_components/components/buttons";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import SelectComponent from "@/app/_class/select";
+
 import { ChangeEvent } from "react";
 import { SelectBox } from "@/app/_components/components/select";
 
@@ -17,7 +17,7 @@ export default function Regist() {
   const [number, setNumber] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [nickName, setNickName] = useState<string>("");
-  const [newPassword, setNewPassword] = useState<string>("");
+  const [rePassword, setRePassword] = useState<string>("");
   const [reNewPassword, setReNewPassword] = useState<string>("");
   const [club, setClub] = useState("");
 
@@ -89,10 +89,14 @@ export default function Regist() {
     visible,
   }: {
     text: string;
-    visible?: () => void;
+    visible?: boolean;
   }) => {
     return (
-      <div className="w-full flex justify-start mt-[8px]">
+      <div
+        className={`w-full flex justify-start mt-[8px] ${
+          visible ? "visible" : "invisible"
+        }`}
+      >
         <div className="text-[18px] text-[#E11960] font-medium">{text}</div>
       </div>
     );
@@ -126,6 +130,63 @@ export default function Regist() {
     setAllIsChecked(smallCheckBoxs.every((item) => item.checked));
   }, [smallCheckBoxs]);
 
+  const handleError = (text: string) => {
+    const containsAlphaNumeric = (input: string): boolean => {
+      const containsLetter = /[a-zA-Z]/.test(input); // 영문자 포함 여부 확인
+      const containsNumber = /[0-9]/.test(input); // 숫자 포함 여부 확인
+
+      return containsLetter && containsNumber; // 영문자와 숫자가 둘 다 포함되어 있어야 함
+    };
+
+    const pwLength = () => {
+      if (password.length >= 8) {
+        if (password.length < 17) return true;
+      } else {
+        return false;
+      }
+    };
+
+    switch (text) {
+      case "name":
+        if (name.localeCompare("aa") >= 0) {
+          return false;
+        } else if (name === "") {
+          return false;
+        } else {
+          return true;
+        }
+      case "password":
+        if (containsAlphaNumeric(password)) {
+          if (pwLength()) {
+            return false;
+          } else {
+            return true;
+          }
+        } else if (password === "") {
+          return false;
+        } else {
+          return true;
+        }
+      case "rePassword":
+        if (password.localeCompare(rePassword) >= 0) {
+          return false;
+        } else {
+          return true;
+        }
+      case "number": {
+        if (/[0-9]/.test(number)) {
+          if (number.length === 11) {
+            return false;
+          }
+        } else if (number === "") {
+          return false;
+        } else {
+          return true;
+        }
+      }
+    }
+  };
+
   return (
     <div className="h-fit-content  bg-white flex flex-col justify-center items-center relative z-[10]">
       <div className="items-center flex flex-col justify-evenly box-border z-10">
@@ -133,14 +194,20 @@ export default function Regist() {
           회원가입
         </div>
         <form onSubmit={handleRegist} className="flex flex-col items-start">
-          <Input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            label="아이디(이메일)"
-            placeholder="이메일 주소를 입력해주세요."
-            className="mt-[49px]"
-          />
+          <div className="flex relative w-full items-end">
+            <Input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              label="아이디(이메일)"
+              placeholder="이메일 주소를 입력해주세요."
+              className="mt-[49px]"
+              w="1"
+            />
+            <div className="w-[130px] h-[50px] box-border ml-[8px] px-[8px] py-[4px] rounded bottom-0 right-0 border flex justify-center items-center bg-[#f5f5f5] cursor-pointer">
+              중복확인
+            </div>
+          </div>
           <WrongMessage
             text="이메일 형식을 확인해주세요"
             //   visible={handleEmail}
@@ -155,16 +222,24 @@ export default function Regist() {
           />
           <WrongMessage
             text="2자 이상 입력해주세요"
-            //   visible={handleEmail}
+            visible={handleError("name")}
           />
-          <Input
-            type="text"
-            value={nickName}
-            onChange={(e) => setNickName(e.target.value)}
-            label="닉네임"
-            placeholder="닉네임을 입력해주세요."
-            className="mt-[31px]"
-          />
+
+          <div className="flex relative w-full items-end">
+            <Input
+              type="text"
+              value={nickName}
+              onChange={(e) => setNickName(e.target.value)}
+              label="닉네임"
+              placeholder="닉네임을 입력해주세요."
+              className="mt-[31px]"
+              w="1"
+            />
+            <div className="w-[130px] h-[50px] box-border ml-[8px] px-[8px] py-[4px] rounded bottom-0 right-0 border flex justify-center items-center bg-[#f5f5f5] cursor-pointer">
+              중복확인
+            </div>
+          </div>
+
           <WrongMessage
             text="이미 존재하는 닉네임입니다"
             //   visible={handleEmail}
@@ -179,19 +254,19 @@ export default function Regist() {
           />
           <WrongMessage
             text="8~16자 이내로 입력해주세요"
-            //   visible={handleEmail}
+            visible={handleError("password")}
           />
           <Input
             type="password"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
+            value={rePassword}
+            onChange={(e) => setRePassword(e.target.value)}
             label="비밀번호 확인"
             placeholder="비밀번호를 한 번 더 입력해주세요"
             className="mt-[31px]"
           />
           <WrongMessage
             text="입력한 비밀번호가 서로 일치하지 않습니다"
-            //   visible={handleEmail}
+            visible={handleError("rePassword")}
           />
           <Input
             type="text"
@@ -203,7 +278,7 @@ export default function Regist() {
           />
           <WrongMessage
             text="휴대전화번호를 정확하게 입력해주세요"
-            //   visible={handleEmail}
+            visible={handleError("number")}
           />
           <div className="flex relative w-full items-end">
             <Input
@@ -247,12 +322,13 @@ export default function Regist() {
               ))}
             </div>
           </div>
-
-          <NextButton
-            text="회원가입"
-            className="mt-[42px]"
-            type="submit"
-          ></NextButton>
+          <div className="w-full flex justify-center">
+            <NextButton
+              text="회원가입"
+              className="mt-[42px]"
+              type="submit"
+            ></NextButton>
+          </div>
         </form>
       </div>
       <div className="w-full h-[230px] bg-[url('/wave.svg')] bottom-0 z-[-1]"></div>
