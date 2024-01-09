@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const Input = ({
   placeholder,
@@ -7,6 +7,8 @@ export const Input = ({
   type,
   value,
   onChange,
+  w,
+  disabled,
 }: {
   placeholder?: string;
   label: string;
@@ -14,6 +16,8 @@ export const Input = ({
   type?: "text" | "password" | "email" | undefined;
   value: string; // 입력 필드의 값
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; // 변경 이벤트 핸들러
+  w?: string;
+  disabled?: boolean;
 }) => {
   const [inputType, setInputType] = useState(type);
 
@@ -23,6 +27,13 @@ export const Input = ({
       : setInputType("password");
   };
 
+  useEffect(() => {
+    let width = "";
+    {
+      w ? (width = "360px") : "";
+    }
+  }, []);
+
   return (
     <div className={`flex flex-col ${className} relative`}>
       <label className="text-[18px] mb-[5px] font-[500]">{label}</label>
@@ -31,7 +42,10 @@ export const Input = ({
         value={value} // 외부에서 받은 값
         onChange={onChange} // 외부에서 받은 onChange 핸들러
         placeholder={placeholder}
-        className="border rounded pl-[12px] py-[12px] box-border placeholder:font-[18px] placeholder:text-[#6b6b6b] w-[500px] h-[50px] bg-[#f5f5f5]"
+        className={`border rounded pl-[12px] py-[12px] box-border placeholder:font-[18px] placeholder:text-[#6b6b6b] h-[50px] bg-[#f5f5f5] ${
+          w ? "w-[360px]" : "w-[500px]"
+        }`}
+        disabled={disabled}
       />
       {inputType !== "password" ? (
         <></>
@@ -42,6 +56,35 @@ export const Input = ({
           onClick={handleView}
         ></img>
       )}
+    </div>
+  );
+};
+
+export const CheckBox = ({
+  label,
+  name,
+  checked,
+  onCheck,
+
+  value,
+}: {
+  label: string;
+  name?: string;
+  checked?: boolean;
+  onCheck: (e: React.ChangeEvent<HTMLInputElement>) => void;
+
+  value: string;
+}) => {
+  return (
+    <div className="flex items-center">
+      <input
+        name={name}
+        type="checkbox"
+        value={value}
+        checked={checked}
+        onChange={onCheck}
+      ></input>
+      <label className="ml-[15px]">{label}</label>
     </div>
   );
 };
