@@ -30,8 +30,8 @@ export default function Login() {
     case "":
       const handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-
-        showToast("존재하지 않는 사용자 입니다!", 2000);
+        //토스트로직 만들기
+        showToast("올바르지 않은 아이디 혹은 비밀번호입니다", 2000);
 
         // if (formRight){
         //     if (router) {
@@ -112,6 +112,8 @@ export default function Login() {
     case "findID":
       const handleFindID = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+
+        showToast("올바르지 않은 이름 혹은 전화번호입니다", 2000);
         //api 받아와서 저장
         //   if(nameWrong){
         //     에러메시지토스트
@@ -167,6 +169,8 @@ export default function Login() {
 
     case "findPW":
       const handleFindPW = () => {
+
+        showToast("올바르지 않은 이메일 혹은 비밀번호입니다", 2000);
         //api 받아옴
         //   if(emailWrong){
         //     에러메시지토스트
