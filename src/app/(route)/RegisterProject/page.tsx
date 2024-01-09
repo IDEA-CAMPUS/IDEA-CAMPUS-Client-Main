@@ -56,14 +56,12 @@ const RegisterProject = () => {
   };
 
   return (
-    <main className="bg-white h-auto text-black flex flex-col items-center mx-auto">
+    <main className="bg-[#FCF6FF] w-full text-black flex flex-col items-center mx-auto">
       <div className="items-start">
         <Image
           src={ProjectGalleryRegisterBackGround}
           alt="projectgallerybackground1"
         />
-        <div className="bg-[#FCF6FF] h-screen"></div>
-        <div className="bg-[#FCF6FF] h-screen"></div>
       </div>
       <div className="mt-40 ml-24 mr-24 w-full absolute">
         <p className="text-white text-center text-4xl font-bold">
@@ -74,7 +72,7 @@ const RegisterProject = () => {
           당신의 프로젝트를 마음껏 뿜내주세요.
         </p>
       </div>
-      <div className="mt-[350px] py-20 px-10 w-[1000px] h-auto absolute bg-white">
+      <div className="mt-[-150px] mb-20 py-20 px-10 w-[1000px] h-auto border-2 border-gray-100 rounded-2xl  shadow-lg bg-white">
         <p className="text-black font-bold text-2xl">키워드</p>
         <div className="mt-3 space-x-4">
           <KeywordButton title={"앱"} />
