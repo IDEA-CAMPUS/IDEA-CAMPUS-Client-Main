@@ -50,7 +50,7 @@ const IdeaContent: React.FC<IdeaContentProps> = ({
           )}
         </div>
       </div>
-      <div className="w-[330px] h-[215px] bg-[#FFF5DB] rounded-b-xl overflow-hidden">
+      <div className="w-[328px] h-[215px] bg-[#FFF5DB] rounded-b-xl overflow-hidden">
         <div className="flex items-center justify-center mt-[-10px]">
           <Image src={Polygon8} alt="polygon8" width={50} />
         </div>
