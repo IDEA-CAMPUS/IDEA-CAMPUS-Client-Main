@@ -26,10 +26,13 @@ const IdeaContent: React.FC<IdeaContentProps> = ({
   return (
     <main className="w-[330px] h-[456px] mb-10 border-2 border-gray-100 rounded-2xl bg-white shadow-lg">
       <div className="flex p-5 flex-col items-center justify-center relative">
-        <p className="w-24 h-12 p-1 text-xl bg-[#FFCF4A] rounded-xl text-black flex items-center justify-center">
+        <p className="w-auto h-12 p-1 px-3 text-xl bg-[#FFCF4A] rounded-xl text-black flex items-center justify-center">
           {title}
         </p>
-        <p className="mt-5 text-lg text-center text-black">
+        <p
+          className="mt-5 h-[90px] text-lg text-center text-black"
+          style={{ display: "flex", alignItems: "center" }}
+        >
           {explain.length > 50 ? `${explain.slice(0, 50)}...` : explain}
         </p>
         <div className="flex mt-4 space-x-2">
