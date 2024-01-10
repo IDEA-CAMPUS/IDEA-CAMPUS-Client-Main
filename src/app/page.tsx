@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import HomeBackground from "public/HomeBackground.svg";
@@ -9,6 +11,7 @@ import Speaker from "public/Home/Speaker.svg";
 import IdeaContent from "./_components/IdeaZone/IdeaContent";
 import Content from "./_components/Gallery/Content";
 import StudentGrouplistItem from "./studentGroups/_components/StudentGroupListItem";
+import { NavBar } from "./_components/components/naviBar";
 
 const page = () => {
   const contents = [
@@ -78,6 +81,7 @@ const page = () => {
   );
   return (
     <main className="bg-white h-auto w-full text-black flex flex-col items-center mx-auto">
+      <NavBar />
       <div className="w-[1600px]">
         <Image src={HomeBackground} alt="HomeBackground" />
       </div>
