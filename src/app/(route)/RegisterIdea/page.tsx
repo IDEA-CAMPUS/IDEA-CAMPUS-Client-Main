@@ -36,8 +36,7 @@ const RegisterIdea = () => {
       <div className="mt-40 ml-24 mr-24 w-full absolute">
         <p className=" text-center text-4xl font-bold">아이디어 등록하기</p>
         <p className="text-xl text-center mt-10 ">
-          당신의 아이디어를 마음껏 뽐내주세요. <br />
-          당신의 아이디어를 마음껏 뽐내주세요. 조금 더 긴 글씨
+          당신의 아이디어를 마음껏 뽐내주세요.
         </p>
       </div>
       <div className="mt-[-150px] mb-20 py-20 px-10 w-[1000px] h-auto border-2 border-gray-100 rounded-2xl  shadow-lg bg-white">
@@ -45,7 +44,7 @@ const RegisterIdea = () => {
         <input
           className="bg-[#F5F5F5] h-12 mt-3 flex focus:outline-none focus:border-2 focus:border-purple-500 w-[650px] p-2 border-2 border-[#A6A6A6] rounded-xl"
           type="text"
-          placeholder="10글자 이내의 프로젝트 제목을 입력해주세요."
+          placeholder="15글자 이내의 프로젝트 제목을 입력해주세요."
         />
         <p className="mt-5 text-black font-bold text-2xl">간단 설명</p>
         <textarea
@@ -58,17 +57,17 @@ const RegisterIdea = () => {
           <input
             className="bg-[#F5F5F5] h-12 mt-3 flex focus:outline-none focus:border-2 focus:border-purple-500 w-[100px] p-2 border-2 border-[#A6A6A6] rounded-xl"
             type="text"
-            placeholder="N글자 이내."
+            placeholder="5글자 이내."
           />
           <input
             className="bg-[#F5F5F5] h-12 mt-3 flex focus:outline-none focus:border-2 focus:border-purple-500 w-[100px] p-2 border-2 border-[#A6A6A6] rounded-xl"
             type="text"
-            placeholder="N글자 이내."
+            placeholder="5글자 이내."
           />
           <input
             className="bg-[#F5F5F5] h-12 mt-3 flex focus:outline-none focus:border-2 focus:border-purple-500 w-[100px] p-2 border-2 border-[#A6A6A6] rounded-xl"
             type="text"
-            placeholder="N글자 이내."
+            placeholder="5글자 이내."
           />
         </div>
 
@@ -76,7 +75,7 @@ const RegisterIdea = () => {
         <textarea
           style={{ resize: "none" }}
           className="bg-[#F5F5F5] h-80 mt-3 flex focus:outline-none focus:border-2 focus:border-purple-500 w-full p-2 border-2 border-[#A6A6A6] rounded-xl"
-          placeholder="뭘 써야 되냐."
+          placeholder="상세 설명을 입력해주세요."
         />
 
         <div className="flex mt-12">

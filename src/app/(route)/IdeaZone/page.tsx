@@ -26,8 +26,7 @@ const IdeaZone = () => {
       keyword2: "동아리",
       keyword3: "it",
       name: "test",
-      explain:
-        "이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다",
+      explain: "이 글자는 5",
     },
     {
       title: "test2",
@@ -83,14 +82,14 @@ const IdeaZone = () => {
             <Image
               src={IdeaZoneIcon}
               alt={"projectGalleryIcon"}
-              className="mb-5"
+              className="ml-2 mt-5 mb-5"
             />
           </div>
           <p className="mt-8 text-xl">
             새로운 아이디어가 당신을 기다리고 있어요. <br />
             아이디어 캠퍼스에 입학한 여러 글을 둘러보고
             <br />
-            협업을 제안해보는 건 어떠세요?
+            참신한 아이디어를 작성해보세요!
           </p>
         </div>
       </div>

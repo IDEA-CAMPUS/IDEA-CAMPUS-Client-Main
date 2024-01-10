@@ -68,8 +68,7 @@ const RegisterProject = () => {
           프로젝트 등록하기
         </p>
         <p className="text-xl text-center mt-10 text-white">
-          당신의 프로젝트를 자랑해주세요 <br />
-          당신의 프로젝트를 마음껏 뿜내주세요.
+          당신의 프로젝트를 마음껏 자랑해주세요!
         </p>
       </div>
       <div className="mt-[-150px] mb-20 py-20 px-10 w-[1000px] h-auto border-2 border-gray-100 rounded-2xl  shadow-lg bg-white">
@@ -83,7 +82,7 @@ const RegisterProject = () => {
         <input
           className="bg-[#F5F5F5] h-12 mt-3 flex focus:outline-none focus:border-2 focus:border-purple-500 w-[650px] p-2 border-2 border-[#A6A6A6] rounded-xl"
           type="text"
-          placeholder="10글자 이내의 프로젝트 제목을 입력해주세요."
+          placeholder="15글자 이내의 프로젝트 제목을 입력해주세요."
         />
         <p className="mt-5 text-black font-bold text-2xl">간단 설명</p>
         <textarea
@@ -95,7 +94,7 @@ const RegisterProject = () => {
         <textarea
           style={{ resize: "none" }}
           className="bg-[#F5F5F5] h-80 mt-3 flex focus:outline-none focus:border-2 focus:border-purple-500 w-full p-2 border-2 border-[#A6A6A6] rounded-xl"
-          placeholder="뭘 써야 되냐."
+          placeholder="상세 설명을 입력해주세요."
         />
         <p className="mt-12 text-black font-bold text-2xl">팀 정보</p>
         <input

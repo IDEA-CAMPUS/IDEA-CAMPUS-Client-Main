@@ -128,20 +128,20 @@ const ProjectGalley = () => {
           </div>
         </div>
         <div className="mt-10 ml-10 mr-10">
-          {chunkedContents.map((chunk, chunkIndex) => (
+          {/* {chunkedContents.map((chunk, chunkIndex) => (
             <div key={chunkIndex} className="flex space-x-20">
               {chunk.map((content, contentIndex) => (
                 <Content
                   key={contentIndex}
                   title={content.title}
-                  image={content.image}
+                  thumbnail={content.image}
                   keyword={content.keyword}
                   team={content.team}
                   explain={content.explain}
                 />
               ))}
             </div>
-          ))}
+          ))} */}
         </div>
       </div>
     </main>
