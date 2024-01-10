@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 
 import { ChangeEvent } from "react";
 import { SelectBox } from "@/app/_components/components/select";
+import { NavBar } from "@/app/_components/components/naviBar";
+import { doubleCheck, regist } from "@/app/_api/regist";
 
 export default function Regist() {
   const pathname = usePathname();
@@ -14,16 +16,21 @@ export default function Regist() {
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [number, setNumber] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [nickName, setNickName] = useState<string>("");
-  const [rePassword, setRePassword] = useState<string>("");
-  const [reNewPassword, setReNewPassword] = useState<string>("");
-  const [club, setClub] = useState("");
+  const [checkPassword, setCheckPassword] = useState<string>("");
+
+  const [organization, setOrganization] = useState("");
 
   const [allIsChecked, setAllIsChecked] = useState(false);
 
   const [selectedValue, setSelectedValue] = useState("직접입력");
+
+  const [agreeMarketingSms, setAgreeMarketingSms] = useState<boolean>();
+
+  const [idRight, setIdRight] = useState<boolean | undefined>(undefined);
+  const [nickRight, setNickRight] = useState<boolean | undefined>(undefined);
 
   interface Option {
     value: string;
@@ -69,18 +76,32 @@ export default function Regist() {
       checked: false,
       className: "round small",
     },
-    {
-      name: "agreement",
-      value: "check3",
-      label: "마케팅 수신 동의 (선택)",
-      checked: false,
-      className: "round small",
-    },
   ]);
 
-  const handleRegist = () => {
-    if (router) {
-      router.push("/login");
+  const handleRegist = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    try {
+      const result: boolean | undefined = await regist({
+        email,
+        name,
+        nickName,
+        password,
+        checkPassword,
+        phoneNumber,
+        organization,
+        agreeMarketingSms,
+      });
+
+      if (result === true) {
+        if (router) {
+          // router.push("/login");
+        }
+      } else {
+      }
+
+      //정보저장
+    } catch (error) {
+      console.error("에러가 발생했습니다:", error);
     }
   };
 
@@ -147,10 +168,26 @@ export default function Regist() {
     };
 
     switch (text) {
+      case "idEmail":
+        if (idRight == undefined) {
+          return false;
+        } else if (idRight == true) {
+          return false;
+        } else {
+          return true;
+        }
       case "name":
         if (name.localeCompare("aa") >= 0) {
           return false;
         } else if (name === "") {
+          return false;
+        } else {
+          return true;
+        }
+      case "nickName":
+        if (nickRight == undefined) {
+          return false;
+        } else if (nickRight == true) {
           return false;
         } else {
           return true;
@@ -167,18 +204,18 @@ export default function Regist() {
         } else {
           return true;
         }
-      case "rePassword":
-        if (password.localeCompare(rePassword) >= 0) {
+      case "checkPassword":
+        if (password.localeCompare(checkPassword) >= 0) {
           return false;
         } else {
           return true;
         }
-      case "number": {
-        if (/[0-9]/.test(number)) {
-          if (number.length === 11) {
+      case "phoneNumber": {
+        if (/[0-9]/.test(phoneNumber)) {
+          if (phoneNumber.length === 11) {
             return false;
           }
-        } else if (number === "") {
+        } else if (phoneNumber === "") {
           return false;
         } else {
           return true;
@@ -187,8 +224,46 @@ export default function Regist() {
     }
   };
 
+  const handleIDCheck = async () => {
+    try {
+      const result: boolean = await doubleCheck("email", email);
+
+      if (result === true) {
+        setIdRight(true);
+      } else {
+        setIdRight(false);
+      }
+
+      //정보저장
+    } catch (error) {
+      console.error("에러가 발생했습니다:", error);
+    }
+  };
+
+  const handleNickCheck = async () => {
+    try {
+      const result: boolean = await doubleCheck("", nickName);
+
+      if (result === true) {
+        setNickRight(true);
+      } else {
+        setNickRight(false);
+      }
+
+      //정보저장
+    } catch (error) {
+      console.error("에러가 발생했습니다:", error);
+    }
+  };
+
+  const handleAgreeMarketingSms = (e: ChangeEvent<HTMLInputElement>) => {
+    const checked = e.target.checked;
+    setAgreeMarketingSms(checked); // agreeMarketingSms 상태 업데이트
+  };
+
   return (
     <div className="h-fit-content  bg-white flex flex-col justify-center items-center relative z-[10]">
+      {/* <NavBar /> */}
       <div className="items-center flex flex-col justify-evenly box-border z-10">
         <div className="text-center text-[36px] font-bold mt-[183px]">
           회원가입
@@ -203,14 +278,18 @@ export default function Regist() {
               placeholder="이메일 주소를 입력해주세요."
               className="mt-[49px]"
               w="1"
+              disabled={idRight}
             />
-            <div className="w-[130px] h-[50px] box-border ml-[8px] px-[8px] py-[4px] rounded bottom-0 right-0 border flex justify-center items-center bg-[#f5f5f5] cursor-pointer">
+            <div
+              className="w-[130px] h-[50px] box-border ml-[8px] px-[8px] py-[4px] rounded bottom-0 right-0 border flex justify-center items-center bg-[#f5f5f5] cursor-pointer"
+              onClick={handleIDCheck}
+            >
               중복확인
             </div>
           </div>
           <WrongMessage
             text="이메일 형식을 확인해주세요"
-            //   visible={handleEmail}
+            visible={handleError("idEmail")}
           />
           <Input
             type="text"
@@ -234,15 +313,19 @@ export default function Regist() {
               placeholder="닉네임을 입력해주세요."
               className="mt-[31px]"
               w="1"
+              disabled={handleError("nickName")}
             />
-            <div className="w-[130px] h-[50px] box-border ml-[8px] px-[8px] py-[4px] rounded bottom-0 right-0 border flex justify-center items-center bg-[#f5f5f5] cursor-pointer">
+            <div
+              className="w-[130px] h-[50px] box-border ml-[8px] px-[8px] py-[4px] rounded bottom-0 right-0 border flex justify-center items-center bg-[#f5f5f5] cursor-pointer"
+              onClick={handleNickCheck}
+            >
               중복확인
             </div>
           </div>
 
           <WrongMessage
             text="이미 존재하는 닉네임입니다"
-            //   visible={handleEmail}
+            visible={handleError("nickName")}
           />
           <Input
             type="password"
@@ -258,33 +341,35 @@ export default function Regist() {
           />
           <Input
             type="password"
-            value={rePassword}
-            onChange={(e) => setRePassword(e.target.value)}
+            value={checkPassword}
+            onChange={(e) => setCheckPassword(e.target.value)}
             label="비밀번호 확인"
             placeholder="비밀번호를 한 번 더 입력해주세요"
             className="mt-[31px]"
           />
           <WrongMessage
             text="입력한 비밀번호가 서로 일치하지 않습니다"
-            visible={handleError("rePassword")}
+            visible={handleError("checkPassword")}
           />
           <Input
             type="text"
-            value={number}
-            onChange={(e) => setNumber(e.target.value)}
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
             label="휴대전화번호"
             placeholder="‘-’ 빼고 숫자만 입력"
             className="mt-[31px]"
           />
           <WrongMessage
             text="휴대전화번호를 정확하게 입력해주세요"
-            visible={handleError("number")}
+            visible={handleError("phoneNumber")}
           />
           <div className="flex relative w-full items-end">
             <Input
               type="text"
-              value={selectedValue === "직접입력" ? club : selectedValue}
-              onChange={(e) => setClub(e.target.value)}
+              value={
+                selectedValue === "직접입력" ? organization : selectedValue
+              }
+              onChange={(e) => setOrganization(e.target.value)}
               label="소속 동아리"
               placeholder="소속 동아리를 입력해주세요."
               className="mt-[31px] "
@@ -320,6 +405,14 @@ export default function Regist() {
                   label={item.label}
                 ></CheckBox>
               ))}
+              <CheckBox
+                name="agreement"
+                value="check3"
+                checked={agreeMarketingSms}
+                onCheck={handleAgreeMarketingSms}
+                label="마케팅 수신 동의 (선택)"
+                className="round small"
+              ></CheckBox>
             </div>
           </div>
           <div className="w-full flex justify-center">

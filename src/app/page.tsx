@@ -1,5 +1,6 @@
 "use client";
 
+
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
@@ -12,6 +13,7 @@ import Speaker from "public/Home/Speaker.svg";
 import IdeaContent from "./_components/IdeaZone/IdeaContent";
 import Content from "./_components/Gallery/Content";
 import StudentGrouplistItem from "./studentGroups/_components/StudentGroupListItem";
+
 import splitKeywords from "./_utils/seperateKeword";
 import getIdeaHome from "./_api/Home/GetIdeaHome";
 import getProjectHome from "./_api/Home/GetProjectHome";
@@ -50,6 +52,7 @@ const page: React.FC = () => {
 
   return (
     <main className="bg-white h-auto w-full text-black flex flex-col items-center mx-auto">
+      <NavBar />
       <div className="w-[1600px]">
         <Image src={HomeBackground} alt="HomeBackground" />
       </div>
