@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import Image from "next/image";
 import IdeaZoneBackground from "public/IdeaZone/IdeaZoneBackground.svg";
 import FlowerGray from "public/IdeaZone/FlowerGray.svg";
@@ -14,15 +14,46 @@ import { NavBar } from "@/app/_components/components/naviBar";
 import getIdea from "@/app/_api/IdeaZone/GetIdea";
 import splitKeywords from "@/app/_utils/seperateKeword";
 
+interface Idea {
+  id: number;
+  title: string;
+  simpleDescription: string;
+  keyword: string;
+  nickName: string;
+  color: string;
+  hits: number;
+  createdAt: string;
+}
+
 const IdeaZone = () => {
   const [currentSort, setCurrentSort] = useState<"new" | "view">("new");
   const ideaData = getIdea();
   const ideaList = ideaData?.information;
 
   const chunkSize = 3;
-  const ideaContents = Array.from(
-    { length: Math.ceil((ideaList?.length || 0) / chunkSize) },
-    (_, index) => ideaList?.slice(index * chunkSize, (index + 1) * chunkSize)
+  // 최신순 또는 조회순으로 정렬된 아이디어 리스트
+  const sortedIdeaList = useMemo(() => {
+    if (currentSort === "new") {
+      return ideaList
+        ?.slice()
+        .sort(
+          (a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
+    } else if (currentSort === "view") {
+      return ideaList?.slice().sort((a, b) => b.hits - a.hits);
+    }
+    return ideaList; // 기본값은 그대로 반환
+  }, [currentSort, ideaList]);
+
+  const ideaContents = useMemo(
+    () =>
+      Array.from(
+        { length: Math.ceil((sortedIdeaList?.length || 0) / chunkSize) },
+        (_, index) =>
+          sortedIdeaList?.slice(index * chunkSize, (index + 1) * chunkSize)
+      ),
+    [sortedIdeaList, chunkSize]
   );
 
   const handleTextButtonClick = (sortType: "new" | "view") => {

@@ -3,7 +3,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 interface SubmitProps {
   title: string;
-  url: string; // url은 반드시 필요하다고 가정
+  url?: string; // url은 반드시 필요하다고 가정
 }
 
 const SubmitButton: React.FC<SubmitProps> = ({ title, url }) => {
@@ -11,7 +11,7 @@ const SubmitButton: React.FC<SubmitProps> = ({ title, url }) => {
 
   const handleClick = () => {
     // 클릭 시 다음 페이지로 이동
-    router.push(url);
+    if (url) router.push(url);
   };
 
   return (

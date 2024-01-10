@@ -96,7 +96,7 @@ const RegisterIdea = () => {
           //건든 흔적 있는 거 추가 (이거 설마 전부 하나씩 추가해야됨?)
           <div className="flex items-center justify-center space-x-5 mt-24">
             <FixButton title="취소하기" onClick={handleUpload} />
-            <SubmitButton title="등록하기" onClick={handleUpload} />
+            <SubmitButton title="등록하기" />
           </div>
         }
       </div>

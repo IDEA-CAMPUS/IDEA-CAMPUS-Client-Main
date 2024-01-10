@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 
 interface Idea {
+  hits: any;
   keyword: any;
   title: string;
   thumbnail: string;
   nickName: string;
   simpleDescription: string;
   color: string;
+  createdAt: string;
 }
 
 interface ApiResponse {
