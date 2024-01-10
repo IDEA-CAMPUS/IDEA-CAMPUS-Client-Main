@@ -1,17 +1,54 @@
-import { Link } from "react-router-dom";
+import { usePathname, useRouter } from "next/navigation";
 
 export const NavBar = () => {
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const handleRoute = (link: string) => {
+    if (router) {
+      router.push(link);
+    }
+  };
+
   return (
-    <div className="w-full h-[60px] bg-white">
-      <div className="flex gap-[64px]">
-        <img src="/logo.svg"></img>
-        <Link className="h-[full] flex ">아이디어 존</Link>
-        <Link>프로젝트 갤러리</Link>
-        <Link>동아리</Link>
-      </div>
-      <div className="flex justify-end gap-[42px]">
-        <Link to="/login">로그인</Link>
-        <Link to="/regist">회원가입</Link>
+    <div className="w-full h-[70px] bg-white box-border flex items-center justify-center">
+      <div className="flex">
+        <div className="flex gap-[64px] items-center">
+          <img
+            src="/logo.svg"
+            className="w-[108px] h-[40px]"
+            onClick={() => handleRoute("/")}
+          ></img>
+          <div
+            className="text-[#B034F7] font-bold text-[18px] flex cursor-pointer"
+            onClick={() => router.push("/IdeaZone")}
+          >
+            아이디어 존
+          </div>
+          <div
+            className="font-bold text-[18px] flex cursor-pointer"
+            onClick={() => router.push("/IdeaZone/ProjectGallery")}
+          >
+            프로젝트 갤러리
+          </div>
+          <div className="font-bold text-[18px] flex cursor-pointer">
+            동아리·학회
+          </div>
+        </div>
+        <div className="flex justify-end gap-[42px] ml-[630px] items-center">
+          <div
+            className="font-bold text-[18px] flex cursor-pointer"
+            onClick={() => handleRoute("/login")}
+          >
+            로그인
+          </div>
+          <div
+            className="font-bold text-[18px] flex cursor-pointer"
+            onClick={() => handleRoute("/regist")}
+          >
+            회원가입
+          </div>
+        </div>
       </div>
     </div>
   );
