@@ -27,7 +27,7 @@ export const NavBar = () => {
           </div>
           <div
             className="font-bold text-[18px] flex cursor-pointer"
-            onClick={() => router.push("/IdeaZone/ProjectGallery")}
+            onClick={() => router.push("/ProjectGallery")}
           >
             프로젝트 갤러리
           </div>
