@@ -12,9 +12,6 @@ import splitkeyWords from "@/app/_utils/seperateKeword";
 import { NavBar } from "@/app/_components/components/naviBar";
 import deleteIdea from "@/app/_api/IdeaZone/DeleteIdea";
 
-const exampleText =
-  "죄송합니다, 저는 외부로 링크를 생성하거나 직접적인 외부 서s비스에 접속하여 정보를 업데이트하는 기능을 지원하지 않습니다. 하지만 글을 위한 예시를 드릴게요.한 오래된 마을의 이야기를 담은 깃허브 레포지토리가 있다면, 그 곳에서는 마을 주민들의 삶과 문화를 소개하는 문서들과 사진들이 모여있을 것입니다. 이 마을은 옛 생활 방식을 유지하면서도 현대의 변화와 조화를 이루고 있습니다. 이 레포지토리 안에는 마을의 역사와 전설, 그리고 주변 자연 환경을 소개하는 파일들이 있을 것입니다. 사람들은 이를 통해 마을의 아름다움과 자연 속에서의 평화로운 삶을 감상할 수 있을 것입니다. 또한, 마을의 지역 행사나 문화 행사에 대한 정보도 담겨 있을 것입니다. 이 깃허브 레포지토리는 마을을 알리는 데 사용되며, 주민들은 이를 통해 마을에 대한 자부심을 느낄 것입니다. 마을에 관심 있는 사람들은 여기를 방문하여 다양한 정보와 이야기를 나누며, 마을을 더 깊이 이해하고 소통할 수 있을 것입니다. 이는 지역사회와 온라인 커뮤니티 간의 연결을 도모하는 데에 큰 도움이 될 것입니다. 죄송합니다, 저는 외부로 링크를 생성하거나 직접적인 외부 서비스에 접속하여 정보를 업데이트하는 기능을 지원하지 않습니다. 하지만 더 많은 글을 통해 이야기를 이어가겠습니다. 마을의 깃허브 레포지토리에는 마을 주변의 아름다운 자연 경관과 함께 주민들의 일상, 그들이 속한 공동체의 소식들이 담겨 있을 것입니다. 이곳은 주민들이 일상의 사진이나 행사 소식을 나누며 마을의 아름다움과 활기를 전하고 있는 곳입니다. 또한, 마을 주민들이 전해온 다양한 이야기와 전설들이 기록되어 있을 것입니다. 이들은 세대를 초월하여 전해져 온 마을의 문화와 역사를 반영합니다. 그리고 지난 날의 모습과 현재의 변화가 어우러져 마을의 아이덴티티를 형성하고 있습니다. 이 레포지토리는 마을에 관심 있는 이들에게 마을의 특별함과 매력을 전달하는 중요한 수단이 될 것입니다. 지역 사회와의 소통을 통해 다양한 혜택을 주민들에게 제공하며, 더 넓은 공동체와의 연결성을 높일 수 있는 좋은 기회가 될 것입니다. 마을의 아름다움과 따뜻한 이야기가 깃허브 레포지토리를 통해 세상과 소통하며 더 많은 이들에게 전달될 수 있기를 바랍니다.";
-
 const IdeaDetail = () => {
   const pathname = usePathname();
   //id가져오는 문자열 함수
@@ -22,9 +19,11 @@ const IdeaDetail = () => {
 
   const ideaData = getIdeaDetail(id)?.information;
 
-  const handleFix = () => {};
-
   const router = useRouter();
+
+  const handleFix = () => {
+    router.push(`/FixIdea/${id}`);
+  };
 
   const handleDelete = () => {
     try {
@@ -35,8 +34,6 @@ const IdeaDetail = () => {
       console.error("Error fetching ideaData:", error);
     }
   };
-
-  console.log(ideaData);
 
   const keyWordArray = ideaData?.keyWord ? splitkeyWords(ideaData.keyWord) : [];
 
@@ -97,7 +94,7 @@ const IdeaDetail = () => {
           <button
             className="w-20 h-9 p-1 text-xs bg-gray-400 hover:bg-[#FFE292] rounded-xl text-white"
             type="button"
-            onClick={handleFix}
+            onClick={() => handleFix()}
           >
             수정하기
           </button>
