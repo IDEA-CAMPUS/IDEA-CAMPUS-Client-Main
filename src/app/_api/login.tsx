@@ -7,23 +7,20 @@ interface Idea {
 }
 
 interface ServerResponse {
-  accessToken?: string;
-  refreshToken?: string;
-  tokenType?: string;
-  timestamp?: string;
-  message?: string;
-  code?: string;
-  status?: number;
-  class?: string;
-  errors?: [
+  timestamp: string;
+  message: string;
+  code: string;
+  status: number;
+  class: string;
+  errors: [
     {
       field: string;
       value: {};
       reason: string;
     }
   ];
-  check?: boolean;
-  information?: Idea[];
+  check: boolean;
+  information: Idea[];
 }
 
 export async function login({
@@ -48,34 +45,31 @@ export async function login({
         }), // 만약 POST 요청에 데이터를 보내려면 body에 데이터를 추가
       }
     );
-    console.log("email,pw:", email, password);
+
     if (!resp.ok) {
       throw new Error(`HTTP error! Status: ${resp.status}`);
     }
 
     const data: ServerResponse = await resp.json();
 
-    return data;
-
-    // if (data.check) {
-    //   console.log("Data received:", data.information);
-    //   return true;
-    // } else {
-    //   // console.error("Error occurred:", data.message || "Unknown error");
-    //   return false;
-    // }
+    if (data.check) {
+      console.log("Data received:", data.information);
+      return true;
+    } else {
+      console.error("Error occurred:", data.message || "Unknown error");
+      return false;
+    }
   } catch (error) {
-
-    // console.error("Error:", error.message || "Unknown error");
+    console.error("Error:", error.message || "Unknown error");
   }
 }
 
 export async function findID({
   name,
-  number,
+  phoneNumber,
 }: {
   name: string;
-  number: string;
+  phoneNumber: string;
 }) {
   try {
     const resp = await fetch(
@@ -88,30 +82,26 @@ export async function findID({
         },
         body: JSON.stringify({
           name: name,
-          phoneNumber: number,
+          phoneNumber: phoneNumber,
         }), // 만약 POST 요청에 데이터를 보내려면 body에 데이터를 추가
       }
     );
-    console.log("name:", name, "number:", number);
-    console.log("resp", resp);
 
     if (!resp.ok) {
       throw new Error(`HTTP error! Status: ${resp.status}`);
     }
 
     const data: ServerResponse = await resp.json();
-    console.log("data", data);
-    return data;
-    // if (data.check) {
-    //   console.log("Data received:", data.information);
-    //   return true;
-    // } else {
-    //   console.error("Error occurred:", data.message || "Unknown error");
-    //   return false;
-    // }
-  } catch (error) {
 
-    // console.error("Error:", error.message || "Unknown error");
+    if (data.check) {
+      console.log("Data received:", data.information);
+      return true;
+    } else {
+      console.error("Error occurred:", data.message || "Unknown error");
+      return false;
+    }
+  } catch (error) {
+    console.error("Error:", error.message || "Unknown error");
   }
 }
 
@@ -152,6 +142,6 @@ export async function findPW({
       return false;
     }
   } catch (error) {
-    console.error("Error:", error || "Unknown error");
+    console.error("Error:", error.message || "Unknown error");
   }
 }
