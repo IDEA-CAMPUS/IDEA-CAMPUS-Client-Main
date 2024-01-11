@@ -65,7 +65,7 @@ export default function Login() {
         //pull 하기
       };
       return (
-        <div className="h-screen bg-white flex justify-center items-center relative z-[10]">
+        <div className="h-screen bg-white text-black flex justify-center items-center relative z-[10]">
           <div className="w-full h-[230px] bg-[url('/wave.svg')] fixed bottom-0 z-[-1]"></div>
           <ToastComponent />
           <div className="flex flex-col items-center box-border justify-evenly z-10">

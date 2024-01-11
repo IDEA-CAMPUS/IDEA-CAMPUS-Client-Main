@@ -60,7 +60,7 @@ export async function login({
       return false;
     }
   } catch (error) {
-    console.error("Error:", error.message || "Unknown error");
+    console.error("Error:", error || "Unknown error");
   }
 }
 
@@ -101,7 +101,7 @@ export async function findID({
       return false;
     }
   } catch (error) {
-    console.error("Error:", error.message || "Unknown error");
+    console.error("Error:", error || "Unknown error");
   }
 }
 
@@ -142,6 +142,6 @@ export async function findPW({
       return false;
     }
   } catch (error) {
-    console.error("Error:", error.message || "Unknown error");
+    console.error("Error:", error || "Unknown error");
   }
 }
