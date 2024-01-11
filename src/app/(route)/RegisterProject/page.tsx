@@ -4,7 +4,7 @@ import React, { useState, ChangeEvent, useRef } from "react";
 
 import ProjectGalleryRegisterBackGround from "public/ProjectGallery/ProjectGalleryRegisterBackGround.svg";
 import Image from "next/image";
-import KeywordButton from "@/app/_components/Gallery/KeywordButton";
+import keyWordButton from "@/app/_components/Gallery/keyWordButton";
 import DeleteButton from "public/ProjectGallery/DeleteButton.svg";
 import SubmitButton from "@/app/_components/Gallery/SubmitButton";
 import FixButton from "@/app/_components/Gallery/FixButton";
@@ -74,9 +74,9 @@ const RegisterProject = () => {
       <div className="mt-[-150px] mb-20 py-20 px-10 w-[1000px] h-auto border-2 border-gray-100 rounded-2xl  shadow-lg bg-white">
         <p className="text-black font-bold text-2xl">키워드</p>
         <div className="mt-3 space-x-4">
-          <KeywordButton title={"앱"} />
-          <KeywordButton title={"웹"} />
-          <KeywordButton title={"AI"} />
+          <keyWordButton title={"앱"} />
+          <keyWordButton title={"웹"} />
+          <keyWordButton title={"AI"} />
         </div>
         <p className="mt-10 text-black font-bold text-2xl">프로젝트 명칭</p>
         <input

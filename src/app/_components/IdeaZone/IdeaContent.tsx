@@ -11,9 +11,9 @@ interface IdeaContentProps {
   id: string;
   title: string;
   image: string;
-  keyword1: string;
-  keyword2: string;
-  keyword3: string;
+  keyWord1: string;
+  keyWord2: string;
+  keyWord3: string;
   name: string;
   explain: string;
 }
@@ -22,9 +22,9 @@ const IdeaContent: React.FC<IdeaContentProps> = ({
   id,
   title,
   image,
-  keyword1,
-  keyword2,
-  keyword3,
+  keyWord1,
+  keyWord2,
+  keyWord3,
   name,
   explain,
 }) => {
@@ -52,19 +52,19 @@ const IdeaContent: React.FC<IdeaContentProps> = ({
           {explain.length > 50 ? `${explain.slice(0, 50)}...` : explain}
         </p>
         <div className="flex mt-4 space-x-2">
-          {keyword1 && (
+          {keyWord1 && (
             <p className="w-auto px-3 h-8 rounded-full bg-[#FFE292] border-2 border-[#FFCF4A] flex items-center justify-center">
-              {keyword1}
+              {keyWord1}
             </p>
           )}
-          {keyword2 && (
+          {keyWord2 && (
             <p className="w-auto px-3 h-8 rounded-full bg-[#FFE292] border-2 border-[#FFCF4A] flex items-center justify-center">
-              {keyword2}
+              {keyWord2}
             </p>
           )}{" "}
-          {keyword3 && (
+          {keyWord3 && (
             <p className="w-auto px-3 h-8 rounded-full bg-[#FFE292] border-2 border-[#FFCF4A] flex items-center justify-center">
-              {keyword3}
+              {keyWord3}
             </p>
           )}
         </div>

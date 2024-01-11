@@ -8,7 +8,7 @@ interface Idea {
   thumbnail: string;
   nickName: string;
   simpleDescription: string;
-  detailedDescription: "string";
+  detailedDescription: string;
   color: string;
   url1: string;
   url2: string;

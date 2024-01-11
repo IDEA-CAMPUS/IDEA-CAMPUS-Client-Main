@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 
 interface Idea {
+  keyword: string;
   title: string;
   simpleDescription: string;
-  keyword: string;
+  keyWord: string;
   nickName: string;
   color: string;
 }

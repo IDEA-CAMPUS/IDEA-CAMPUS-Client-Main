@@ -13,7 +13,7 @@ import IdeaContent from "./_components/IdeaZone/IdeaContent";
 import Content from "./_components/Gallery/Content";
 import StudentGrouplistItem from "./studentGroups/_components/StudentGroupListItem";
 
-import splitKeywords from "./_utils/seperateKeword";
+import splitkeyWords from "./_utils/seperateKeword";
 import getIdeaHome from "./_api/Home/GetIdeaHome";
 import getProjectHome from "./_api/Home/GetProjectHome";
 import { NavBar } from "./_components/components/naviBar";
@@ -21,9 +21,10 @@ import { NavBar } from "./_components/components/naviBar";
 interface Idea {
   title: string;
   simpleDescription: string;
-  keyword: string;
+  keyWord: string;
   nickName: string;
   color: string;
+  onClick: () => void;
 }
 
 interface ApiResponse {
@@ -114,20 +115,14 @@ const page: React.FC = () => {
                     key={contentIndex}
                     title={content.title}
                     image={content.color}
-                    keyword1={
-                      (splitKeywords(
-                        content.keyword[0]
-                      ) as unknown as string) || ""
+                    keyWord1={
+                      (splitkeyWords(content.keyword)[0] as string) || ""
                     }
-                    keyword2={
-                      (splitKeywords(
-                        content.keyword[1]
-                      ) as unknown as string) || ""
+                    keyWord2={
+                      (splitkeyWords(content.keyword)[1] as string) || ""
                     }
-                    keyword3={
-                      (splitKeywords(
-                        content.keyword[2]
-                      ) as unknown as string) || ""
+                    keyWord3={
+                      (splitkeyWords(content.keyword)[2] as string) || ""
                     }
                     name={content.nickName}
                     explain={content.simpleDescription}

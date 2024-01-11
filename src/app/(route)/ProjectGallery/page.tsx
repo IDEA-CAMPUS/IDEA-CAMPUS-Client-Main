@@ -20,44 +20,6 @@ const ProjectGalley = () => {
     setCurrentSort(sortType);
   };
 
-  const contents = [
-    {
-      title: "test1",
-      image: "/Profile.svg",
-      keyword: "앱",
-      team: "test",
-      explain:
-        "이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다",
-    },
-    {
-      title: "test",
-      image: "/Profile.svg",
-      keyword: "앱",
-      team: "없음",
-      explain: "test",
-    },
-    {
-      title: "test",
-      image: "/Profile.svg",
-      keyword: "앱",
-      team: "test",
-      explain: "test",
-    },
-    {
-      title: "test",
-      image: "/Profile.svg",
-      keyword: "앱",
-      team: "test",
-      explain: "test",
-    },
-  ];
-
-  const chunkSize = 3;
-  const chunkedContents = Array.from(
-    { length: Math.ceil(contents.length / chunkSize) },
-    (_, index) => contents.slice(index * chunkSize, (index + 1) * chunkSize)
-  );
-
   return (
     <main className="bg-white w-full text-black flex flex-col items-center mx-auto">
       <div className="items-start">
@@ -135,7 +97,7 @@ const ProjectGalley = () => {
                   key={contentIndex}
                   title={content.title}
                   thumbnail={content.image}
-                  keyword={content.keyword}
+                  ={content.}
                   team={content.team}
                   explain={content.explain}
                 />

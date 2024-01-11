@@ -12,18 +12,7 @@ import SubmitButton from "@/app/_components/IdeaZone/SubmitButton";
 import IdeaContent from "@/app/_components/IdeaZone/IdeaContent";
 import { NavBar } from "@/app/_components/components/naviBar";
 import getIdea from "@/app/_api/IdeaZone/GetIdea";
-import splitKeywords from "@/app/_utils/seperateKeword";
-
-interface Idea {
-  id: number;
-  title: string;
-  simpleDescription: string;
-  keyWord: string;
-  nickName: string;
-  color: string;
-  hits: number;
-  createdAt: string;
-}
+import splitkeyWords from "@/app/_utils/seperateKeword";
 
 const IdeaZone = () => {
   const [currentSort, setCurrentSort] = useState<"new" | "view">("new");
@@ -128,16 +117,16 @@ const IdeaZone = () => {
                   id={content.id}
                   title={content.title}
                   image={content.color}
-                  keyword1={
-                    (splitKeywords(content.keyword)[0] as unknown as string) ||
+                  keyWord1={
+                    (splitkeyWords(content.keyword)[0] as unknown as string) ||
                     ""
                   }
-                  keyword2={
-                    (splitKeywords(content.keyword)[1] as unknown as string) ||
+                  keyWord2={
+                    (splitkeyWords(content.keyword)[1] as unknown as string) ||
                     ""
                   }
-                  keyword3={
-                    (splitKeywords(content.keyword)[2] as unknown as string) ||
+                  keyWord3={
+                    (splitkeyWords(content.keyword)[2] as unknown as string) ||
                     ""
                   }
                   name={content.nickName}
