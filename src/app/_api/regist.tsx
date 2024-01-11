@@ -7,12 +7,12 @@ interface Idea {
 }
 
 interface ServerResponse {
-  timestamp: string;
-  message: string;
-  code: string;
-  status: number;
-  class: string;
-  errors: [
+  timestamp?: string;
+  message?: string;
+  code?: string;
+  status?: number;
+  class?: string;
+  errors?: [
     {
       field: string;
       value: {};
@@ -20,7 +20,7 @@ interface ServerResponse {
     }
   ];
   check: boolean;
-  information: Idea[];
+  information?: Idea[];
 }
 
 export async function doubleCheck(type: string, checkData: string) {
@@ -58,7 +58,7 @@ export async function regist({
   checkPassword: string;
   phoneNumber: string;
   organization: string;
-  agreeMarketingSms: boolean | undefined;
+  agreeMarketingSms: string;
 }) {
   try {
     const resp = await fetch(
@@ -81,21 +81,33 @@ export async function regist({
         }), // 만약 POST 요청에 데이터를 보내려면 body에 데이터를 추가
       }
     );
-
+    console.log(
+      "request:",
+      email,
+      name,
+      nickName,
+      password,
+      checkPassword,
+      phoneNumber,
+      organization,
+      agreeMarketingSms
+    );
+    console.log("resp", resp);
     if (!resp.ok) {
       throw new Error(`HTTP error! Status: ${resp.status}`);
     }
 
     const data: ServerResponse = await resp.json();
 
-    if (data.check) {
-      console.log("Data received:", data.information);
-      return true;
-    } else {
-      console.error("Error occurred:", data.message || "Unknown error");
-      return false;
-    }
+    return data;
+    // if (data.check) {
+    //   console.log("Data received:", data.information);
+
+    // } else {
+    //   console.error("Error occurred:", data.message || "Unknown error");
+
+    // }
   } catch (error) {
-    console.error("Error:", error.message || "Unknown error");
+    // console.error("Error:", error.message || "Unknown error");
   }
 }

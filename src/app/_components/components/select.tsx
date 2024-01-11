@@ -36,7 +36,7 @@ export const SelectBox = ({
         <option
           key={option.value}
           value={option.value}
-          selected={defaultValue === option.value}
+          // selected={defaultValue === option.value}
         >
           {option.name}
         </option>

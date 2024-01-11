@@ -27,7 +27,7 @@ export default function Regist() {
 
   const [selectedValue, setSelectedValue] = useState("직접입력");
 
-  const [agreeMarketingSms, setAgreeMarketingSms] = useState<boolean>();
+  const [agreeMarketingSms, setAgreeMarketingSms] = useState<string>("");
 
   const [idRight, setIdRight] = useState<boolean | undefined>(undefined);
   const [nickRight, setNickRight] = useState<boolean | undefined>(undefined);
@@ -59,6 +59,7 @@ export default function Regist() {
 
   const selectHandle = (selectedValue: string) => {
     setSelectedValue(selectedValue);
+    setOrganization(selectedValue);
   };
 
   const [smallCheckBoxs, setSmallCheckBoxs] = useState([
@@ -81,7 +82,7 @@ export default function Regist() {
   const handleRegist = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const result: boolean | undefined = await regist({
+      const response = await regist({
         email,
         name,
         nickName,
@@ -91,10 +92,11 @@ export default function Regist() {
         organization,
         agreeMarketingSms,
       });
-
-      if (result === true) {
+      console.log("response", response);
+      if (response?.check == true) {
         if (router) {
-          // router.push("/login");
+          console.log("response", response);
+          router.push("/login");
         }
       } else {
       }
@@ -258,7 +260,9 @@ export default function Regist() {
 
   const handleAgreeMarketingSms = (e: ChangeEvent<HTMLInputElement>) => {
     const checked = e.target.checked;
-    setAgreeMarketingSms(checked); // agreeMarketingSms 상태 업데이트
+
+    setAgreeMarketingSms(checked === true ? "True" : "False"); // agreeMarketingSms 상태 업데이트
+    console.log("sms상태:", agreeMarketingSms);
   };
 
   return (
@@ -369,7 +373,10 @@ export default function Regist() {
               value={
                 selectedValue === "직접입력" ? organization : selectedValue
               }
-              onChange={(e) => setOrganization(e.target.value)}
+              onChange={(e) => {
+                setOrganization(e.target.value),
+                  console.log("organization:", organization);
+              }}
               label="소속 동아리"
               placeholder="소속 동아리를 입력해주세요."
               className="mt-[31px] "

@@ -7,20 +7,23 @@ interface Idea {
 }
 
 interface ServerResponse {
-  timestamp: string;
-  message: string;
-  code: string;
-  status: number;
-  class: string;
-  errors: [
+  accessToken?: string;
+  refreshToken?: string;
+  tokenType?: string;
+  timestamp?: string;
+  message?: string;
+  code?: string;
+  status?: number;
+  class?: string;
+  errors?: [
     {
       field: string;
       value: {};
       reason: string;
     }
   ];
-  check: boolean;
-  information: Idea[];
+  check?: boolean;
+  information?: Idea[];
 }
 
 export async function login({
@@ -45,31 +48,33 @@ export async function login({
         }), // 만약 POST 요청에 데이터를 보내려면 body에 데이터를 추가
       }
     );
-
+    console.log("email,pw:", email, password);
     if (!resp.ok) {
       throw new Error(`HTTP error! Status: ${resp.status}`);
     }
 
     const data: ServerResponse = await resp.json();
 
-    if (data.check) {
-      console.log("Data received:", data.information);
-      return true;
-    } else {
-      console.error("Error occurred:", data.message || "Unknown error");
-      return false;
-    }
+    return data;
+
+    // if (data.check) {
+    //   console.log("Data received:", data.information);
+    //   return true;
+    // } else {
+    //   // console.error("Error occurred:", data.message || "Unknown error");
+    //   return false;
+    // }
   } catch (error) {
-    console.error("Error:", error.message || "Unknown error");
+    // console.error("Error:", error.message || "Unknown error");
   }
 }
 
 export async function findID({
   name,
-  phoneNumber,
+  number,
 }: {
   name: string;
-  phoneNumber: string;
+  number: string;
 }) {
   try {
     const resp = await fetch(
@@ -82,26 +87,29 @@ export async function findID({
         },
         body: JSON.stringify({
           name: name,
-          phoneNumber: phoneNumber,
+          phoneNumber: number,
         }), // 만약 POST 요청에 데이터를 보내려면 body에 데이터를 추가
       }
     );
+    console.log("name:", name, "number:", number);
+    console.log("resp", resp);
 
     if (!resp.ok) {
       throw new Error(`HTTP error! Status: ${resp.status}`);
     }
 
     const data: ServerResponse = await resp.json();
-
-    if (data.check) {
-      console.log("Data received:", data.information);
-      return true;
-    } else {
-      console.error("Error occurred:", data.message || "Unknown error");
-      return false;
-    }
+    console.log("data", data);
+    return data;
+    // if (data.check) {
+    //   console.log("Data received:", data.information);
+    //   return true;
+    // } else {
+    //   console.error("Error occurred:", data.message || "Unknown error");
+    //   return false;
+    // }
   } catch (error) {
-    console.error("Error:", error.message || "Unknown error");
+    // console.error("Error:", error.message || "Unknown error");
   }
 }
 
