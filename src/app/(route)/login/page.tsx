@@ -42,7 +42,7 @@ export default function Login() {
 
           if (response?.accessToken) {
             localStorage.setItem("login-token", response.accessToken);
-
+            console.log(response.tokenType);
             if (router) {
               router.push("/");
             }
