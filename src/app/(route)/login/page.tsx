@@ -39,7 +39,11 @@ export default function Login() {
             password,
           });
 
-          if (result === true) {
+          console.log("response", response);
+
+          if (response?.accessToken) {
+            localStorage.setItem("login-token", response.accessToken);
+            console.log(response.tokenType);
             if (router) {
               router.push("/");
             }
