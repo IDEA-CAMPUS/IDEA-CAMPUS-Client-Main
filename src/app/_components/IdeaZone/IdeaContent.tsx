@@ -1,10 +1,14 @@
+"use Client";
+
 import Image from "next/image";
 import React from "react";
 
 import Polygon8 from "public/IdeaZone/Polygon 8.svg";
 import Profile from "public/Profile.svg";
+import { useRouter } from "next/navigation";
 
 interface IdeaContentProps {
+  id: string;
   title: string;
   image: string;
   keyword1: string;
@@ -15,6 +19,7 @@ interface IdeaContentProps {
 }
 
 const IdeaContent: React.FC<IdeaContentProps> = ({
+  id,
   title,
   image,
   keyword1,
@@ -23,8 +28,19 @@ const IdeaContent: React.FC<IdeaContentProps> = ({
   name,
   explain,
 }) => {
+  const router = useRouter();
+
+  const handleClick = () => {
+    // 클릭 시 해당 id를 이용하여 새로운 페이지로 이동
+    router.push(`/IdeaDetail/${id}`);
+  };
+
   return (
-    <main className="w-[330px] h-[456px] mb-10 border-2 border-gray-100 rounded-2xl bg-white shadow-lg">
+    <main
+      className="w-[330px] h-[456px] mb-10 border-2 border-gray-100 rounded-2xl bg-white shadow-lg"
+      onClick={handleClick}
+      style={{ cursor: "pointer" }}
+    >
       <div className="flex p-5 flex-col items-center justify-center relative">
         <p className="w-auto h-12 p-1 px-3 text-xl bg-[#FFCF4A] rounded-xl text-black flex items-center justify-center">
           {title}

@@ -5,7 +5,7 @@ import { NextButton, TextButton } from "@/app/_components/components/buttons";
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useToast } from "@/app/_class/tost";
-import { findID, findPW, login } from "@/app/_api/login";
+import { findPW, login } from "@/app/_api/login";
 
 export default function Login() {
   // const [findID, setFindID] = useState(false);
@@ -34,15 +34,12 @@ export default function Login() {
         //토스트로직 만들기
 
         try {
-          const response = await login({
+          const result: boolean | undefined = await login({
             email,
             password,
           });
-          console.log("response", response);
 
-          if (response?.accessToken) {
-            localStorage.setItem("login-token", response.accessToken);
-
+          if (result === true) {
             if (router) {
               router.push("/");
             }
@@ -54,9 +51,21 @@ export default function Login() {
         } catch (error) {
           console.error("에러가 발생했습니다:", error);
         }
+
+        // if (formRight){
+        //     if (router) {
+
+        //       router.push("/banner/IdeaManage");
+        //     }
+        // }else{
+        //   폼리셋
+        //   토스트 띄우기
+        // }
+
+        //pull 하기
       };
       return (
-        <div className="h-screen bg-white text-black flex justify-center items-center relative z-[10]">
+        <div className="h-screen bg-white flex justify-center items-center relative z-[10]">
           <div className="w-full h-[230px] bg-[url('/wave.svg')] fixed bottom-0 z-[-1]"></div>
           <ToastComponent />
           <div className="flex flex-col items-center box-border justify-evenly z-10">
@@ -105,7 +114,7 @@ export default function Login() {
               <div className="mx-[11px]">|</div>
               <TextButton
                 text="회원가입"
-                onClick={() => router.push("/regist")}
+                onClick={() => setPage("findPW")}
               ></TextButton>
             </div>
 
@@ -123,15 +132,14 @@ export default function Login() {
     case "findID":
       const handleFindID = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log("name:", name, "number", number);
+
         try {
-          const response = await findID({
-            name,
-            number,
+          const result: boolean | undefined = await login({
+            email,
+            password,
           });
-          console.log("response", response);
-          if (response?.check == true) {
-            setPage("returnID");
+
+          if (result === true) {
             if (router) {
               // router.push("/");
             }
@@ -180,7 +188,7 @@ export default function Login() {
               <NextButton
                 text="아이디 찾기"
                 className="mt-[42px] "
-                // onClick={() => setPage("returnID")}
+                onClick={() => setPage("returnID")}
                 //api작업시 온클릭 삭제
                 type="submit"
               ></NextButton>

@@ -131,6 +131,7 @@ const page: React.FC = () => {
                     }
                     name={content.nickName}
                     explain={content.simpleDescription}
+                    id={""}
                   />
                 ))}
               </div>

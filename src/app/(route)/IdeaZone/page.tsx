@@ -18,7 +18,7 @@ interface Idea {
   id: number;
   title: string;
   simpleDescription: string;
-  keyword: string;
+  keyWord: string;
   nickName: string;
   color: string;
   hits: number;
@@ -125,18 +125,19 @@ const IdeaZone = () => {
               {chunk?.map((content, contentIndex) => (
                 <IdeaContent
                   key={contentIndex}
+                  id={content.id}
                   title={content.title}
                   image={content.color}
                   keyword1={
-                    (splitKeywords(content.keyword[0]) as unknown as string) ||
+                    (splitKeywords(content.keyword)[0] as unknown as string) ||
                     ""
                   }
                   keyword2={
-                    (splitKeywords(content.keyword[1]) as unknown as string) ||
+                    (splitKeywords(content.keyword)[1] as unknown as string) ||
                     ""
                   }
                   keyword3={
-                    (splitKeywords(content.keyword[2]) as unknown as string) ||
+                    (splitKeywords(content.keyword)[2] as unknown as string) ||
                     ""
                   }
                   name={content.nickName}
