@@ -58,7 +58,7 @@ export async function regist({
   checkPassword: string;
   phoneNumber: string;
   organization: string;
-  agreeMarketingSms: string;
+  agreeMarketingSms: boolean | undefined;
 }) {
   try {
     const resp = await fetch(

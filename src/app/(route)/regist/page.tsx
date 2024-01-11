@@ -29,7 +29,7 @@ export default function Regist() {
 
   const [agreeMarketingSms, setAgreeMarketingSms] = useState<
     boolean | undefined
-  >();
+  >(false);
 
   const [idRight, setIdRight] = useState<boolean | undefined>(undefined);
   const [nickRight, setNickRight] = useState<boolean | undefined>(undefined);
@@ -140,15 +140,22 @@ export default function Regist() {
 
   const onAllCheck = (e: ChangeEvent<HTMLInputElement>) => {
     setAllIsChecked((prev) => !prev);
-    if (e.target.checked) {
-      setSmallCheckBoxs(
-        smallCheckBoxs.map((item) => ({ ...item, checked: true }))
-      );
-    } else {
-      setSmallCheckBoxs(
-        smallCheckBoxs.map((item) => ({ ...item, checked: false }))
-      );
-    }
+    // 각 약관 체크박스의 상태를 업데이트
+    setSmallCheckBoxs(
+      smallCheckBoxs.map((item) => ({
+        ...item,
+        checked: e.target.checked,
+      }))
+    );
+
+    // "마케팅 수신 동의" 체크박스의 상태도 업데이트
+    setAgreeMarketingSms(e.target.checked);
+  };
+
+  const handleAgreeMarketingSms = (e: ChangeEvent<HTMLInputElement>) => {
+    const checked = e.target.checked;
+
+    setAgreeMarketingSms(checked); // agreeMarketingSms 상태 업데이트
   };
 
   useEffect(() => {
@@ -258,13 +265,6 @@ export default function Regist() {
     } catch (error) {
       console.error("에러가 발생했습니다:", error);
     }
-  };
-
-  const handleAgreeMarketingSms = (e: ChangeEvent<HTMLInputElement>) => {
-    const checked = e.target.checked;
-
-    setAgreeMarketingSms(checked); // agreeMarketingSms 상태 업데이트
-    console.log("sms상태:", agreeMarketingSms);
   };
 
   return (
