@@ -1,6 +1,5 @@
 "use client";
 
-
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
@@ -17,6 +16,7 @@ import StudentGrouplistItem from "./studentGroups/_components/StudentGroupListIt
 import splitKeywords from "./_utils/seperateKeword";
 import getIdeaHome from "./_api/Home/GetIdeaHome";
 import getProjectHome from "./_api/Home/GetProjectHome";
+import { NavBar } from "./_components/components/naviBar";
 
 interface Idea {
   title: string;

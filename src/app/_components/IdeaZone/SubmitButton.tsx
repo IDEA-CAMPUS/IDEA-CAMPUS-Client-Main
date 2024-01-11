@@ -1,16 +1,26 @@
 import React from "react";
+import { usePathname, useRouter } from "next/navigation";
 
 interface SubmitProps {
   title: string;
+  url?: string;
   onClick?: () => void;
 }
 
-const SubmitButton: React.FC<SubmitProps> = ({ title, onClick }) => {
+const SubmitButton: React.FC<SubmitProps> = ({ title, url, onClick }) => {
+  const router = useRouter();
+
+  const handleClick = () => {
+    if (onClick) onClick();
+    // 클릭 시 다음 페이지로 이동
+    if (url) router.push(url);
+  };
+
   return (
     <button
       className="w-20 h-9 p-1 text-xs bg-[#FFE292] hover:bg-[#FFCF4A] rounded-xl text-black"
       type="button"
-      onClick={onClick}
+      onClick={handleClick}
     >
       {title}
     </button>
