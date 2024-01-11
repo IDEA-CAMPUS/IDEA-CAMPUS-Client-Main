@@ -1,3 +1,23 @@
+interface ServerResponse {
+  accessToken?: string;
+  refreshToken?: string;
+  tokenType?: string;
+  timestamp?: string;
+  message?: string;
+  code?: string;
+  status?: number;
+  class?: string;
+  errors?: [
+    {
+      field: string;
+      value: {};
+      reason: string;
+    }
+  ];
+  check?: boolean;
+  information?: { nickName?: string; color?: string };
+}
+
 export async function loginState() {
   console.log("login-token:", localStorage.getItem("login-token"));
   try {
@@ -23,19 +43,15 @@ export async function loginState() {
       throw new Error(`HTTP error! Status: ${resp.status}`);
     }
 
-    const data =
-      // : ServerResponse
-      await resp.json();
+    const data: ServerResponse = await resp.json();
+    console.log("data", data);
 
-    return data;
-
-    // if (data.check) {
-    //   console.log("Data received:", data.information);
-    //   return true;
-    // } else {
-    //   // console.error("Error occurred:", data.message || "Unknown error");
-    //   return false;
-    // }
+    if (data.check) {
+      console.log("Data received:", data.information);
+      return data;
+    } else {
+      console.error("Error occurred:", data.message || "Unknown error");
+    }
   } catch (error) {
     console.error("Error:", error || "Unknown error");
   }

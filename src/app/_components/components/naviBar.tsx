@@ -2,9 +2,13 @@
 
 import { loginState } from "@/app/_api/naviBar";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const NavBar = () => {
+  const [isLogin, setIsLogin] = useState(false);
+  const [color, setColor] = useState("");
+  const [nick, setNick] = useState("");
+
   const pathname = usePathname();
   const router = useRouter();
 
@@ -15,8 +19,19 @@ export const NavBar = () => {
   };
 
   useEffect(() => {
-    const response = loginState();
-    console.log("response", response);
+    const fetchData = async () => {
+      try {
+        const response = await loginState();
+        console.log("response", response);
+        response?.check ? setIsLogin(true) : setIsLogin(false);
+        setColor(response?.information.color);
+        setNick(response?.information.nickname);
+      } catch (error) {
+        console.error("Error fetching login state:", error);
+        // 오류 처리를 여기에 추가할 수 있습니다.
+      }
+    };
+    fetchData();
   }, []);
 
   return (
@@ -40,23 +55,49 @@ export const NavBar = () => {
           >
             프로젝트 갤러리
           </div>
-          <div className="font-bold text-[18px] flex cursor-pointer">
+          <div
+            className="font-bold text-[18px] flex cursor-pointer"
+            onClick={() => router.push("동아리?")}
+          >
             동아리·학회
           </div>
         </div>
         <div className="flex justify-end gap-[42px] ml-[630px] items-center">
-          <div
-            className="font-bold text-[18px] flex cursor-pointer"
-            onClick={() => handleRoute("/login")}
-          >
-            로그인
-          </div>
-          <div
-            className="font-bold text-[18px] flex cursor-pointer"
-            onClick={() => handleRoute("/regist")}
-          >
-            회원가입
-          </div>
+          {isLogin ? (
+            <>
+              <div
+                className={`flex justify-center pt-[6px] w-[46px] h-[46px] rounded-[100px] bg-[${color}] z-0 cursor-pointer`}
+                onClick={() => router.push("마이페이지?")}
+              >
+                <img
+                  src="/user.svg"
+                  className="w-[40px] h-[40px] z-10 cursor-pointer"
+                  onClick={() => router.push("마이페이지?")}
+                />
+              </div>
+              <div
+                className="font-bold text-[18px] flex cursor-pointer"
+                onClick={() => router.push("마이페이지?")}
+              >
+                {nick}
+              </div>
+            </>
+          ) : (
+            <>
+              <div
+                className="font-bold text-[18px] flex cursor-pointer"
+                onClick={() => handleRoute("/login")}
+              >
+                로그인
+              </div>
+              <div
+                className="font-bold text-[18px] flex cursor-pointer"
+                onClick={() => handleRoute("/regist")}
+              >
+                회원가입
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
