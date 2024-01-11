@@ -372,9 +372,7 @@ export default function Regist() {
           <div className="flex relative w-full items-end">
             <Input
               type="text"
-              value={
-                selectedValue === "직접입력" ? organization : selectedValue
-              }
+              value={selectedValue === "직접입력" ? undefined : selectedValue}
               onChange={(e) => {
                 setOrganization(e.target.value),
                   console.log("organization:", organization);

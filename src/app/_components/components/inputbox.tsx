@@ -14,7 +14,7 @@ export const Input = ({
   label: string;
   className?: string;
   type?: "text" | "password" | "email" | undefined;
-  value: string; // 입력 필드의 값
+  value: string | undefined; // 입력 필드의 값
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; // 변경 이벤트 핸들러
   w?: string;
   disabled?: boolean;
