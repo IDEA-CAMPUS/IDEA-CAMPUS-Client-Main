@@ -12,7 +12,7 @@ const IdeaManage = () => {
   return (
     <div>
       <Header />
-      <div className="flex flex-col w-[100vw] items-center bg-[#FAFAFA]">
+      <div className="flex flex-c w-[100vw] items-center bg-[#FAFAFA]">
         <Image
           src={GradientBackground}
           alt="gradientBackground"
