@@ -1,4 +1,6 @@
+import { loginState } from "@/app/_api/naviBar";
 import { usePathname, useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export const NavBar = () => {
   const pathname = usePathname();
@@ -9,6 +11,11 @@ export const NavBar = () => {
       router.push(link);
     }
   };
+
+  useEffect(() => {
+    const response = loginState();
+    console.log("response", response);
+  }, []);
 
   return (
     <div className="w-full h-[70px] bg-white box-border flex items-center justify-center">

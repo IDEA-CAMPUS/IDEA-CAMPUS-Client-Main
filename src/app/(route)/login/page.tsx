@@ -5,7 +5,7 @@ import { NextButton, TextButton } from "@/app/_components/components/buttons";
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useToast } from "@/app/_class/tost";
-import { findPW, login } from "@/app/_api/login";
+import { findID, findPW, login } from "@/app/_api/login";
 
 export default function Login() {
   // const [findID, setFindID] = useState(false);
@@ -34,12 +34,15 @@ export default function Login() {
         //토스트로직 만들기
 
         try {
-          const result: boolean | undefined = await login({
+          const response = await login({
             email,
             password,
           });
+          console.log("response", response);
 
-          if (result === true) {
+          if (response?.accessToken) {
+            localStorage.setItem("login-token", response.accessToken);
+
             if (router) {
               router.push("/");
             }
@@ -51,18 +54,6 @@ export default function Login() {
         } catch (error) {
           console.error("에러가 발생했습니다:", error);
         }
-
-        // if (formRight){
-        //     if (router) {
-
-        //       router.push("/banner/IdeaManage");
-        //     }
-        // }else{
-        //   폼리셋
-        //   토스트 띄우기
-        // }
-
-        //pull 하기
       };
       return (
         <div className="h-screen bg-white text-black flex justify-center items-center relative z-[10]">
@@ -114,7 +105,7 @@ export default function Login() {
               <div className="mx-[11px]">|</div>
               <TextButton
                 text="회원가입"
-                onClick={() => setPage("findPW")}
+                onClick={() => router.push("/regist")}
               ></TextButton>
             </div>
 
@@ -132,14 +123,15 @@ export default function Login() {
     case "findID":
       const handleFindID = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-
+        console.log("name:", name, "number", number);
         try {
-          const result: boolean | undefined = await login({
-            email,
-            password,
+          const response = await findID({
+            name,
+            number,
           });
-
-          if (result === true) {
+          console.log("response", response);
+          if (response?.check == true) {
+            setPage("returnID");
             if (router) {
               // router.push("/");
             }
@@ -188,7 +180,7 @@ export default function Login() {
               <NextButton
                 text="아이디 찾기"
                 className="mt-[42px] "
-                onClick={() => setPage("returnID")}
+                // onClick={() => setPage("returnID")}
                 //api작업시 온클릭 삭제
                 type="submit"
               ></NextButton>
