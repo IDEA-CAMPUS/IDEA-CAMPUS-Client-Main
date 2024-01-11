@@ -27,7 +27,9 @@ export default function Regist() {
 
   const [selectedValue, setSelectedValue] = useState("직접입력");
 
-  const [agreeMarketingSms, setAgreeMarketingSms] = useState<string>("");
+  const [agreeMarketingSms, setAgreeMarketingSms] = useState<
+    boolean | undefined
+  >();
 
   const [idRight, setIdRight] = useState<boolean | undefined>(undefined);
   const [nickRight, setNickRight] = useState<boolean | undefined>(undefined);
@@ -261,7 +263,7 @@ export default function Regist() {
   const handleAgreeMarketingSms = (e: ChangeEvent<HTMLInputElement>) => {
     const checked = e.target.checked;
 
-    setAgreeMarketingSms(checked === true ? "True" : "False"); // agreeMarketingSms 상태 업데이트
+    setAgreeMarketingSms(checked); // agreeMarketingSms 상태 업데이트
     console.log("sms상태:", agreeMarketingSms);
   };
 
@@ -418,7 +420,6 @@ export default function Regist() {
                 checked={agreeMarketingSms}
                 onCheck={handleAgreeMarketingSms}
                 label="마케팅 수신 동의 (선택)"
-                className="round small"
               ></CheckBox>
             </div>
           </div>
