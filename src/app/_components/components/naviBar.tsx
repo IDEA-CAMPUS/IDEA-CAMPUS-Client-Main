@@ -1,3 +1,5 @@
+"use client";
+
 import { loginState } from "@/app/_api/naviBar";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
