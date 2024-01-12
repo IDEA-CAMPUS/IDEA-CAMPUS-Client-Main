@@ -14,7 +14,7 @@ import deleteIdea from "@/app/_api/IdeaZone/DeleteIdea";
 
 const IdeaDetail = () => {
   const pathname = usePathname();
-  //id가져오는 문자열 함수
+  //id가져오는 문자열 함수g
   const id = pathname.split("/")[2];
 
   const ideaData = getIdeaDetail(id)?.information;
