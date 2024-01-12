@@ -27,7 +27,7 @@ interface keyrwordFormData {
 }
 
 const FixIdea = () => {
-  //id가져오는 문자열 함수
+  //id가져오는 문자열 함수 ddd
   const pathname = usePathname();
   const id = pathname.split("/")[2];
   const [images, setImages] = useState<
