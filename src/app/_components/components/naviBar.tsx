@@ -1,6 +1,6 @@
 "use client";
 
-import { loginState } from "@/app/_api/naviBar";
+import { LoginState } from "@/app/_api/naviBar";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -21,7 +21,7 @@ export const NavBar = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await loginState();
+        const response = await LoginState();
         console.log("response", response);
         response?.check ? setIsLogin(true) : setIsLogin(false);
         setColor(response?.information?.color);

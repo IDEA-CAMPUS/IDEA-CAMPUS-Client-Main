@@ -18,7 +18,7 @@ interface ServerResponse {
   information?: { nickName?: string; color?: string };
 }
 
-export async function loginState() {
+export async function LoginState() {
   console.log("login-token:", localStorage.getItem("login-token"));
   try {
     const resp = await fetch(
