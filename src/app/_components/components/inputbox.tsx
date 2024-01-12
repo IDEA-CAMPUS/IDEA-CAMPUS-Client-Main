@@ -42,9 +42,9 @@ export const Input = ({
         value={value} // 외부에서 받은 값
         onChange={onChange} // 외부에서 받은 onChange 핸들러
         placeholder={placeholder}
-        className={`border rounded pl-[12px] py-[12px] box-border placeholder:font-[18px] placeholder:text-[#6b6b6b] h-[50px] bg-[#f5f5f5] ${
-          w ? "w-[360px]" : "w-[500px]"
-        }`}
+        className={`border rounded pl-[12px] py-[12px] box-border placeholder:font-[18px] placeholder:text-[#6b6b6b] h-[50px] ${
+          disabled ? "bg-[#9f9f9f] " : "bg-[#f5f5f5]"
+        } ${w ? "w-[360px]" : "w-[500px]"}`}
         disabled={disabled}
       />
       {inputType !== "password" ? (

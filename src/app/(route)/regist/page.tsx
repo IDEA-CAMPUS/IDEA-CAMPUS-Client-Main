@@ -9,6 +9,7 @@ import { ChangeEvent } from "react";
 import { SelectBox } from "@/app/_components/components/select";
 import { NavBar } from "@/app/_components/components/naviBar";
 import { doubleCheck, regist } from "@/app/_api/regist";
+import { useToast } from "@/app/_class/tost";
 
 export default function Regist() {
   const pathname = usePathname();
@@ -34,6 +35,23 @@ export default function Regist() {
   const [idRight, setIdRight] = useState<boolean | undefined>(undefined);
   const [nickRight, setNickRight] = useState<boolean | undefined>(undefined);
 
+  const inputStates = [
+    email,
+    password,
+    phoneNumber,
+    name,
+    nickName,
+    checkPassword,
+    organization,
+  ];
+
+  const areAllInputsFilled = () => {
+    return (
+      allIsChecked &&
+      inputStates.every((inputState) => inputState.trim() !== "")
+    );
+  };
+
   interface Option {
     value: string;
     name: string;
@@ -58,6 +76,8 @@ export default function Regist() {
     { value: "투빅스", name: "투빅스" },
     { value: "BITAmin", name: "BITAmin" },
   ];
+
+  const { ToastComponent, showToast } = useToast();
 
   const selectHandle = (selectedValue: string) => {
     setSelectedValue(selectedValue);
@@ -156,6 +176,7 @@ export default function Regist() {
     const checked = e.target.checked;
 
     setAgreeMarketingSms(checked); // agreeMarketingSms 상태 업데이트
+    console.log("allIsChecked", allIsChecked);
   };
 
   useEffect(() => {
@@ -183,7 +204,7 @@ export default function Regist() {
         if (idRight == undefined) {
           return false;
         } else if (idRight == true) {
-          return false;
+          return true;
         } else {
           return true;
         }
@@ -216,7 +237,7 @@ export default function Regist() {
           return true;
         }
       case "checkPassword":
-        if (password.localeCompare(checkPassword) >= 0) {
+        if (password.localeCompare(checkPassword) == 0) {
           return false;
         } else {
           return true;
@@ -237,12 +258,14 @@ export default function Regist() {
 
   const handleIDCheck = async () => {
     try {
-      const result: boolean = await doubleCheck("email", email);
+      const response = await doubleCheck("email", email);
 
-      if (result === true) {
+      if (response === true) {
         setIdRight(true);
+        // showToast("사용 가능한 아이디입니다.", 2000);
       } else {
         setIdRight(false);
+        // showToast("중복된 아이디입니다.", 2000);
       }
 
       //정보저장
@@ -253,10 +276,11 @@ export default function Regist() {
 
   const handleNickCheck = async () => {
     try {
-      const result: boolean = await doubleCheck("", nickName);
+      const response = await doubleCheck("", nickName);
 
-      if (result === true) {
+      if (response === true) {
         setNickRight(true);
+        showToast("사용 가능한 닉네임입니다.", 2000);
       } else {
         setNickRight(false);
       }
@@ -271,6 +295,7 @@ export default function Regist() {
     <div className="h-fit-content  bg-white flex flex-col justify-center items-center relative z-[10]">
       {/* <NavBar /> */}
       <div className="items-center flex flex-col justify-evenly box-border z-10">
+        <ToastComponent />
         <div className="text-center text-[36px] font-bold mt-[183px]">
           회원가입
         </div>
@@ -294,7 +319,9 @@ export default function Regist() {
             </div>
           </div>
           <WrongMessage
-            text="이메일 형식을 확인해주세요"
+            text={
+              idRight ? "사용 가능한 아이디입니다." : "중복된 아이디입니다."
+            }
             visible={handleError("idEmail")}
           />
           <Input
@@ -319,7 +346,7 @@ export default function Regist() {
               placeholder="닉네임을 입력해주세요."
               className="mt-[31px]"
               w="1"
-              disabled={handleError("nickName")}
+              disabled={nickRight}
             />
             <div
               className="w-[130px] h-[50px] box-border ml-[8px] px-[8px] py-[4px] rounded bottom-0 right-0 border flex justify-center items-center bg-[#f5f5f5] cursor-pointer"
@@ -426,6 +453,7 @@ export default function Regist() {
               text="회원가입"
               className="mt-[42px]"
               type="submit"
+              disabled={!areAllInputsFilled()}
             ></NextButton>
           </div>
         </form>

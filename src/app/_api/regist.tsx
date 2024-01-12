@@ -20,7 +20,7 @@ interface ServerResponse {
     }
   ];
   check: boolean;
-  information?: Idea[];
+  information?: boolean;
 }
 
 export async function doubleCheck(type: string, checkData: string) {
@@ -34,11 +34,10 @@ export async function doubleCheck(type: string, checkData: string) {
 
   if (data.check) {
     console.log("Data received:", data.information);
-    return true;
   } else {
     console.error("Error occurred:", data.message || "Unknown error");
-    return false;
   }
+  return data.information;
 }
 
 export async function regist({
