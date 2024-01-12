@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
-import HomeBackground from "public/HomeBackground.svg";
+// import HomeBackground from "public/HomeBackground.svg";
 import Logo from "public/Logo.svg";
 import StudentCard from "public/Home/StudentCard.svg";
 import Light from "public/Home/Light.svg";
@@ -16,7 +16,7 @@ import StudentGrouplistItem from "./studentGroups/_components/StudentGroupListIt
 import splitkeyWords from "./_utils/seperateKeword";
 import getIdeaHome from "./_api/Home/GetIdeaHome";
 import getProjectHome from "./_api/Home/GetProjectHome";
-import { NavBar } from "./_components/components/NaviBar";
+import { NavBar } from "./_components/components/naviBar";
 import getClubHome from "./_api/Home/GetClubHome";
 
 interface Idea {
@@ -60,7 +60,12 @@ const page: React.FC = () => {
     <main className="bg-white h-auto w-full text-black flex flex-col items-center mx-auto">
       <NavBar />
       <div className="w-[1600px]">
-        <Image src={HomeBackground} alt="HomeBackground" />
+        <Image
+          src="/HomeBackground.svg"
+          alt="HomeBackground"
+          width={50}
+          height={50}
+        />
       </div>
       <div className="mt-[-4250px] w-[1204px] h-[400px] bg-gray-300">
         banner
@@ -121,13 +126,13 @@ const page: React.FC = () => {
                     title={content.title}
                     image={content.color}
                     keyWord1={
-                      (splitkeyWords(content.keyword)[0] as string) || ""
+                      (splitkeyWords(content.keyWord)[0] as string) || ""
                     }
                     keyWord2={
-                      (splitkeyWords(content.keyword)[1] as string) || ""
+                      (splitkeyWords(content.keyWord)[1] as string) || ""
                     }
                     keyWord3={
-                      (splitkeyWords(content.keyword)[2] as string) || ""
+                      (splitkeyWords(content.keyWord)[2] as string) || ""
                     }
                     name={content.nickName}
                     explain={content.simpleDescription}

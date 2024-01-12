@@ -12,7 +12,7 @@ import KeywordButton from "@/app/_components/Gallery/KeywordButton";
 import TextButton from "@/app/_components/Gallery/TextButotn";
 import SubmitButton from "@/app/_components/Gallery/SubmitButton";
 import Content from "@/app/_components/Gallery/Content";
-import { NavBar } from "@/app/_components/components/NaviBar";
+import { NavBar } from "@/app/_components/components/naviBar";
 import getProject from "@/app/_api/Gallery/GetProject";
 import getProjectKeyWord from "@/app/_api/Gallery/GetProjectKeyWord";
 

@@ -9,7 +9,7 @@ import Profile from "public/Profile.svg";
 import { usePathname, useRouter } from "next/navigation";
 import getIdeaDetail from "@/app/_api/IdeaZone/GetIdeaDetail";
 import splitkeyWords from "@/app/_utils/seperateKeword";
-import { NavBar } from "@/app/_components/components/NaviBar";
+import { NavBar } from "@/app/_components/components/naviBar";
 import deleteIdea from "@/app/_api/IdeaZone/DeleteIdea";
 
 const IdeaDetail = () => {

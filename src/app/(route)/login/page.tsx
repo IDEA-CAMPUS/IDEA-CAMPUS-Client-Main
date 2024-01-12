@@ -3,9 +3,9 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { findID, findPW, login } from "@/app/_api/login";
-import { useToast } from "@/app/_class/Tost";
-import { NextButton, TextButton } from "@/app/_components/components/Buttons";
-import { Input } from "@/app/_components/components/Inputbox";
+import { useToast } from "@/app/_class/tost";
+import { NextButton, TextButton } from "@/app/_components/components/buttons";
+import { Input } from "@/app/_components/components/inputbox";
 
 export default function Login() {
   // const [findID, setFindID] = useState(false);
