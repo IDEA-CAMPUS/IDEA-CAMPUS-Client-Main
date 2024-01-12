@@ -14,17 +14,19 @@ import IdeaContent from "./_components/IdeaZone/IdeaContent";
 import Content from "./_components/Gallery/Content";
 import StudentGrouplistItem from "./studentGroups/_components/StudentGroupListItem";
 
-import splitKeywords from "./_utils/seperateKeword";
+import splitkeyWords from "./_utils/seperateKeword";
 import getIdeaHome from "./_api/Home/GetIdeaHome";
 import getProjectHome from "./_api/Home/GetProjectHome";
 import { NavBar } from "./_components/components/naviBar";
+import getClubHome from "./_api/Home/GetClubHome";
 
 interface Idea {
   title: string;
   simpleDescription: string;
-  keyword: string;
+  keyWord: string;
   nickName: string;
   color: string;
+  onClick: () => void;
 }
 
 interface ApiResponse {
@@ -38,8 +40,8 @@ const page: React.FC = () => {
   const ideaList = ideaData?.information;
   const projectData = getProjectHome();
   const projectList = projectData?.information;
-
-  console.log(projectList);
+  const clubData = getClubHome();
+  const clubList = clubData?.information;
 
   const chunkSize = 3;
   const ideaContents = Array.from(
@@ -49,6 +51,10 @@ const page: React.FC = () => {
   const projectContents = Array.from(
     { length: Math.ceil((projectList?.length || 0) / chunkSize) },
     (_, index) => projectList?.slice(index * chunkSize, (index + 1) * chunkSize)
+  );
+  const clubContents = Array.from(
+    { length: Math.ceil((clubList?.length || 0) / chunkSize) },
+    (_, index) => clubList?.slice(index * chunkSize, (index + 1) * chunkSize)
   );
 
   return (
@@ -115,20 +121,14 @@ const page: React.FC = () => {
                     key={contentIndex}
                     title={content.title}
                     image={content.color}
-                    keyword1={
-                      (splitKeywords(
-                        content.keyword[0]
-                      ) as unknown as string) || ""
+                    keyWord1={
+                      (splitkeyWords(content.keyword)[0] as string) || ""
                     }
-                    keyword2={
-                      (splitKeywords(
-                        content.keyword[1]
-                      ) as unknown as string) || ""
+                    keyWord2={
+                      (splitkeyWords(content.keyword)[1] as string) || ""
                     }
-                    keyword3={
-                      (splitKeywords(
-                        content.keyword[2]
-                      ) as unknown as string) || ""
+                    keyWord3={
+                      (splitkeyWords(content.keyword)[2] as string) || ""
                     }
                     name={content.nickName}
                     explain={content.simpleDescription}
@@ -162,13 +162,16 @@ const page: React.FC = () => {
                 {chunk?.map((content, contentIndex) => (
                   <Content
                     key={contentIndex}
-                    booleanWeb={content.booleanApp}
+                    id={0}
+                    booleanWeb={content.booleanWeb}
                     booleanApp={content.booleanApp}
                     booleanAi={content.booleanAi}
-                    title={content.title}
-                    thumbnail={content.thumbnail}
                     team={content.team}
                     simpleDescription={content.simpleDescription}
+                    thumbnail={content.thumbnail}
+                    hits={0}
+                    createdAt={""}
+                    title={content.title}
                   />
                 ))}
               </div>
@@ -191,9 +194,16 @@ const page: React.FC = () => {
               </div>
             </div>
             <div className="mt-[-80px] mb-20">
-              <StudentGrouplistItem />
-              <StudentGrouplistItem />
-              <StudentGrouplistItem />
+              {clubList?.map((content, contentIndex) => (
+                <StudentGrouplistItem
+                  id={1}
+                  title={content.title}
+                  description={content.description}
+                  createdAt={content.createdAt}
+                  nickname={content.nickname}
+                  thumbnail={content.thumbnail}
+                />
+              ))}
             </div>
           </div>
         </div>

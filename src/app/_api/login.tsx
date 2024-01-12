@@ -1,7 +1,7 @@
 interface Idea {
   title: string;
   simpleDescription: string;
-  keyword: string;
+  keyWord: string;
   nickName: string;
   color: string;
 }

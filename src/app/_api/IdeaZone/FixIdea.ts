@@ -9,12 +9,12 @@ interface Idea {
   url2: string;
 }
 
-const postIdea = async (ideaData: Idea | undefined) => {
+const fixIdea = async (ideaData: Idea | undefined, id: string) => {
   try {
     const response = await fetch(
-      "http://ec2-3-34-14-75.ap-northeast-2.compute.amazonaws.com:8080/api/idea",
+      `http://ec2-3-34-14-75.ap-northeast-2.compute.amazonaws.com:8080/api/idea/${id}`,
       {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("login-token")}`,
@@ -34,4 +34,4 @@ const postIdea = async (ideaData: Idea | undefined) => {
   }
 };
 
-export default postIdea;
+export default fixIdea;

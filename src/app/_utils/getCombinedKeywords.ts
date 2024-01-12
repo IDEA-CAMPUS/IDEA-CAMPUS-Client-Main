@@ -1,9 +1,9 @@
 interface KeyrwordFormData {
-  keyword1: string;
-  keyword2: string;
-  keyword3: string;
+  keyWord1: string;
+  keyWord2: string;
+  keyWord3: string;
 }
 
-export const getCombinedKeywords = (keywordData: KeyrwordFormData) => {
-  return `${keywordData.keyword1}, ${keywordData.keyword2}, ${keywordData.keyword3}`;
+export const getCombinedkeyWords = (keyWordData: KeyrwordFormData) => {
+  return `${keyWordData.keyWord1}, ${keyWordData.keyWord2}, ${keyWordData.keyWord3}`;
 };

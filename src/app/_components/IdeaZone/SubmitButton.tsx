@@ -11,9 +11,14 @@ const SubmitButton: React.FC<SubmitProps> = ({ title, url, onClick }) => {
   const router = useRouter();
 
   const handleClick = () => {
-    if (onClick) onClick();
-    // 클릭 시 다음 페이지로 이동
-    if (url) router.push(url);
+    if (localStorage.getItem("login-token") !== null) {
+      if (onClick) onClick();
+      // 클릭 시 다음 페이지로 이동
+      if (url) router.push(url);
+    } else {
+      alert("로그인 후 이용해주세요");
+      router.push("/login");
+    }
   };
 
   return (

@@ -2,11 +2,11 @@
 
 import React, { useState } from "react";
 
-interface KeywordProps {
+interface keyWordProps {
   title: string;
 }
 
-const KeywordButton: React.FC<KeywordProps> = ({ title }) => {
+const keyWordButton: React.FC<keyWordProps> = ({ title }) => {
   const [isClicked, setisClicked] = useState<boolean>(false);
 
   const handleisClicked = () => {
@@ -25,4 +25,4 @@ const KeywordButton: React.FC<KeywordProps> = ({ title }) => {
   );
 };
 
-export default KeywordButton;
+export default keyWordButton;

@@ -9,6 +9,7 @@ interface FixButtonProps {
 
 const FixButton: React.FC<FixButtonProps> = ({ title, url, onClick }) => {
   const router = useRouter();
+  if (onClick) onClick();
 
   const handleClick = () => {
     // 클릭 시 다음 페이지로 이동

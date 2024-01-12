@@ -1,16 +1,16 @@
 "use client";
 
-import React, { useState, ChangeEvent, useRef } from "react";
+import React, { useState, ChangeEvent, useRef, useEffect } from "react";
 import Image from "next/image";
 
 import RegisterIdeaZoneBackground from "public/IdeaZone/RegisterIdeaZoneBackground.svg";
-import DeleteButton from "public/ProjectGallery/DeleteButton.svg";
 import SubmitButton from "@/app/_components/IdeaZone/SubmitButton";
 import FixButton from "@/app/_components/IdeaZone/FixButton";
 import { NavBar } from "@/app/_components/components/naviBar";
-import PostIdea from "@/app/_api/IdeaZone/PostIdea";
-import { getCombinedkeyWords } from "@/app/_utils/getCombinedKeyWords";
-import { useRouter } from "next/navigation";
+
+import { usePathname, useRouter } from "next/navigation";
+import getIdeaDeatil from "@/app/_api/IdeaZone/GetIdeaDetail";
+import fixIdea from "@/app/_api/IdeaZone/FixIdea";
 
 interface IdeaFormData {
   title: string;
@@ -26,11 +26,35 @@ interface keyrwordFormData {
   keyWord3: string;
 }
 
-const RegisterIdea = () => {
+const FixIdea = () => {
+  //id가져오는 문자열 함수
+  const pathname = usePathname();
+  const id = pathname.split("/")[2];
   const [images, setImages] = useState<
     Array<{ name: string; url: string; size: string }>
   >([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const response = getIdeaDeatil(id);
+  const ideaFixData = response?.information;
+
+  useEffect(() => {
+    if (ideaFixData) {
+      setIdeaData({
+        title: ideaFixData.title,
+        simpleDescription: ideaFixData.simpleDescription,
+        keyWord: ideaFixData.keyWord,
+        detailedDescription: ideaFixData.detailedDescription,
+        url1: ideaFixData.url1,
+        url2: ideaFixData.url2,
+      });
+      setkeyWordData({
+        keyWord1: "", // You can set these to ideaFixData.keyWord1 if needed
+        keyWord2: "",
+        keyWord3: "",
+      });
+    }
+  }, [ideaFixData]);
+
   const [ideaData, setIdeaData] = useState<IdeaFormData>({
     title: "",
     simpleDescription: "",
@@ -39,6 +63,7 @@ const RegisterIdea = () => {
     url1: "",
     url2: "",
   });
+
   const [keyWordData, setkeyWordData] = useState<keyrwordFormData>({
     keyWord1: "",
     keyWord2: "",
@@ -93,7 +118,7 @@ const RegisterIdea = () => {
       if (isFormValid()) {
         // 여기에 파일 업로드 로직 추가
         console.log("Upload image:", ideaData);
-        await PostIdea(ideaData);
+        await fixIdea(ideaData, id);
         // Additional logic after successful upload, if needed
         router.push("/IdeaZone");
       } else {
@@ -211,4 +236,5 @@ const RegisterIdea = () => {
   );
 };
 
-export default RegisterIdea;
+export default FixIdea;
+
