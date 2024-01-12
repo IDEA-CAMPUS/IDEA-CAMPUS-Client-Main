@@ -3,8 +3,8 @@
 import Image from "next/image";
 import React from "react";
 
-import Polygon8 from "public/ideazone/Polygon8.svg";
-import Profile from "public/Profile.svg";
+import Polygon8 from "public/ideazone/polygon8.svg";
+import Profile from "public/profile.svg";
 import { useRouter } from "next/navigation";
 
 interface IdeaContentProps {

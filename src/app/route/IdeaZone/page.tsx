@@ -2,10 +2,10 @@
 
 import React, { useMemo, useState } from "react";
 import Image from "next/image";
-import IdeaZoneBackground from "public/IdeaZone/IdeaZoneBackground.svg";
-import FlowerGray from "public/IdeaZone/FlowerGray.svg";
-import Flower from "public/IdeaZone/Flower.svg";
-import IdeaZoneIcon from "public/IdeaZone/IdeaZoneIcon.svg";
+import IdeaZoneBackground from "public/ideaZone/ideaZoneBackground.svg";
+import FlowerGray from "public/ideaZone/flowerGray.svg";
+import Flower from "public/ideaZone/flower.svg";
+import IdeaZoneIcon from "public/ideaZone/ideaZoneIcon.svg";
 
 import TextButton from "@/app/_components/ideazone/TextButotn";
 import SubmitButton from "@/app/_components/ideazone/SubmitButton";

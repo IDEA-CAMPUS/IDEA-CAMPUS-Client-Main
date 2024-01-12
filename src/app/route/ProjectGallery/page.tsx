@@ -2,11 +2,11 @@
 
 import React, { useMemo, useState } from "react";
 import Image from "next/image";
-import ProjectGalleryBackground1 from "public/ProjectGallery/ProjectGalleryBackground1.svg";
-import ProjectGalleryBackground2 from "public/ProjectGallery/ProjectGalleryBackground2.svg";
-import SnowGray from "public/ProjectGallery/SnowGray.svg";
-import Snow from "public/ProjectGallery/Snow.svg";
-import ProjectGalleryIcon from "public/ProjectGallery/ProjectGalleryIcon.svg";
+import ProjectGalleryBackground1 from "public/projectgallery/projectGalleryBackground1.svg";
+import ProjectGalleryBackground2 from "public/projectgallery/projectGalleryBackground2.svg";
+import SnowGray from "public/projectgallery/snowGray.svg";
+import Snow from "public/projectgallery/snow.svg";
+import ProjectGalleryIcon from "public/projectgallery/projectGalleryIcon.svg";
 
 import KeywordButton from "@/app/_components/gallery/KeywordButton";
 import TextButton from "@/app/_components/gallery/TextButotn";
