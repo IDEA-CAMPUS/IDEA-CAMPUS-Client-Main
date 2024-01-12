@@ -6,7 +6,7 @@ interface keyWordProps {
   title: string;
 }
 
-const keyWordButton: React.FC<keyWordProps> = ({ title }) => {
+const KeyWordButton: React.FC<keyWordProps> = ({ title }) => {
   const [isClicked, setisClicked] = useState<boolean>(false);
 
   const handleisClicked = () => {
@@ -25,4 +25,4 @@ const keyWordButton: React.FC<keyWordProps> = ({ title }) => {
   );
 };
 
-export default keyWordButton;
+export default KeyWordButton;

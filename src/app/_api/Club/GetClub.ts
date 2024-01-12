@@ -18,7 +18,7 @@ interface ApiResponse {
   message: null;
 }
 
-const getClub = () => {
+const GetClub = () => {
   const [clubData, setClubData] = useState<ApiResponse | null>(null);
 
   useEffect(() => {
@@ -40,4 +40,4 @@ const getClub = () => {
   return clubData;
 };
 
-export default getClub;
+export default GetClub;

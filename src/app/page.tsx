@@ -16,7 +16,7 @@ import StudentGrouplistItem from "./studentGroups/_components/StudentGroupListIt
 import splitkeyWords from "./_utils/seperateKeword";
 import getIdeaHome from "./_api/Home/GetIdeaHome";
 import getProjectHome from "./_api/Home/GetProjectHome";
-import { NavBar } from "./_components/components/naviBar";
+import { NavBar } from "./_components/components/NaviBar";
 import getClubHome from "./_api/Home/GetClubHome";
 
 interface Idea {
@@ -195,6 +195,7 @@ const page: React.FC = () => {
             <div className="mt-[-80px] mb-20">
               {clubList?.map((content, contentIndex) => (
                 <StudentGrouplistItem
+                  key={contentIndex}
                   id={1}
                   title={content.title}
                   description={content.description}

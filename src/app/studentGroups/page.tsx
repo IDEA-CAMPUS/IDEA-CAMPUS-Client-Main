@@ -7,7 +7,7 @@ import Image from "next/image";
 import StudentGrouplistItem from "./_components/StudentGroupListItem";
 import { useRouter } from "next/navigation";
 import getClub from "../_api/Club/GetClub";
-import { NavBar } from "../_components/components/naviBar";
+import { NavBar } from "../_components/components/NaviBar";
 
 const IdeaManage = () => {
   const clubData = getClub();
@@ -29,7 +29,6 @@ const IdeaManage = () => {
     <div>
       <NavBar />
       <div className="flex flex-col w-[100vw] items-center bg-[#FAFAFA]">
-
         <Image
           src={GradientBackground}
           alt="gradientBackground"

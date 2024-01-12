@@ -1,7 +1,7 @@
 "use client";
 
 import getClubDetail from "@/app/_api/Club/GetClubDetail";
-import { NavBar } from "@/app/_components/components/naviBar";
+import { NavBar } from "@/app/_components/components/NaviBar";
 import Header from "@/app/_components/layout/Header";
 import GradientBackground from "@/assests/images/gradientBackground.png";
 import ThumbnailImage from "@/assests/images/Image.png";
@@ -10,7 +10,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 import React from "react";
 
-const registrationCompleted = () => {
+const RegistrationCompleted = () => {
   const pathname = usePathname();
   //id가져오는 문자열 함수
   const id = pathname.split("/")[3];
@@ -108,4 +108,4 @@ const registrationCompleted = () => {
   );
 };
 
-export default registrationCompleted;
+export default RegistrationCompleted;

@@ -23,7 +23,7 @@ interface ApiResponse {
   message: null | string;
 }
 
-const getProjectDetail = (id: string) => {
+const GetProjectDetail = (id: string) => {
   const [projectData, setProjectData] = useState<ApiResponse | null>(null);
 
   useEffect(() => {
@@ -45,4 +45,4 @@ const getProjectDetail = (id: string) => {
   return projectData;
 };
 
-export default getProjectDetail;
+export default GetProjectDetail;

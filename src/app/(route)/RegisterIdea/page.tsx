@@ -7,7 +7,7 @@ import RegisterIdeaZoneBackground from "public/IdeaZone/RegisterIdeaZoneBackgrou
 import DeleteButton from "public/ProjectGallery/DeleteButton.svg";
 import SubmitButton from "@/app/_components/IdeaZone/SubmitButton";
 import FixButton from "@/app/_components/IdeaZone/FixButton";
-import { NavBar } from "@/app/_components/components/naviBar";
+import { NavBar } from "@/app/_components/components/NaviBar";
 import PostIdea from "@/app/_api/IdeaZone/PostIdea";
 import { getCombinedkeyWords } from "@/app/_utils/getCombinedKeyWords";
 import { useRouter } from "next/navigation";
