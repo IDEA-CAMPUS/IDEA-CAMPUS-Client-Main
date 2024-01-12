@@ -6,8 +6,8 @@ import { useEffect, useState } from "react";
 
 export const NavBar = () => {
   const [isLogin, setIsLogin] = useState(false);
-  const [color, setColor] = useState("");
-  const [nick, setNick] = useState("");
+  const [color, setColor] = useState<string | undefined>("");
+  const [nick, setNick] = useState<string | undefined>("");
 
   const pathname = usePathname();
   const router = useRouter();
@@ -24,8 +24,8 @@ export const NavBar = () => {
         const response = await loginState();
         console.log("response", response);
         response?.check ? setIsLogin(true) : setIsLogin(false);
-        setColor(response?.information.color);
-        setNick(response?.information.nickname);
+        setColor(response?.information?.color);
+        setNick(response?.information?.nickName);
       } catch (error) {
         console.error("Error fetching login state:", error);
         // 오류 처리를 여기에 추가할 수 있습니다.
