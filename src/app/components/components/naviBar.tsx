@@ -1,6 +1,6 @@
 "use client";
 
-import { LoginState } from "@/app/_api/naviBar";
+import { LoginState } from "@/app/api/naviBar";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 

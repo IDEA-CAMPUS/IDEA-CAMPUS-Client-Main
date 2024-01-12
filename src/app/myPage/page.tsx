@@ -1,5 +1,5 @@
 import "next/link";
-import Header from "../_components/layout/Header";
+import Header from "../components/layout/Header";
 import Image from "next/image";
 import GradientBackgroundmyPage from "@/assests/images/graidentBackgroundmyPage.png";
 
