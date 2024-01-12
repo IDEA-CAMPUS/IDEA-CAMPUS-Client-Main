@@ -8,7 +8,7 @@ import DeleteButton from "public/ProjectGallery/DeleteButton.svg";
 import SubmitButton from "@/app/_components/Gallery/SubmitButton";
 import FixButton from "@/app/_components/Gallery/FixButton";
 import KeywordButton from "@/app/_components/Gallery/KeywordButton";
-import { NavBar } from "@/app/_components/components/naviBar";
+import { NavBar } from "@/app/_components/components/NaviBar";
 import { usePathname, useRouter } from "next/navigation";
 import PostProject from "@/app/_api/Gallery/PostProject";
 import getProjectDetail from "@/app/_api/Gallery/GetProjectDetail";
