@@ -17,6 +17,7 @@ import splitkeyWords from "./_utils/seperateKeword";
 import getIdeaHome from "./_api/Home/GetIdeaHome";
 import getProjectHome from "./_api/Home/GetProjectHome";
 import { NavBar } from "./_components/components/naviBar";
+import getClubHome from "./_api/Home/GetClubHome";
 
 interface Idea {
   title: string;
@@ -38,6 +39,8 @@ const page: React.FC = () => {
   const ideaList = ideaData?.information;
   const projectData = getProjectHome();
   const projectList = projectData?.information;
+  const clubData = getClubHome();
+  const clubList = clubData?.information;
 
   const chunkSize = 3;
   const ideaContents = Array.from(
@@ -47,6 +50,10 @@ const page: React.FC = () => {
   const projectContents = Array.from(
     { length: Math.ceil((projectList?.length || 0) / chunkSize) },
     (_, index) => projectList?.slice(index * chunkSize, (index + 1) * chunkSize)
+  );
+  const clubContents = Array.from(
+    { length: Math.ceil((clubList?.length || 0) / chunkSize) },
+    (_, index) => clubList?.slice(index * chunkSize, (index + 1) * chunkSize)
   );
 
   return (
@@ -186,9 +193,16 @@ const page: React.FC = () => {
               </div>
             </div>
             <div className="mt-[-80px] mb-20">
-              <StudentGrouplistItem />
-              <StudentGrouplistItem />
-              <StudentGrouplistItem />
+              {clubList?.map((content, contentIndex) => (
+                <StudentGrouplistItem
+                  id={1}
+                  title={content.title}
+                  description={content.description}
+                  createdAt={content.createdAt}
+                  nickname={content.nickname}
+                  thumbnail={content.thumbnail}
+                />
+              ))}
             </div>
           </div>
         </div>

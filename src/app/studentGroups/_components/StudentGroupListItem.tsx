@@ -9,7 +9,7 @@ interface contentProps {
   description: string;
   createdAt: string;
   nickname: string;
-  thumbnail: string;
+  thumbnail: string | null;
 }
 const StudentGrouplistItem: React.FC<contentProps> = ({
   id,

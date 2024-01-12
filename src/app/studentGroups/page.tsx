@@ -7,6 +7,7 @@ import Image from "next/image";
 import StudentGrouplistItem from "./_components/StudentGroupListItem";
 import { useRouter } from "next/navigation";
 import getClub from "../_api/Club/GetClub";
+import { NavBar } from "../_components/components/naviBar";
 
 const IdeaManage = () => {
   const clubData = getClub();
@@ -26,7 +27,7 @@ const IdeaManage = () => {
 
   return (
     <div>
-      <Header />
+      <NavBar />
       <div className="flex flex-col w-[100vw] items-center bg-[#FAFAFA]">
         <Image
           src={GradientBackground}
@@ -55,7 +56,7 @@ const IdeaManage = () => {
             {clubList?.map((item, index) => (
               <StudentGrouplistItem
                 key={index}
-                id={0}
+                id={1}
                 title={item.title}
                 description={item.description}
                 createdAt={item.createdAt}
