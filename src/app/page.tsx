@@ -3,21 +3,21 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
-// import HomeBackground from "public/HomeBackground.svg";
+import HomeBackground from "public/HomeBackground.svg";
 import Logo from "public/Logo.svg";
-import StudentCard from "public/Home/StudentCard.svg";
-import Light from "public/Home/Light.svg";
-import Puzzle from "public/Home/Puzzle.svg";
-import Speaker from "public/Home/Speaker.svg";
-import IdeaContent from "./_components/IdeaZone/IdeaContent";
-import Content from "./_components/Gallery/Content";
+import StudentCard from "public/home/StudentCard.svg";
+import Light from "public/home/Light.svg";
+import Puzzle from "public/home/Puzzle.svg";
+import Speaker from "public/home/Speaker.svg";
+import IdeaContent from "./_components/ideazone/IdeaContent";
+import Content from "./_components/gallery/Content";
 import StudentGrouplistItem from "./studentGroups/_components/StudentGroupListItem";
 
 import splitkeyWords from "./_utils/seperateKeword";
-import getIdeaHome from "./_api/Home/GetIdeaHome";
-import getProjectHome from "./_api/Home/GetProjectHome";
+import getIdeaHome from "./_api/home/GetIdeaHome";
+import getProjectHome from "./_api/home/GetProjectHome";
 import { NavBar } from "./_components/components/naviBar";
-import getClubHome from "./_api/Home/GetClubHome";
+import getClubHome from "./_api/home/GetClubHome";
 
 interface Idea {
   title: string;
@@ -60,12 +60,7 @@ const page: React.FC = () => {
     <main className="bg-white h-auto w-full text-black flex flex-col items-center mx-auto">
       <NavBar />
       <div className="w-[1600px]">
-        <Image
-          src="/HomeBackground.svg"
-          alt="HomeBackground"
-          width={50}
-          height={50}
-        />
+        <Image src={HomeBackground} alt="HomeBackground" />
       </div>
       <div className="mt-[-4250px] w-[1204px] h-[400px] bg-gray-300">
         banner

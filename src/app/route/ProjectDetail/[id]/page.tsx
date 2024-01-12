@@ -11,11 +11,10 @@ import IndexIcon from "public/ProjectGallery/IndexIcon.svg";
 import GitHubButton from "public/ProjectGallery/GitHubButton.svg";
 import GoogleButton from "public/ProjectGallery/GoogleButton.svg";
 import WebButton from "public/ProjectGallery/WebButton.svg";
-import FixButton from "@/app/_components/Gallery/FixButton";
 import { usePathname, useRouter } from "next/navigation";
-import getProjectDetail from "@/app/_api/Gallery/GetProjectDetail";
+import GetProjectDetail from "@/app/_api/gallery/GetProjectDetail";
 import { NavBar } from "@/app/_components/components/naviBar";
-import deleteProject from "@/app/_api/Gallery/DeleteProject";
+import DeleteProject from "@/app/_api/gallery/DeleteProject";
 
 const ProjectDetail = () => {
   const exampleText =
@@ -24,7 +23,7 @@ const ProjectDetail = () => {
   //id가져오는 문자열 함수
   const id = pathname.split("/")[2];
 
-  const projectData = getProjectDetail(id)?.information;
+  const projectData = GetProjectDetail(id)?.information;
 
   const router = useRouter();
 
@@ -62,7 +61,7 @@ const ProjectDetail = () => {
 
   const handleDelete = () => {
     try {
-      deleteProject(id);
+      DeleteProject(id);
       // router.push("/ProjectGallery");
       alert("성공적으로 삭제되었습니다.");
     } catch (error) {

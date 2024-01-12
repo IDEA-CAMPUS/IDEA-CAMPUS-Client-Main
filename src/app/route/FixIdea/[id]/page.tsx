@@ -3,14 +3,14 @@
 import React, { useState, ChangeEvent, useRef, useEffect } from "react";
 import Image from "next/image";
 
-import RegisterIdeaZoneBackground from "public/IdeaZone/RegisterIdeaZoneBackground.svg";
-import SubmitButton from "@/app/_components/IdeaZone/SubmitButton";
-import FixButton from "@/app/_components/IdeaZone/FixButton";
+import RegisterIdeaZoneBackground from "public/ideazone/RegisterIdeaZoneBackground.svg";
+import SubmitButton from "@/app/_components/ideazone/SubmitButton";
+import FixButton from "@/app/_components/ideazone/FixButton";
 import { NavBar } from "@/app/_components/components/naviBar";
 
 import { usePathname, useRouter } from "next/navigation";
-import getIdeaDeatil from "@/app/_api/IdeaZone/GetIdeaDetail";
-import fixIdea from "@/app/_api/IdeaZone/FixIdea";
+import getIdeaDetail from "@/app/_api/ideazone/GetIdeaDetail";
+import fixIdea from "@/app/_api/ideazone/FixIdea";
 
 interface IdeaFormData {
   title: string;
@@ -34,7 +34,7 @@ const FixIdea = () => {
     Array<{ name: string; url: string; size: string }>
   >([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const response = getIdeaDeatil(id);
+  const response = getIdeaDetail(id);
   const ideaFixData = response?.information;
 
   useEffect(() => {

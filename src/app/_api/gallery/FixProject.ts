@@ -20,7 +20,7 @@ interface Images {
 }
 [];
 
-const fixProject = async (
+const FixProject = async (
   projectData: ProjectFormData | undefined,
   id: string,
   images: Array<{ name: string; url: string; size: string }>
@@ -44,4 +44,4 @@ const fixProject = async (
   }
 };
 
-export default fixProject;
+export default FixProject;

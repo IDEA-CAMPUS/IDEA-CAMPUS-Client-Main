@@ -1,18 +1,16 @@
 "use client";
 
-import React, { useState, ChangeEvent, useRef, useEffect } from "react";
+import React, { useState, ChangeEvent, useRef } from "react";
 
 import ProjectGalleryRegisterBackGround from "public/ProjectGallery/ProjectGalleryRegisterBackGround.svg";
 import Image from "next/image";
 import DeleteButton from "public/ProjectGallery/DeleteButton.svg";
-import SubmitButton from "@/app/_components/Gallery/SubmitButton";
-import FixButton from "@/app/_components/Gallery/FixButton";
-import KeywordButton from "@/app/_components/Gallery/KeywordButton";
+import SubmitButton from "@/app/_components/gallery/SubmitButton";
+import FixButton from "@/app/_components/gallery/FixButton";
+import KeywordButton from "@/app/_components/gallery/KeywordButton";
 import { NavBar } from "@/app/_components/components/naviBar";
-import { usePathname, useRouter } from "next/navigation";
-import PostProject from "@/app/_api/Gallery/PostProject";
-import getProjectDetail from "@/app/_api/Gallery/GetProjectDetail";
-import fixProject from "@/app/_api/Gallery/FixProject";
+import { useRouter } from "next/navigation";
+import PostProject from "@/app/_api/gallery/PostProject";
 
 interface ProjectFormData {
   title: string;
@@ -29,36 +27,9 @@ interface ProjectFormData {
 
 const RegisterProject = () => {
   const formData = new FormData();
-  const pathname = usePathname();
-  const id = pathname.split("/")[2];
   const [images, setImages] = useState<
     Array<{ name: string; url: string; size: string }>
   >([]);
-  const response = getProjectDetail(id);
-  const projectFixData = response?.information;
-  useEffect(() => {
-    if (projectFixData) {
-      setProjectData({
-        title: projectFixData.title,
-        booleanWeb: projectFixData.booleanWeb,
-        booleanApp: projectFixData.booleanApp,
-        booleanAi: projectFixData.booleanAi,
-        simpleDescription: projectFixData.simpleDescription,
-        detailedDescription: projectFixData.detailedDescription,
-        team: projectFixData.teamInformation,
-        githubUrl: projectFixData.githubUrl,
-        webUrl: projectFixData.webUrl,
-        googlePlayUrl: projectFixData.googlePlayUrl,
-      });
-    }
-    // if (projectFixData?.thumbnail) {
-    //   images.push(projectFixData.thumbnail);
-    // }
-    // if (projectFixData?.otherImages) {
-    //   images = images.concat(projectFixData.otherImages);
-    // }
-  }, [projectFixData]);
-
   const [projectData, setProjectData] = useState<ProjectFormData>({
     title: "",
     booleanWeb: true,
@@ -155,7 +126,7 @@ const RegisterProject = () => {
         console.log("Upload image:", images, projectData);
         // 이 부분에 실제로 서버로 이미지를 업로드하는 로직을 추가할 수 있습니다.
         // 서버로의 업로드를 위해 fetch 또는 axios 등을 사용할 수 있습니다.
-        await fixProject(projectData, id, images);
+        await PostProject(projectData, images);
         // Additional logic after successful upload, if needed
         router.push("/ProjectGallery");
       } else {

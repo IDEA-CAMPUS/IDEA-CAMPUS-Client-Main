@@ -9,7 +9,7 @@ interface Idea {
   url2: string;
 }
 
-const fixIdea = async (ideaData: Idea | undefined, id: string) => {
+const FixIdea = async (ideaData: Idea | undefined, id: string) => {
   try {
     const response = await fetch(
       `http://ec2-3-34-14-75.ap-northeast-2.compute.amazonaws.com:8080/api/idea/${id}`,
@@ -34,4 +34,4 @@ const fixIdea = async (ideaData: Idea | undefined, id: string) => {
   }
 };
 
-export default fixIdea;
+export default FixIdea;

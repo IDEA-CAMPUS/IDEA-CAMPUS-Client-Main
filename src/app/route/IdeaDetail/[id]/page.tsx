@@ -3,21 +3,21 @@
 import React, { useEffect } from "react";
 import Image from "next/image";
 
-import IdeaDetailBackground from "public/IdeaZone/IdeaDetailBackground.png";
-import FixButton from "@/app/_components/IdeaZone/FixButton";
+import IdeaDetailBackground from "public/ideazone/IdeaDetailBackground.png";
+import FixButton from "@/app/_components/ideazone/FixButton";
 import Profile from "public/Profile.svg";
 import { usePathname, useRouter } from "next/navigation";
-import getIdeaDetail from "@/app/_api/IdeaZone/GetIdeaDetail";
+import GetIdeaDetail from "@/app/_api/ideazone/GetIdeaDetail";
 import splitkeyWords from "@/app/_utils/seperateKeword";
 import { NavBar } from "@/app/_components/components/naviBar";
-import deleteIdea from "@/app/_api/IdeaZone/DeleteIdea";
+import DeleteIdea from "@/app/_api/ideazone/DeleteIdea";
 
 const IdeaDetail = () => {
   const pathname = usePathname();
   //id가져오는 문자열 함수g
   const id = pathname.split("/")[2];
 
-  const ideaData = getIdeaDetail(id)?.information;
+  const ideaData = GetIdeaDetail(id)?.information;
 
   const router = useRouter();
 
@@ -27,7 +27,7 @@ const IdeaDetail = () => {
 
   const handleDelete = () => {
     try {
-      deleteIdea(ideaData!.id);
+      DeleteIdea(ideaData!.id);
       alert("성공적으로 삭제되었습니다.");
       router.push("/IdeaZone");
     } catch (error) {

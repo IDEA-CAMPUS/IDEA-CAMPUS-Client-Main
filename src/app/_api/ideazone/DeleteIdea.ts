@@ -4,10 +4,10 @@ interface ApiResponse {
   message: string;
 }
 
-const deleteProject = async (id: string) => {
+const DeleteIdea = async (id: string) => {
   try {
     const response = await fetch(
-      `http://ec2-3-34-14-75.ap-northeast-2.compute.amazonaws.com:8080/api/project/${id}`,
+      `http://ec2-3-34-14-75.ap-northeast-2.compute.amazonaws.com:8080/api/idea/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -23,4 +23,4 @@ const deleteProject = async (id: string) => {
   }
 };
 
-export default deleteProject;
+export default DeleteIdea;

@@ -8,13 +8,13 @@ import SnowGray from "public/ProjectGallery/SnowGray.svg";
 import Snow from "public/ProjectGallery/Snow.svg";
 import ProjectGalleryIcon from "public/ProjectGallery/ProjectGalleryIcon.svg";
 
-import KeywordButton from "@/app/_components/Gallery/KeywordButton";
-import TextButton from "@/app/_components/Gallery/TextButotn";
-import SubmitButton from "@/app/_components/Gallery/SubmitButton";
-import Content from "@/app/_components/Gallery/Content";
+import KeywordButton from "@/app/_components/gallery/KeywordButton";
+import TextButton from "@/app/_components/gallery/TextButotn";
+import SubmitButton from "@/app/_components/gallery/SubmitButton";
 import { NavBar } from "@/app/_components/components/naviBar";
-import getProject from "@/app/_api/Gallery/GetProject";
-import getProjectKeyWord from "@/app/_api/Gallery/GetProjectKeyWord";
+import GetProject from "@/app/_api/gallery/GetProject";
+import GetProjectKeyWord from "@/app/_api/gallery/GetProjectKeyWord";
+import Content from "@/app/_components/gallery/Content";
 
 const ProjectGalley = () => {
   const [currentSort, setCurrentSort] = useState<"new" | "view">("new");
@@ -31,7 +31,7 @@ const ProjectGalley = () => {
   // } else {
   //   projectData = getProjectKeyWord(buttonStates);
   // }
-  const projectData = getProject();
+  const projectData = GetProject();
   const projectList = projectData?.information.content;
   console.log(projectData);
 

@@ -5,10 +5,10 @@ import Image from "next/image";
 
 import RegisterIdeaZoneBackground from "public/IdeaZone/RegisterIdeaZoneBackground.svg";
 import DeleteButton from "public/ProjectGallery/DeleteButton.svg";
-import SubmitButton from "@/app/_components/IdeaZone/SubmitButton";
-import FixButton from "@/app/_components/IdeaZone/FixButton";
+import SubmitButton from "@/app/_components/ideazone/SubmitButton";
+import FixButton from "@/app/_components/ideazone/FixButton";
 import { NavBar } from "@/app/_components/components/naviBar";
-import PostIdea from "@/app/_api/IdeaZone/PostIdea";
+import PostIdea from "@/app/_api/ideazone/PostIdea";
 // import { getCombinedkeyWords } from "@/app/_utils/getCombinedKeyWords";
 import { useRouter } from "next/navigation";
 

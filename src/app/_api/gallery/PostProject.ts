@@ -29,7 +29,7 @@ interface Images {
 //   ],
 // };
 
-const postProject = async (
+const PostProject = async (
   ideaData: ProjectFormData | undefined,
   images: { name: string; url: string; size: string }[]
 ) => {
@@ -53,4 +53,4 @@ const postProject = async (
   }
 };
 
-export default postProject;
+export default PostProject;

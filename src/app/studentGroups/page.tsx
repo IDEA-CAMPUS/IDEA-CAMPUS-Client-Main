@@ -6,7 +6,7 @@ import GradientBackground from "@/assests/images/gradientBackground.png";
 import Image from "next/image";
 import StudentGrouplistItem from "./_components/StudentGroupListItem";
 import { useRouter } from "next/navigation";
-import getClub from "../_api/Club/GetClub";
+import getClub from "../_api/club/GetClub";
 import { NavBar } from "../_components/components/naviBar";
 
 const IdeaManage = () => {

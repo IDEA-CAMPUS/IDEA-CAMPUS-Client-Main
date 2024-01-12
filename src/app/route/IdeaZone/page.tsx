@@ -7,16 +7,16 @@ import FlowerGray from "public/IdeaZone/FlowerGray.svg";
 import Flower from "public/IdeaZone/Flower.svg";
 import IdeaZoneIcon from "public/IdeaZone/IdeaZoneIcon.svg";
 
-import TextButton from "@/app/_components/IdeaZone/TextButotn";
-import SubmitButton from "@/app/_components/IdeaZone/SubmitButton";
-import IdeaContent from "@/app/_components/IdeaZone/IdeaContent";
+import TextButton from "@/app/_components/ideazone/TextButotn";
+import SubmitButton from "@/app/_components/ideazone/SubmitButton";
+import IdeaContent from "@/app/_components/ideazone/IdeaContent";
 import { NavBar } from "@/app/_components/components/naviBar";
-import getIdea from "@/app/_api/IdeaZone/GetIdea";
+import GetIdea from "@/app/_api/ideazone/GetIdea";
 import splitkeyWords from "@/app/_utils/seperateKeword";
 
 const IdeaZone = () => {
   const [currentSort, setCurrentSort] = useState<"new" | "view">("new");
-  const ideaData = getIdea();
+  const ideaData = GetIdea();
   const ideaList = ideaData?.information;
 
   const chunkSize = 3;
