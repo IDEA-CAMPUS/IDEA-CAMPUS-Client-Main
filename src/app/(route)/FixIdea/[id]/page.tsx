@@ -3,7 +3,7 @@
 import React, { useState, ChangeEvent, useRef, useEffect } from "react";
 import Image from "next/image";
 
-import RegisterIdeaZoneBackground from "public/IdeaZone/RegisterIdeaZoneBackground.svg";
+import RegisterIdeaZoneBackground from "/public/IdeaZone/RegisterIdeaZoneBackground.svg";
 import SubmitButton from "@/app/_components/IdeaZone/SubmitButton";
 import FixButton from "@/app/_components/IdeaZone/FixButton";
 import { NavBar } from "@/app/_components/components/naviBar";
