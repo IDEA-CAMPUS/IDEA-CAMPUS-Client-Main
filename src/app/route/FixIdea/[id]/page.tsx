@@ -4,13 +4,13 @@ import React, { useState, ChangeEvent, useRef, useEffect } from "react";
 import Image from "next/image";
 
 import registerIdeaZoneBackground from "public/ideazone/registerIdeaZoneBackground.svg";
-import SubmitButton from "@/app/_components/ideazone/SubmitButton";
-import FixButton from "@/app/_components/ideazone/FixButton";
-import { NavBar } from "@/app/_components/components/naviBar";
+import SubmitButton from "@/app/components/ideazone/SubmitButton";
+import FixButton from "@/app/components/ideazone/FixButton";
+import { NavBar } from "@/app/components/components/naviBar";
 
 import { usePathname, useRouter } from "next/navigation";
-import getIdeaDetail from "@/app/_api/ideazone/GetIdeaDetail";
-import fixIdea from "@/app/_api/ideazone/FixIdea";
+import getIdeaDetail from "@/app/api/ideazone/GetIdeaDetail";
+import fixIdea from "@/app/api/ideazone/FixIdea";
 
 interface IdeaFormData {
   title: string;

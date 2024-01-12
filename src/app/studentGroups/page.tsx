@@ -1,13 +1,13 @@
 "use client";
 
 import "next/link";
-import Header from "../_components/layout/Header";
+import Header from "../components/layout/Header";
 import GradientBackground from "@/assests/images/gradientBackground.png";
 import Image from "next/image";
 import StudentGrouplistItem from "./_components/StudentGroupListItem";
 import { useRouter } from "next/navigation";
-import getClub from "../_api/club/GetClub";
-import { NavBar } from "../_components/components/naviBar";
+import getClub from "../api/club/GetClub";
+import { NavBar } from "../components/components/naviBar";
 
 const IdeaManage = () => {
   const clubData = getClub();
@@ -18,7 +18,7 @@ const IdeaManage = () => {
   const handleonClick = () => {
     if (localStorage.getItem("login-token") !== null) {
       // 클릭 시 다음 페이지로 이동dd
-      router.push("/studentGroups/registrationForms");
+      router.push("/studentGroups/registrationFogrms");
     } else {
       alert("로그인 후 이용해주세요");
       router.push("/login");

@@ -4,13 +4,13 @@ import React, { useEffect } from "react";
 import Image from "next/image";
 
 import ideaDetailBackground from "public/ideazone/ideaDetailBackground.png";
-import FixButton from "@/app/_components/ideazone/FixButton";
+import FixButton from "@/app/components/ideazone/FixButton";
 import profile from "public/profile.svg";
 import { usePathname, useRouter } from "next/navigation";
-import GetIdeaDetail from "@/app/_api/ideazone/GetIdeaDetail";
-import splitkeyWords from "@/app/_utils/seperateKeword";
-import { NavBar } from "@/app/_components/components/naviBar";
-import DeleteIdea from "@/app/_api/ideazone/DeleteIdea";
+import GetIdeaDetail from "@/app/api/ideazone/GetIdeaDetail";
+import splitkeyWords from "@/app/utils/seperateKeword";
+import { NavBar } from "@/app/components/components/naviBar";
+import DeleteIdea from "@/app/api/ideazone/DeleteIdea";
 
 const IdeaDetail = () => {
   const pathname = usePathname();

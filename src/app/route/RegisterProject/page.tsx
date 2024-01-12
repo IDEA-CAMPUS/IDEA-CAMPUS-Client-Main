@@ -5,12 +5,12 @@ import React, { useState, ChangeEvent, useRef } from "react";
 import projectGalleryRegisterBackGround from "public/projectgallery/projectGalleryRegisterBackGround.svg";
 import Image from "next/image";
 import deleteButton from "public/projectgallery/deleteButton.svg";
-import SubmitButton from "@/app/_components/gallery/SubmitButton";
-import FixButton from "@/app/_components/gallery/FixButton";
-import KeywordButton from "@/app/_components/gallery/KeywordButton";
-import { NavBar } from "@/app/_components/components/naviBar";
+import SubmitButton from "@/app/components/gallery/SubmitButton";
+import FixButton from "@/app/components/gallery/FixButton";
+import KeywordButton from "@/app/components/gallery/KeywordButton";
+import { NavBar } from "@/app/components/components/naviBar";
 import { useRouter } from "next/navigation";
-import PostProject from "@/app/_api/gallery/PostProject";
+import PostProject from "@/app/api/gallery/PostProject";
 
 interface ProjectFormData {
   title: string;

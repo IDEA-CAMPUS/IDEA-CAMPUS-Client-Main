@@ -12,9 +12,9 @@ import gitHubButton from "public/ProjectGallery/GitHubButton.svg";
 import googleButton from "public/ProjectGallery/GoogleButton.svg";
 import webButton from "public/ProjectGallery/WebButton.svg";
 import { usePathname, useRouter } from "next/navigation";
-import GetProjectDetail from "@/app/_api/gallery/GetProjectDetail";
-import { NavBar } from "@/app/_components/components/naviBar";
-import DeleteProject from "@/app/_api/gallery/DeleteProject";
+import GetProjectDetail from "@/app/api/gallery/GetProjectDetail";
+import { NavBar } from "@/app/components/components/naviBar";
+import DeleteProject from "@/app/api/gallery/DeleteProject";
 
 const ProjectDetail = () => {
   const exampleText =

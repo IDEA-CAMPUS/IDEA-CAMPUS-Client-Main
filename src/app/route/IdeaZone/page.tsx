@@ -7,12 +7,12 @@ import flowerGray from "public/ideaZone/flowerGray.svg";
 import flower from "public/ideaZone/flower.svg";
 import ideaZoneIcon from "public/ideaZone/ideaZoneIcon.svg";
 
-import TextButton from "@/app/_components/ideazone/TextButotn";
-import SubmitButton from "@/app/_components/ideazone/SubmitButton";
-import IdeaContent from "@/app/_components/ideazone/IdeaContent";
-import { NavBar } from "@/app/_components/components/naviBar";
-import GetIdea from "@/app/_api/ideazone/GetIdea";
-import splitkeyWords from "@/app/_utils/seperateKeword";
+import TextButton from "@/app/components/ideazone/TextButotn";
+import SubmitButton from "@/app/components/ideazone/SubmitButton";
+import IdeaContent from "@/app/components/ideazone/IdeaContent";
+import { NavBar } from "@/app/components/components/naviBar";
+import GetIdea from "@/app/api/ideazone/GetIdea";
+import splitkeyWords from "@/app/utils/seperateKeword";
 
 const IdeaZone = () => {
   const [currentSort, setCurrentSort] = useState<"new" | "view">("new");

@@ -1,8 +1,8 @@
 "use client";
 
-import getClubDetail from "@/app/_api/club/GetClubDetail";
-import { NavBar } from "@/app/_components/components/naviBar";
-import Header from "@/app/_components/layout/Header";
+import getClubDetail from "@/app/api/club/GetClubDetail";
+import { NavBar } from "@/app/components/components/naviBar";
+import Header from "@/app/components/layout/Header";
 import GradientBackground from "@/assests/images/gradientBackground.png";
 import ThumbnailImage from "@/assests/images/Image.png";
 import Image from "next/image";
