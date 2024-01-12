@@ -22,7 +22,7 @@ interface ApiResponse {
   information: Information;
 }
 
-const getProjectKeyWord = (buttonStates: { [key: string]: boolean }) => {
+const GetProjectKeyWord = (buttonStates: { [key: string]: boolean }) => {
   const [projectData, setProjectData] = useState<ApiResponse | null>(null);
 
   useEffect(() => {
@@ -51,4 +51,4 @@ const getProjectKeyWord = (buttonStates: { [key: string]: boolean }) => {
   return projectData;
 };
 
-export default getProjectKeyWord;
+export default GetProjectKeyWord;

@@ -10,7 +10,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 import React from "react";
 
-const registrationCompleted = () => {
+const RegistrationCompleted = () => {
   const pathname = usePathname();
   //id가져오는 문자열 함수
   const id = pathname.split("/")[3];
@@ -108,4 +108,4 @@ const registrationCompleted = () => {
   );
 };
 
-export default registrationCompleted;
+export default RegistrationCompleted;

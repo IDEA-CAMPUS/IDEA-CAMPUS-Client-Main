@@ -19,7 +19,7 @@ interface ApiResponse {
   message: string;
 }
 
-const putIdea = (ideaDate: Idea | undefined) => {
+const PutIdea = (ideaDate: Idea | undefined) => {
   useEffect(() => {
     const fetchIdeaData = async () => {
       try {
@@ -50,4 +50,4 @@ const putIdea = (ideaDate: Idea | undefined) => {
   }, []); // Include props in the dependenZcy array
 };
 
-export default putIdea;
+export default PutIdea;

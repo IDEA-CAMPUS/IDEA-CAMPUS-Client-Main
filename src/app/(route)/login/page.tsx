@@ -56,7 +56,7 @@ export default function Login() {
         }
       };
       return (
-        <div className="h-screen bg-white flex justify-center items-center relative z-[10]">
+        <div className="h-screen text-black bg-white flex justify-center items-center relative z-[10]">
           <div className="w-full h-[230px] bg-[url('/wave.svg')] fixed bottom-0 z-[-1]"></div>
           <ToastComponent />
           <div className="flex flex-col items-center box-border justify-evenly z-10">
@@ -153,7 +153,7 @@ export default function Login() {
         //   }
       };
       return (
-        <div className="h-screen  bg-white flex justify-center items-center relative z-[10]">
+        <div className="h-screen text-black  bg-white flex justify-center items-center relative z-[10]">
           <div className="w-full h-[230px] bg-[url('/wave.svg')] fixed bottom-0 z-[-1]"></div>
           <div className="items-center flex flex-col justify-evenly box-border z-10">
             <div className="text-center text-[36px] font-bold">아이디 찾기</div>
@@ -230,7 +230,7 @@ export default function Login() {
         //   }
       };
       return (
-        <div className="h-screen  bg-white flex justify-center items-center relative z-[10]">
+        <div className="h-screen text-black  bg-white flex justify-center items-center relative z-[10]">
           <div className="w-full h-[230px] bg-[url('/wave.svg')] fixed bottom-0 z-[-1]"></div>
           <div className="items-center flex flex-col justify-center box-border z-10">
             <div className="text-center text-[36px] font-bold">
@@ -269,7 +269,7 @@ export default function Login() {
 
     case "returnID":
       return (
-        <div className="h-screen bg-white flex justify-center items-center relative z-[10]">
+        <div className="h-screen text-black bg-white flex justify-center items-center relative z-[10]">
           <div className="w-full h-[230px] bg-[url('/wave.svg')] fixed bottom-0 z-[-1]"></div>
           <div className="items-center flex flex-col justify-center box-border z-10">
             <div className="text-center text-[36px]">아이디 찾기</div>
@@ -298,7 +298,7 @@ export default function Login() {
 
     case "returnPW":
       return (
-        <div className="h-screen  bg-white flex justify-center items-center relative z-[10]">
+        <div className="h-screen  text-black bg-white flex justify-center items-center relative z-[10]">
           <div className="w-full h-[230px] bg-[url('/wave.svg')] fixed bottom-0 z-[-1]"></div>
           <div className="items-center flex flex-col justify-center box-border z-10">
             <div className="text-center text-[36px] font-bold">
@@ -332,7 +332,7 @@ export default function Login() {
         //   }
       };
       return (
-        <div className="h-screen  bg-white flex justify-center items-center relative z-[10]">
+        <div className="h-screen  text-black  bg-white flex justify-center items-center relative z-[10]">
           <div className="w-full h-[230px] bg-[url('/wave.svg')] fixed bottom-0 z-[-1]"></div>
           <div className="items-center flex flex-col justify-center box-border z-10">
             <div className="text-center text-[36px] font-bold">

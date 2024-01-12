@@ -21,7 +21,7 @@ interface ApiResponse {
   message: string | null;
 }
 
-const getIdeaDeatil = (id: string) => {
+const GetIdeaDeatil = (id: string) => {
   const [ideaData, setideaData] = useState<ApiResponse | null>(null);
 
   useEffect(() => {
@@ -43,4 +43,4 @@ const getIdeaDeatil = (id: string) => {
   return ideaData;
 };
 
-export default getIdeaDeatil;
+export default GetIdeaDeatil;

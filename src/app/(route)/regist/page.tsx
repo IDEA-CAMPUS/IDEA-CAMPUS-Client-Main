@@ -266,7 +266,7 @@ export default function Regist() {
   };
 
   return (
-    <div className="h-fit-content  bg-white flex flex-col justify-center items-center relative z-[10]">
+    <div className="h-fit-content text-black  bg-white flex flex-col justify-center items-center relative z-[10]">
       {/* <NavBar /> */}
       <div className="items-center flex flex-col justify-evenly box-border z-10">
         <div className="text-center text-[36px] font-bold mt-[183px]">
