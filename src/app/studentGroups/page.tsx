@@ -29,6 +29,7 @@ const IdeaManage = () => {
     <div>
       <NavBar />
       <div className="flex flex-col w-[100vw] items-center bg-[#FAFAFA]">
+
         <Image
           src={GradientBackground}
           alt="gradientBackground"
