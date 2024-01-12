@@ -10,7 +10,7 @@ import IdeaZoneIcon from "public/IdeaZone/IdeaZoneIcon.svg";
 import TextButton from "@/app/_components/IdeaZone/TextButotn";
 import SubmitButton from "@/app/_components/IdeaZone/SubmitButton";
 import IdeaContent from "@/app/_components/IdeaZone/IdeaContent";
-import { NavBar } from "@/app/_components/components/naviBar";
+import { NavBar } from "@/app/_components/components/NaviBar";
 import getIdea from "@/app/_api/IdeaZone/GetIdea";
 import splitkeyWords from "@/app/_utils/seperateKeword";
 

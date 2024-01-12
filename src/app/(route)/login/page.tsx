@@ -1,11 +1,11 @@
 "use client";
 import Image from "next/image";
-import { Input } from "@/app/_components/components/inputbox";
-import { NextButton, TextButton } from "@/app/_components/components/buttons";
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { useToast } from "@/app/_class/tost";
 import { findID, findPW, login } from "@/app/_api/login";
+import { useToast } from "@/app/_class/Tost";
+import { NextButton, TextButton } from "@/app/_components/components/Buttons";
+import { Input } from "@/app/_components/components/Inputbox";
 
 export default function Login() {
   // const [findID, setFindID] = useState(false);

@@ -14,7 +14,7 @@ import WebButton from "public/ProjectGallery/WebButton.svg";
 import FixButton from "@/app/_components/Gallery/FixButton";
 import { usePathname, useRouter } from "next/navigation";
 import getProjectDetail from "@/app/_api/Gallery/GetProjectDetail";
-import { NavBar } from "@/app/_components/components/naviBar";
+import { NavBar } from "@/app/_components/components/NaviBar";
 import deleteProject from "@/app/_api/Gallery/DeleteProject";
 
 const ProjectDetail = () => {
