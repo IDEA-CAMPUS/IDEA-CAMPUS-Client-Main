@@ -3,7 +3,7 @@
 import Image from "next/image";
 import React from "react";
 
-import Polygon8 from "public/ideazone/Polygon 8.svg";
+import Polygon8 from "public/ideazone/Polygon8.svg";
 import Profile from "public/Profile.svg";
 import { useRouter } from "next/navigation";
 
