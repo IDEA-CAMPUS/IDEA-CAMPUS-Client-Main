@@ -3,12 +3,12 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
-import HomeBackground from "public/HomeBackground.svg";
-import Logo from "public/Logo.svg";
-import StudentCard from "public/home/StudentCard.svg";
-import Light from "public/home/Light.svg";
-import Puzzle from "public/home/Puzzle.svg";
-import Speaker from "public/home/Speaker.svg";
+import HomeBackground from "public/homeBackground.svg";
+import Logo from "public/logo.svg";
+import StudentCard from "public/home/studentCard.svg";
+import Light from "public/home/light.svg";
+import Puzzle from "public/home/puzzle.svg";
+import Speaker from "public/home/speaker.svg";
 import IdeaContent from "./_components/ideazone/IdeaContent";
 import Content from "./_components/gallery/Content";
 import StudentGrouplistItem from "./studentGroups/_components/StudentGroupListItem";
