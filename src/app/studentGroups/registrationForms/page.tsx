@@ -4,11 +4,11 @@ import "next/link";
 import Header from "@/app/_components/layout/Header";
 import GradientBackground from "@/assests/images/gradientBackground.png";
 import Image from "next/image";
-import DeleteButton from "public/ProjectGallery/DeleteButton.svg";
-import SubmitButton from "@/app/_components/Gallery/SubmitButton";
-import FixButton from "@/app/_components/Gallery/FixButton";
+import DeleteButton from "public/projectgallery/DeleteButton.svg";
+import SubmitButton from "@/app/_components/gallery/SubmitButton";
+import FixButton from "@/app/_components/gallery/FixButton";
 import { ChangeEvent, useRef, useState } from "react";
-import PostClub from "@/app/_api/Club/PostClub";
+import PostClub from "@/app/_api/club/PostClub";
 import { useRouter } from "next/navigation";
 
 interface ClubPostRequest {
