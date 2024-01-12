@@ -237,6 +237,4 @@ const FixIdea = () => {
 };
 
 export default FixIdea;
-function getFixIdeaDetail(id: string) {
-  throw new Error("Function not implemented.");
-}
+
