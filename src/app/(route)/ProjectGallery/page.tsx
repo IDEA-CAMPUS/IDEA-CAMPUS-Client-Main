@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import Image from "next/image";
 import ProjectGalleryBackground1 from "public/ProjectGallery/ProjectGalleryBackground1.svg";
 import ProjectGalleryBackground2 from "public/ProjectGallery/ProjectGalleryBackground2.svg";
@@ -12,54 +12,67 @@ import KeywordButton from "@/app/_components/Gallery/KeywordButton";
 import TextButton from "@/app/_components/Gallery/TextButotn";
 import SubmitButton from "@/app/_components/Gallery/SubmitButton";
 import Content from "@/app/_components/Gallery/Content";
+import { NavBar } from "@/app/_components/components/naviBar";
+import getProject from "@/app/_api/Gallery/GetProject";
+import getProjectKeyWord from "@/app/_api/Gallery/GetProjectKeyWord";
 
 const ProjectGalley = () => {
   const [currentSort, setCurrentSort] = useState<"new" | "view">("new");
+  const [buttonStates, setButtonStates] = useState<{ [key: string]: boolean }>({
+    앱: true,
+    웹: true,
+    AI: true,
+  });
+
+  // let projectData;
+
+  // if (buttonStates[0] && buttonStates[1] && buttonStates[2]) {
+  //   projectData = getProject();
+  // } else {
+  //   projectData = getProjectKeyWord(buttonStates);
+  // }
+  const projectData = getProject();
+  const projectList = projectData?.information.content;
+  console.log(projectData);
+
+  const chunkSize = 3;
+  // 최신순 또는 조회순으로 정렬된 아이디어 리스트
+  const sortedprojectList = useMemo(() => {
+    if (currentSort === "new") {
+      return projectList
+        ?.slice()
+        .sort(
+          (a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
+    } else if (currentSort === "view") {
+      return projectList?.slice().sort((a, b) => b.hits - a.hits);
+    }
+    return projectList; // 기본값은 그대로 반환
+  }, [currentSort, projectList]);
+
+  const projectContents = useMemo(
+    () =>
+      Array.from(
+        { length: Math.ceil((sortedprojectList?.length || 0) / chunkSize) },
+        (_, index) =>
+          sortedprojectList?.slice(index * chunkSize, (index + 1) * chunkSize)
+      ),
+    [sortedprojectList, chunkSize]
+  );
 
   const handleTextButtonClick = (sortType: "new" | "view") => {
     setCurrentSort(sortType);
   };
 
-  const contents = [
-    {
-      title: "test1",
-      image: "/Profile.svg",
-      keyword: "앱",
-      team: "test",
-      explain:
-        "이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다",
-    },
-    {
-      title: "test",
-      image: "/Profile.svg",
-      keyword: "앱",
-      team: "없음",
-      explain: "test",
-    },
-    {
-      title: "test",
-      image: "/Profile.svg",
-      keyword: "앱",
-      team: "test",
-      explain: "test",
-    },
-    {
-      title: "test",
-      image: "/Profile.svg",
-      keyword: "앱",
-      team: "test",
-      explain: "test",
-    },
-  ];
-
-  const chunkSize = 3;
-  const chunkedContents = Array.from(
-    { length: Math.ceil(contents.length / chunkSize) },
-    (_, index) => contents.slice(index * chunkSize, (index + 1) * chunkSize)
-  );
+  //키워드 버튼 true여부 확인 함수
+  const handleButtonClick = (isClicked: boolean, title: string) => {
+    setButtonStates((prevStates) => ({ ...prevStates, [title]: isClicked }));
+  };
 
   return (
-    <main className="bg-white w-full text-black flex flex-col items-center mx-auto">
+    <main className="bg-white min-h-screen w-full text-black flex flex-col items-center mx-auto">
+      <NavBar />
       <div className="items-start">
         <Image
           className="flex-shrink-0"
@@ -72,7 +85,7 @@ const ProjectGalley = () => {
           className="my-0"
         />
       </div>
-      <div className="absolute mt-12 ">
+      <div className="mt-[-1200px]  ">
         <div className="w-[1204px] h-[400px] bg-gray-300">banner</div>
         <div className="mt-24 text-center text-white">
           <div className="flex items-center justify-center">
@@ -104,9 +117,18 @@ const ProjectGalley = () => {
       <div className="mx-24 mt-12">
         <h1 className="font-bold text-3xl">완성 프로젝트</h1>
         <div className="mt-8 space-x-4">
-          <KeywordButton title={"앱"} />
-          <KeywordButton title={"웹"} />
-          <KeywordButton title={"AI"} />
+          <KeywordButton
+            title={"앱"}
+            onButtonClick={(isClicked) => handleButtonClick(isClicked, "앱")}
+          />
+          <KeywordButton
+            title={"웹"}
+            onButtonClick={(isClicked) => handleButtonClick(isClicked, "웹")}
+          />
+          <KeywordButton
+            title={"AI"}
+            onButtonClick={(isClicked) => handleButtonClick(isClicked, "AI")}
+          />
         </div>
         <div className="flex items-center justify-between mt-4">
           <div className="flex">
@@ -124,20 +146,25 @@ const ProjectGalley = () => {
           </div>
           {/* 핸들러 구현 */}
           <div>
-            <SubmitButton title="등록 하기" />
+            <SubmitButton title="등록 하기" url="/RegisterProject" />
           </div>
         </div>
         <div className="mt-10 ml-10 mr-10">
-          {chunkedContents.map((chunk, chunkIndex) => (
-            <div key={chunkIndex} className="flex space-x-20">
-              {chunk.map((content, contentIndex) => (
+          {projectContents.map((chunk, chunkIndex) => (
+            <div key={chunkIndex} className="flex space-x-5">
+              {chunk?.map((content, contentIndex) => (
                 <Content
                   key={contentIndex}
-                  title={content.title}
-                  image={content.image}
-                  keyword={content.keyword}
+                  id={content.id}
+                  booleanWeb={content.booleanWeb}
+                  booleanApp={content.booleanApp}
+                  booleanAi={content.booleanAi}
                   team={content.team}
-                  explain={content.explain}
+                  simpleDescription={content.simpleDescription}
+                  thumbnail={content.thumbnail}
+                  hits={content.hits}
+                  createdAt={content.createdAt}
+                  title={content.title}
                 />
               ))}
             </div>

@@ -1,51 +1,70 @@
+"use Client";
+
 import Image from "next/image";
 import React from "react";
 
 import Polygon8 from "public/IdeaZone/Polygon 8.svg";
 import Profile from "public/Profile.svg";
+import { useRouter } from "next/navigation";
 
 interface IdeaContentProps {
+  id: string;
   title: string;
   image: string;
-  keyword1: string;
-  keyword2: string;
-  keyword3: string;
+  keyWord1: string;
+  keyWord2: string;
+  keyWord3: string;
   name: string;
   explain: string;
 }
 
 const IdeaContent: React.FC<IdeaContentProps> = ({
+  id,
   title,
   image,
-  keyword1,
-  keyword2,
-  keyword3,
+  keyWord1,
+  keyWord2,
+  keyWord3,
   name,
   explain,
 }) => {
+  const router = useRouter();
+
+  const handleClick = () => {
+    // 클릭 시 해당 id를 이용하여 새로운 페이지로 이동
+    router.push(`/IdeaDetail/${id}`);
+  };
+
   return (
-    <main className="w-[330px] h-[456px] mb-10 border-2 border-gray-100 rounded-2xl bg-white shadow-lg">
+    <main
+      className="w-[330px] h-[456px] mb-10 border-2 border-gray-100 rounded-2xl bg-white shadow-lg"
+      onClick={handleClick}
+      style={{ cursor: "pointer" }}
+    >
       <div className="flex p-5 flex-col items-center justify-center relative">
-        <p className="w-24 h-12 p-1 text-xl bg-[#FFCF4A] rounded-xl text-black flex items-center justify-center">
+        <p className="w-auto h-12 p-1 px-3 text-xl bg-[#FFCF4A] rounded-xl text-black flex items-center justify-center">
           {title}
         </p>
-        <p className="mt-5 text-lg text-center text-black">
+        <p
+          className="mt-5 h-[90px] text-lg text-center text-black"
+          style={{ display: "flex", alignItems: "center" }}
+        >
           {explain.length > 50 ? `${explain.slice(0, 50)}...` : explain}
         </p>
         <div className="flex mt-4 space-x-2">
-          {keyword1 && (
+          {keyWord1 && (
             <p className="w-auto px-3 h-8 rounded-full bg-[#FFE292] border-2 border-[#FFCF4A] flex items-center justify-center">
-              {keyword1}
+              {keyWord1}
             </p>
           )}
-          {keyword2 && (
+          {keyWord2 && (
             <p className="w-auto px-3 h-8 rounded-full bg-[#FFE292] border-2 border-[#FFCF4A] flex items-center justify-center">
-              {keyword2}
+              {keyWord2}
             </p>
           )}{" "}
-          {keyword3 && (
+          {keyWord3 && (
             <p className="w-auto px-3 h-8 rounded-full bg-[#FFE292] border-2 border-[#FFCF4A] flex items-center justify-center">
-              {keyword3}
+              {keyWord3}
             </p>
           )}
         </div>

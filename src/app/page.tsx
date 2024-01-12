@@ -1,5 +1,9 @@
-import React from "react";
+
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
+
 import HomeBackground from "public/HomeBackground.svg";
 import Logo from "public/Logo.svg";
 import StudentCard from "public/Home/StudentCard.svg";
@@ -10,74 +14,52 @@ import IdeaContent from "./_components/IdeaZone/IdeaContent";
 import Content from "./_components/Gallery/Content";
 import StudentGrouplistItem from "./studentGroups/_components/StudentGroupListItem";
 
-const page = () => {
-  const contents = [
-    {
-      title: "test1",
-      image: "/Profile.svg",
-      keyword2: "동아리",
-      keyword3: "it",
-      name: "test",
-      explain:
-        "이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다",
-    },
-    {
-      title: "test2",
-      image: "/Profile.svg",
-      keyword1: "앱",
-      keyword2: "앱",
-      keyword3: "앱",
-      name: "test",
-      explain:
-        "이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다",
-    },
-    {
-      title: "test1",
-      image: "/Profile.svg",
-      keyword1: "앱",
-      keyword3: "앱",
-      name: "test",
-      explain:
-        "이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다",
-    },
-  ];
+import splitkeyWords from "./_utils/seperateKeword";
+import getIdeaHome from "./_api/Home/GetIdeaHome";
+import getProjectHome from "./_api/Home/GetProjectHome";
+import { NavBar } from "./_components/components/naviBar";
+import getClubHome from "./_api/Home/GetClubHome";
 
-  const Projectcontents = [
-    {
-      title: "test1",
-      image: "/Profile.svg",
-      keyword: "앱",
-      team: "test",
-      explain:
-        "이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다이 글자는 50자가 넘습니다",
-    },
-    {
-      title: "test",
-      image: "/Profile.svg",
-      keyword: "앱",
-      team: "없음",
-      explain: "test",
-    },
-    {
-      title: "test",
-      image: "/Profile.svg",
-      keyword: "앱",
-      team: "test",
-      explain: "test",
-    },
-  ];
+interface Idea {
+  title: string;
+  simpleDescription: string;
+  keyWord: string;
+  nickName: string;
+  color: string;
+  onClick: () => void;
+}
+
+interface ApiResponse {
+  check: boolean;
+  information: Idea[];
+  message: string | null;
+}
+
+const page: React.FC = () => {
+  const ideaData = getIdeaHome();
+  const ideaList = ideaData?.information;
+  const projectData = getProjectHome();
+  const projectList = projectData?.information;
+  const clubData = getClubHome();
+  const clubList = clubData?.information;
+
   const chunkSize = 3;
-  const chunkedContents = Array.from(
-    { length: Math.ceil(contents.length / chunkSize) },
-    (_, index) => contents.slice(index * chunkSize, (index + 1) * chunkSize)
+  const ideaContents = Array.from(
+    { length: Math.ceil((ideaList?.length || 0) / chunkSize) },
+    (_, index) => ideaList?.slice(index * chunkSize, (index + 1) * chunkSize)
   );
-  const ProjectchunkedContents = Array.from(
-    { length: Math.ceil(Projectcontents.length / chunkSize) },
-    (_, index) =>
-      Projectcontents.slice(index * chunkSize, (index + 1) * chunkSize)
+  const projectContents = Array.from(
+    { length: Math.ceil((projectList?.length || 0) / chunkSize) },
+    (_, index) => projectList?.slice(index * chunkSize, (index + 1) * chunkSize)
   );
+  const clubContents = Array.from(
+    { length: Math.ceil((clubList?.length || 0) / chunkSize) },
+    (_, index) => clubList?.slice(index * chunkSize, (index + 1) * chunkSize)
+  );
+
   return (
     <main className="bg-white h-auto w-full text-black flex flex-col items-center mx-auto">
+      <NavBar />
       <div className="w-[1600px]">
         <Image src={HomeBackground} alt="HomeBackground" />
       </div>
@@ -132,18 +114,25 @@ const page = () => {
               </div>
             </div>
 
-            {chunkedContents.map((chunk, chunkIndex) => (
+            {ideaContents.map((chunk, chunkIndex) => (
               <div key={chunkIndex} className="flex space-x-5">
-                {chunk.map((content, contentIndex) => (
+                {chunk?.map((content, contentIndex) => (
                   <IdeaContent
                     key={contentIndex}
                     title={content.title}
-                    image={content.image}
-                    keyword1={content.keyword1 || ""}
-                    keyword2={content.keyword2 || ""}
-                    keyword3={content.keyword3 || ""}
-                    name={content.name}
-                    explain={content.explain}
+                    image={content.color}
+                    keyWord1={
+                      (splitkeyWords(content.keyword)[0] as string) || ""
+                    }
+                    keyWord2={
+                      (splitkeyWords(content.keyword)[1] as string) || ""
+                    }
+                    keyWord3={
+                      (splitkeyWords(content.keyword)[2] as string) || ""
+                    }
+                    name={content.nickName}
+                    explain={content.simpleDescription}
+                    id={""}
                   />
                 ))}
               </div>
@@ -168,16 +157,21 @@ const page = () => {
                 <Image src={Puzzle} alt="Puzzle" />
               </div>
             </div>
-            {ProjectchunkedContents.map((chunk, chunkIndex) => (
+            {projectContents.map((chunk, chunkIndex) => (
               <div key={chunkIndex} className="flex mt-[-50px] space-x-5">
-                {chunk.map((content, contentIndex) => (
+                {chunk?.map((content, contentIndex) => (
                   <Content
                     key={contentIndex}
-                    title={content.title}
-                    image={content.image}
-                    keyword={content.keyword}
+                    id={0}
+                    booleanWeb={content.booleanWeb}
+                    booleanApp={content.booleanApp}
+                    booleanAi={content.booleanAi}
                     team={content.team}
-                    explain={content.explain}
+                    simpleDescription={content.simpleDescription}
+                    thumbnail={content.thumbnail}
+                    hits={0}
+                    createdAt={""}
+                    title={content.title}
                   />
                 ))}
               </div>
@@ -200,9 +194,16 @@ const page = () => {
               </div>
             </div>
             <div className="mt-[-80px] mb-20">
-              <StudentGrouplistItem />
-              <StudentGrouplistItem />
-              <StudentGrouplistItem />
+              {clubList?.map((content, contentIndex) => (
+                <StudentGrouplistItem
+                  id={1}
+                  title={content.title}
+                  description={content.description}
+                  createdAt={content.createdAt}
+                  nickname={content.nickname}
+                  thumbnail={content.thumbnail}
+                />
+              ))}
             </div>
           </div>
         </div>

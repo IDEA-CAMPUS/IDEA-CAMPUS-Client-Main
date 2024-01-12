@@ -5,6 +5,7 @@ import { NextButton, TextButton } from "@/app/_components/components/buttons";
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useToast } from "@/app/_class/tost";
+import { findID, findPW, login } from "@/app/_api/login";
 
 export default function Login() {
   // const [findID, setFindID] = useState(false);
@@ -28,21 +29,31 @@ export default function Login() {
 
   switch (page) {
     case "":
-      const handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
+      const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        //토스트로직 만들기
 
-        showToast("존재하지 않는 사용자 입니다!", 2000);
+        try {
+          const response = await login({
+            email,
+            password,
+          });
+          console.log("response", response);
 
-        // if (formRight){
-        //     if (router) {
-        //       router.push("/banner/IdeaManage");
-        //     }
-        // }else{
-        //   폼리셋
-        //   토스트 띄우기
-        // }
+          if (response?.accessToken) {
+            localStorage.setItem("login-token", response.accessToken);
+            console.log(response.tokenType);
+            if (router) {
+              router.push("/");
+            }
+          } else {
+            showToast("올바르지 않은 아이디 혹은 비밀번호입니다", 2000);
+          }
 
-        //pull 하기
+          //정보저장
+        } catch (error) {
+          console.error("에러가 발생했습니다:", error);
+        }
       };
       return (
         <div className="h-screen bg-white flex justify-center items-center relative z-[10]">
@@ -94,7 +105,7 @@ export default function Login() {
               <div className="mx-[11px]">|</div>
               <TextButton
                 text="회원가입"
-                onClick={() => setPage("findPW")}
+                onClick={() => router.push("/regist")}
               ></TextButton>
             </div>
 
@@ -110,8 +121,28 @@ export default function Login() {
       );
 
     case "findID":
-      const handleFindID = (event: React.FormEvent<HTMLFormElement>) => {
+      const handleFindID = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        console.log("name:", name, "number", number);
+        try {
+          const response = await findID({
+            name,
+            number,
+          });
+          console.log("response", response);
+          if (response?.check == true) {
+            setPage("returnID");
+            if (router) {
+              // router.push("/");
+            }
+          } else {
+            showToast("존재하는 아이디가 없습니다.", 2000);
+          }
+
+          //정보저장
+        } catch (error) {
+          console.error("에러가 발생했습니다:", error);
+        }
         //api 받아와서 저장
         //   if(nameWrong){
         //     에러메시지토스트
@@ -149,7 +180,7 @@ export default function Login() {
               <NextButton
                 text="아이디 찾기"
                 className="mt-[42px] "
-                onClick={() => setPage("returnID")}
+                // onClick={() => setPage("returnID")}
                 //api작업시 온클릭 삭제
                 type="submit"
               ></NextButton>
@@ -166,7 +197,28 @@ export default function Login() {
       );
 
     case "findPW":
-      const handleFindPW = () => {
+      const handleFindPW = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        try {
+          const result: boolean | undefined = await findPW({
+            email,
+            number,
+          });
+
+          if (result === true) {
+            if (router) {
+              // router.push("/");
+            }
+          } else {
+            showToast("존재하는 계정이 없습니다.", 2000);
+          }
+
+          //정보저장
+        } catch (error) {
+          console.error("에러가 발생했습니다:", error);
+        }
+
         //api 받아옴
         //   if(emailWrong){
         //     에러메시지토스트
