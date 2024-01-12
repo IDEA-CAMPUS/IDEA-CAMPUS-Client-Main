@@ -57,7 +57,7 @@ export const NavBar = () => {
           </div>
           <div
             className="font-bold text-[18px] flex cursor-pointer"
-            onClick={() => router.push("동아리?")}
+            onClick={() => router.push("/studentGroups")}
           >
             동아리·학회
           </div>
