@@ -3,14 +3,14 @@
 import React, { useState } from "react";
 
 import Image from "next/image";
-import ProjectDetailBackgroundTop from "public/ProjectGallery/ProjectDetailBackgroundTop.png";
-import ProjectGalleryIcon from "public/ProjectGallery/ProjectGalleryIcon.svg";
-import PreviousButton from "public/ProjectGallery/PreviousButton.svg";
-import NextButton from "public/ProjectGallery/NextButton.svg";
-import IndexIcon from "public/ProjectGallery/IndexIcon.svg";
-import GitHubButton from "public/ProjectGallery/GitHubButton.svg";
-import GoogleButton from "public/ProjectGallery/GoogleButton.svg";
-import WebButton from "public/ProjectGallery/WebButton.svg";
+import projectDetailBackgroundTop from "public/ProjectGallery/ProjectDetailBackgroundTop.png";
+import projectGalleryIcon from "public/ProjectGallery/ProjectGalleryIcon.svg";
+import previousButton from "public/ProjectGallery/PreviousButton.svg";
+import nextButton from "public/ProjectGallery/NextButton.svg";
+import indexIcon from "public/ProjectGallery/IndexIcon.svg";
+import gitHubButton from "public/ProjectGallery/GitHubButton.svg";
+import googleButton from "public/ProjectGallery/GoogleButton.svg";
+import webButton from "public/ProjectGallery/WebButton.svg";
 import { usePathname, useRouter } from "next/navigation";
 import GetProjectDetail from "@/app/_api/gallery/GetProjectDetail";
 import { NavBar } from "@/app/_components/components/naviBar";
@@ -39,10 +39,10 @@ const ProjectDetail = () => {
 
   //이미지 배열
   const images = [
-    ProjectGalleryIcon,
-    PreviousButton,
-    NextButton,
-    PreviousButton,
+    projectGalleryIcon,
+    previousButton,
+    nextButton,
+    previousButton,
     // ... 더 많은 이미지
   ];
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -74,7 +74,7 @@ const ProjectDetail = () => {
       <NavBar />
       <div className="mt-[100px] h-full z-10">
         <Image
-          src={ProjectDetailBackgroundTop}
+          src={projectDetailBackgroundTop}
           alt={"projectDetailBackground"}
           width={1005}
         />
@@ -145,10 +145,10 @@ const ProjectDetail = () => {
           </div>
           <div className="flex items-center mt-[-170px] justify-between space-x-48 z-20">
             <button className="flex items-center p-4" onClick={goToPrevious}>
-              <Image src={PreviousButton} alt="nextButton" />
+              <Image src={previousButton} alt="nextButton" />
             </button>
             <button className="flex items-center p-4" onClick={goToNext}>
-              <Image src={NextButton} alt="nextButton" />
+              <Image src={nextButton} alt="nextButton" />
             </button>
           </div>
         </div>
@@ -162,7 +162,7 @@ const ProjectDetail = () => {
             <div className="ml-[-10px] mt-[-10px]">
               <div className="flex flex-col">
                 <div className="flex">
-                  <Image src={IndexIcon} alt="indexIcon" />
+                  <Image src={indexIcon} alt="indexIcon" />
                   <p className="text-black font-bold text-2xl ml-4">
                     상세 설명
                   </p>
@@ -174,7 +174,7 @@ const ProjectDetail = () => {
 
               <div className="flex flex-col mt-20">
                 <div className="flex">
-                  <Image src={IndexIcon} alt="indexIcon" />
+                  <Image src={indexIcon} alt="indexIcon" />
                   <p className="text-black font-bold text-2xl ml-4">팀 정보</p>
                 </div>
                 <p className="mt-5 ml-12 text-black text-lg">
@@ -183,7 +183,7 @@ const ProjectDetail = () => {
               </div>
               <div className="flex flex-col mt-20">
                 <div className="flex">
-                  <Image src={IndexIcon} alt="indexIcon" />
+                  <Image src={indexIcon} alt="indexIcon" />
                   <p className="text-black font-bold text-2xl ml-4">
                     GitHub 링크
                   </p>
@@ -194,7 +194,7 @@ const ProjectDetail = () => {
                 <div className="mt-6 ml-24 mb-10 flex space-x-4">
                   {projectData?.githubUrl && (
                     <Image
-                      src={GitHubButton}
+                      src={gitHubButton}
                       alt="GitHubButton"
                       onClick={() => handleButtonClick(projectData.githubUrl)}
                       style={{ cursor: "pointer" }}
@@ -202,7 +202,7 @@ const ProjectDetail = () => {
                   )}
                   {projectData?.webUrl && (
                     <Image
-                      src={WebButton}
+                      src={webButton}
                       alt="WebButton"
                       onClick={() => handleButtonClick(projectData.webUrl)}
                       style={{ cursor: "pointer" }}
@@ -210,7 +210,7 @@ const ProjectDetail = () => {
                   )}
                   {projectData?.googlePlayUrl && (
                     <Image
-                      src={GoogleButton}
+                      src={googleButton}
                       alt="GoogleButton"
                       onClick={() =>
                         handleButtonClick(projectData.googlePlayUrl)
@@ -221,7 +221,7 @@ const ProjectDetail = () => {
                 </div>
               </div>
               <div className="flex">
-                <Image src={IndexIcon} alt="indexIcon" />
+                <Image src={indexIcon} alt="indexIcon" />
               </div>
             </div>
           </div>

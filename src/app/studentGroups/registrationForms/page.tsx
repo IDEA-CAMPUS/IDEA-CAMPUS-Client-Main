@@ -4,7 +4,7 @@ import "next/link";
 import Header from "@/app/_components/layout/Header";
 import GradientBackground from "@/assests/images/gradientBackground.png";
 import Image from "next/image";
-import DeleteButton from "public/projectgallery/DeleteButton.svg";
+import DeleteButton from "public/projectgallery/deleteButton.svg";
 import SubmitButton from "@/app/_components/gallery/SubmitButton";
 import FixButton from "@/app/_components/gallery/FixButton";
 import { ChangeEvent, useRef, useState } from "react";

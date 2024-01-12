@@ -2,10 +2,10 @@
 
 import React, { useMemo, useState } from "react";
 import Image from "next/image";
-import IdeaZoneBackground from "public/ideaZone/ideaZoneBackground.svg";
-import FlowerGray from "public/ideaZone/flowerGray.svg";
-import Flower from "public/ideaZone/flower.svg";
-import IdeaZoneIcon from "public/ideaZone/ideaZoneIcon.svg";
+import ideaZoneBackground from "public/ideaZone/ideaZoneBackground.svg";
+import flowerGray from "public/ideaZone/flowerGray.svg";
+import flower from "public/ideaZone/flower.svg";
+import ideaZoneIcon from "public/ideaZone/ideaZoneIcon.svg";
 
 import TextButton from "@/app/_components/ideazone/TextButotn";
 import SubmitButton from "@/app/_components/ideazone/SubmitButton";
@@ -55,7 +55,7 @@ const IdeaZone = () => {
       <div className="items-start">
         <Image
           className="flex-shrink-0"
-          src={IdeaZoneBackground}
+          src={ideaZoneBackground}
           alt="ideaZoneBackground"
         />
       </div>
@@ -65,7 +65,7 @@ const IdeaZone = () => {
           <div className="flex items-center justify-center">
             <p className="ml-8 text-3xl font-bold">아이디어 존</p>
             <Image
-              src={IdeaZoneIcon}
+              src={ideaZoneIcon}
               alt={"projectGalleryIcon"}
               className="ml-2 mt-5 mb-5"
             />
@@ -80,10 +80,10 @@ const IdeaZone = () => {
       </div>
       <div className="absolute mt-[370px] flex items-center justify-between w-full">
         <div className="flex-shrink-0 ml-80">
-          <Image src={FlowerGray} alt={"snowGray"} />
+          <Image src={flowerGray} alt={"snowGray"} />
         </div>
         <div className="flex-shrink-0 mr-80 mt-80">
-          <Image src={Flower} alt={"snow"} />
+          <Image src={flower} alt={"snow"} />
         </div>
       </div>
 

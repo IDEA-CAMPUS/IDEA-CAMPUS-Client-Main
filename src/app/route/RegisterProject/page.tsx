@@ -2,9 +2,9 @@
 
 import React, { useState, ChangeEvent, useRef } from "react";
 
-import ProjectGalleryRegisterBackGround from "public/ProjectGallery/ProjectGalleryRegisterBackGround.svg";
+import projectGalleryRegisterBackGround from "public/projectgallery/projectGalleryRegisterBackGround.svg";
 import Image from "next/image";
-import DeleteButton from "public/ProjectGallery/DeleteButton.svg";
+import deleteButton from "public/projectgallery/deleteButton.svg";
 import SubmitButton from "@/app/_components/gallery/SubmitButton";
 import FixButton from "@/app/_components/gallery/FixButton";
 import KeywordButton from "@/app/_components/gallery/KeywordButton";
@@ -145,7 +145,7 @@ const RegisterProject = () => {
       <NavBar />
       <div className="items-start">
         <Image
-          src={ProjectGalleryRegisterBackGround}
+          src={projectGalleryRegisterBackGround}
           alt="projectgallerybackground1"
         />
       </div>
@@ -283,7 +283,7 @@ const RegisterProject = () => {
                       ({image.size})
                     </p>
                     <button onClick={() => handleDeleteImage(index)}>
-                      <Image src={DeleteButton} alt="deleteButton" />
+                      <Image src={deleteButton} alt="deleteButton" />
                     </button>
                   </div>
                 ))}

@@ -3,7 +3,7 @@
 import React, { useState, ChangeEvent, useRef, useEffect } from "react";
 import Image from "next/image";
 
-import RegisterIdeaZoneBackground from "public/ideazone/RegisterIdeaZoneBackground.svg";
+import registerIdeaZoneBackground from "public/ideazone/registerIdeaZoneBackground.svg";
 import SubmitButton from "@/app/_components/ideazone/SubmitButton";
 import FixButton from "@/app/_components/ideazone/FixButton";
 import { NavBar } from "@/app/_components/components/naviBar";
@@ -137,7 +137,7 @@ const FixIdea = () => {
       <NavBar />
       <div className="items-start">
         <Image
-          src={RegisterIdeaZoneBackground}
+          src={registerIdeaZoneBackground}
           alt="projectgallerybackground1"
         />
       </div>

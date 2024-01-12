@@ -3,9 +3,9 @@
 import React, { useEffect } from "react";
 import Image from "next/image";
 
-import IdeaDetailBackground from "public/ideazone/IdeaDetailBackground.png";
+import ideaDetailBackground from "public/ideazone/ideaDetailBackground.png";
 import FixButton from "@/app/_components/ideazone/FixButton";
-import Profile from "public/Profile.svg";
+import profile from "public/profile.svg";
 import { usePathname, useRouter } from "next/navigation";
 import GetIdeaDetail from "@/app/_api/ideazone/GetIdeaDetail";
 import splitkeyWords from "@/app/_utils/seperateKeword";
@@ -42,7 +42,7 @@ const IdeaDetail = () => {
       <NavBar />
       <div className="mt-[100px] h-full z-10">
         <Image
-          src={IdeaDetailBackground}
+          src={ideaDetailBackground}
           alt="ideaDetailBackground"
           width={1005}
         />
@@ -74,7 +74,7 @@ const IdeaDetail = () => {
             </div>
           </div>
           <div className="mr-24 items-center justify-center flex flex-col">
-            <Image src={Profile} alt="profile" width={70} />
+            <Image src={profile} alt="profile" width={70} />
             <p className="mt-3 text-black text-lg">{ideaData?.nickName}</p>
           </div>
         </div>
