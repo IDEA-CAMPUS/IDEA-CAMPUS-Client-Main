@@ -237,4 +237,3 @@ const FixIdea = () => {
 };
 
 export default FixIdea;
-
