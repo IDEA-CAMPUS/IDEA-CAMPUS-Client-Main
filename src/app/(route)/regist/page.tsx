@@ -266,7 +266,7 @@ export default function Regist() {
   };
 
   return (
-    <div className="h-fit-content  bg-white flex flex-col justify-center items-center relative z-[10]">
+    <div className="h-fit-content text-black  bg-white flex flex-col justify-center items-center relative z-[10]">
       {/* <NavBar /> */}
       <div className="items-center flex flex-col justify-evenly box-border z-10">
         <div className="text-center text-[36px] font-bold mt-[183px]">
@@ -392,7 +392,7 @@ export default function Regist() {
           </div>
 
           <div className="flex flex-col items-start w-full mt-[150px]">
-            <CheckBox
+            {/* <CheckBox
               name="agreement"
               value="all"
               checked={allIsChecked}
@@ -400,7 +400,7 @@ export default function Regist() {
               label="아래 약관에 모두 동의합니다."
             >
               모두 동의하기
-            </CheckBox>
+            </CheckBox> */}
             <div className="flex flex-col gap-[8px] box-border pl-[12px] mt-[12px]">
               {smallCheckBoxs.map((item) => (
                 <CheckBox
@@ -412,14 +412,14 @@ export default function Regist() {
                   label={item.label}
                 ></CheckBox>
               ))}
-              <CheckBox
+              {/* <CheckBox
                 name="agreement"
                 value="check3"
                 checked={agreeMarketingSms}
                 onCheck={handleAgreeMarketingSms}
                 label="마케팅 수신 동의 (선택)"
                 className="round small"
-              ></CheckBox>
+              ></CheckBox> */}
             </div>
           </div>
           <div className="w-full flex justify-center">

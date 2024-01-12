@@ -19,7 +19,7 @@ interface ApiResponse {
   message: string | null;
 }
 
-const getIdea = () => {
+const GetIdea = () => {
   const [ideaData, setideaData] = useState<ApiResponse | null>(null);
 
   useEffect(() => {
@@ -41,4 +41,4 @@ const getIdea = () => {
   return ideaData;
 };
 
-export default getIdea;
+export default GetIdea;

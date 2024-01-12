@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -196,6 +195,7 @@ const page: React.FC = () => {
             <div className="mt-[-80px] mb-20">
               {clubList?.map((content, contentIndex) => (
                 <StudentGrouplistItem
+                  key={contentIndex}
                   id={1}
                   title={content.title}
                   description={content.description}
