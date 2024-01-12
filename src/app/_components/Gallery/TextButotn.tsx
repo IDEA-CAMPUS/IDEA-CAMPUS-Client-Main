@@ -9,7 +9,7 @@ interface TextProps {
 const TextButton: React.FC<TextProps> = ({ title, isHover, onClick }) => {
   return (
     <button
-      className={`w-16 h-8 p-1 text-base bg-white ${
+      className={`w-16 h-8 p-1 text-base  ${
         isHover ? "text-[#9747FF]" : "text-black"
       }`}
       type="button"

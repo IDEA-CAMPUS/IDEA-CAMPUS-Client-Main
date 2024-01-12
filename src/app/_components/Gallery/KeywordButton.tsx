@@ -1,28 +1,30 @@
 "use client";
-
 import React, { useState } from "react";
 
-interface keyWordProps {
+interface KeywordProps {
   title: string;
+  onButtonClick: (isClicked: boolean) => void;
 }
 
-const keyWordButton: React.FC<keyWordProps> = ({ title }) => {
-  const [isClicked, setisClicked] = useState<boolean>(false);
+const KeywordButton: React.FC<KeywordProps> = ({ title, onButtonClick }) => {
+  const [isClicked, setIsClicked] = useState<boolean>(true);
 
-  const handleisClicked = () => {
-    setisClicked(!isClicked);
+  const handleButtonClick = () => {
+    setIsClicked(!isClicked);
+    onButtonClick(!isClicked); // Notify the parent component about the state change
   };
+
   return (
     <button
       className={`w-20 h-8 p-1 text-sm border-2 border-[#B034F7] rounded-3xl ${
         isClicked ? "bg-purple-300" : "bg-white"
       } text-black`}
       type="button"
-      onClick={handleisClicked}
+      onClick={handleButtonClick}
     >
       {title}
     </button>
   );
 };
 
-export default keyWordButton;
+export default KeywordButton;

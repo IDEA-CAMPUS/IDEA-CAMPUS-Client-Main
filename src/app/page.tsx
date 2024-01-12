@@ -39,8 +39,6 @@ const page: React.FC = () => {
   const projectData = getProjectHome();
   const projectList = projectData?.information;
 
-  console.log(projectList);
-
   const chunkSize = 3;
   const ideaContents = Array.from(
     { length: Math.ceil((ideaList?.length || 0) / chunkSize) },
@@ -156,13 +154,16 @@ const page: React.FC = () => {
                 {chunk?.map((content, contentIndex) => (
                   <Content
                     key={contentIndex}
-                    booleanWeb={content.booleanApp}
+                    id={0}
+                    booleanWeb={content.booleanWeb}
                     booleanApp={content.booleanApp}
                     booleanAi={content.booleanAi}
-                    title={content.title}
-                    thumbnail={content.thumbnail}
                     team={content.team}
                     simpleDescription={content.simpleDescription}
+                    thumbnail={content.thumbnail}
+                    hits={0}
+                    createdAt={""}
+                    title={content.title}
                   />
                 ))}
               </div>

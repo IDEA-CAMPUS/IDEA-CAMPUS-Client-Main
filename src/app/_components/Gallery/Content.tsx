@@ -1,26 +1,43 @@
 import Image from "next/image";
 import React from "react";
+import { useRouter } from "next/navigation";
 
 interface contentProps {
+  id: number;
   booleanWeb: boolean;
   booleanApp: boolean;
   booleanAi: boolean;
-  title: string;
-  thumbnail: string;
   team: string;
+  title: string;
   simpleDescription: string;
+  thumbnail: string;
+  hits: number;
+  createdAt: string;
 }
 const Content: React.FC<contentProps> = ({
-  booleanAi,
-  booleanApp,
+  id,
   booleanWeb,
-  title,
-  thumbnail,
+  booleanApp,
+  booleanAi,
   team,
+  title,
   simpleDescription,
+  thumbnail,
+  hits,
+  createdAt,
 }) => {
+  const router = useRouter();
+
+  const handleClick = () => {
+    // 클릭 시 해당 id를 이용하여 새로운 페이지로 이동
+    router.push(`/ProjectDetail/${id}`);
+  };
   return (
-    <main className="w-[330px] h-[456px] mb-10 border-2 border-gray-100 rounded-2xl bg-white p-5 shadow-lg">
+    <main
+      className="w-[330px] h-[456px] mb-10 border-2 border-gray-100 rounded-2xl bg-white p-5 shadow-lg"
+      onClick={handleClick}
+      style={{ cursor: "pointer" }}
+    >
       <div
         className="flex items-center justify-center"
         style={{
