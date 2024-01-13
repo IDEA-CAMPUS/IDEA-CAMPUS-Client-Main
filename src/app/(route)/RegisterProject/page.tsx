@@ -12,6 +12,19 @@ import { NavBar } from "@/app/components/components/naviBar";
 import { useRouter } from "next/navigation";
 import PostProject from "@/app/api/gallery/PostProject";
 
+// const a = {
+//   "title": "asdf",
+//   "simpleDescription": "asdf설명02",
+//   "detailedDescription": "asdf설명02",
+//   "teamInformation": "팀asdf정보02",
+//   "githubUrl": "https://github.com/project/02",
+//   "webUrl": "https://project.com/02",
+//   "googlePlayUrl": "https://play.google.com/store/apps/details?id=com.project/02",
+//   "booleanWeb": 1,
+//   "booleanApp": 1,
+//   "booleanAi": 0
+// }
+
 interface ProjectFormData {
   title: string;
   booleanWeb: boolean;

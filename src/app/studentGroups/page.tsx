@@ -25,6 +25,8 @@ const IdeaManage = () => {
     }
   };
 
+  // console.log(clubList[0].thumbnail);
+
   return (
     <div>
       <NavBar />
@@ -56,12 +58,12 @@ const IdeaManage = () => {
             {clubList?.map((item, index) => (
               <StudentGrouplistItem
                 key={index}
-                id={1}
+                id={item.id}
                 title={item.title}
                 description={item.description}
                 createdAt={item.createdAt}
                 nickname={item.nickname}
-                thumbnail={item.thumbnail}
+                thumbnail={item.thumbnail ?? ""}
               />
             ))}
           </div>

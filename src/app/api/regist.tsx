@@ -25,7 +25,7 @@ interface ServerResponse {
 
 export async function doubleCheck(type: string, checkData: string) {
   const resp = await fetch(
-    `http://ec2-3-34-14-75.ap-northeast-2.compute.amazonaws.com:8080/auth${
+    `https://ideacampus.site:8080/auth${
       type === "email" ? `/email/${checkData}` : `/nickname/${checkData}`
     }`
   );
@@ -61,26 +61,23 @@ export async function regist({
   agreeMarketingSms: string;
 }) {
   try {
-    const resp = await fetch(
-      "http://ec2-3-34-14-75.ap-northeast-2.compute.amazonaws.com:8080/auth/sign-up",
-      {
-        method: "POST", // 여기를 POST로 변경
-        headers: {
-          "Content-Type": "application/json",
-          // 여기에 필요한 다른 헤더 추가
-        },
-        body: JSON.stringify({
-          idEmail: email,
-          name: name,
-          nickname: nickName,
-          password: password,
-          checkPassword: checkPassword,
-          phoneNumber: phoneNumber,
-          organization: organization,
-          agreeMarketingSms: agreeMarketingSms,
-        }), // 만약 POST 요청에 데이터를 보내려면 body에 데이터를 추가
-      }
-    );
+    const resp = await fetch("https://ideacampus.site:8080/auth/sign-up", {
+      method: "POST", // 여기를 POST로 변경
+      headers: {
+        "Content-Type": "application/json",
+        // 여기에 필요한 다른 헤더 추가
+      },
+      body: JSON.stringify({
+        idEmail: email,
+        name: name,
+        nickname: nickName,
+        password: password,
+        checkPassword: checkPassword,
+        phoneNumber: phoneNumber,
+        organization: organization,
+        agreeMarketingSms: agreeMarketingSms,
+      }), // 만약 POST 요청에 데이터를 보내려면 body에 데이터를 추가
+    });
     console.log(
       "request:",
       email,

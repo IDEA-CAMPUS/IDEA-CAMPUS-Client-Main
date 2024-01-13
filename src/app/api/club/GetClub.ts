@@ -3,11 +3,12 @@
 import { useEffect, useState } from "react";
 
 interface Content {
+  id: number;
   title: string;
   description: string;
   createdAt: string;
   nickname: string;
-  thumbnail: string;
+  thumbnail: string | null;
 }
 
 interface Information {
@@ -26,9 +27,7 @@ const GetClub = () => {
   useEffect(() => {
     const fetchclubData = async () => {
       try {
-        const response = await fetch(
-          "http://ec2-3-34-14-75.ap-northeast-2.compute.amazonaws.com:8080/api/club"
-        );
+        const response = await fetch("https://ideacampus.site:8080/api/club");
         const result: ApiResponse = await response.json();
         setClubData(result);
       } catch (error) {

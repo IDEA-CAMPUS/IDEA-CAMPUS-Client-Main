@@ -22,7 +22,7 @@ export async function LoginState() {
   console.log("login-token:", localStorage.getItem("login-token"));
   try {
     const resp = await fetch(
-      "http://ec2-3-34-14-75.ap-northeast-2.compute.amazonaws.com:8080/api/my-page/header/user-info",
+      "https://ideacampus.site:8080/api/my-page/header/user-info",
       {
         method: "GET", // 여기를 POST로 변경
         headers: {

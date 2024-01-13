@@ -24,7 +24,7 @@ const PutIdea = (ideaDate: Idea | undefined) => {
     const fetchIdeaData = async () => {
       try {
         const response = await fetch(
-          `http://ec2-3-34-14-75.ap-northeast-2.compute.amazonaws.com:8080/api/idea/${ideaDate?.id}`,
+          `https://ideacampus.site:8080/api/idea/${ideaDate?.id}`,
           {
             method: "DELETE",
             headers: {

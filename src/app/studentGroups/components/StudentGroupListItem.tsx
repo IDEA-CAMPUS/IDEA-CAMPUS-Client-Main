@@ -33,8 +33,6 @@ const StudentGrouplistItem: React.FC<contentProps> = ({
     router.push(`/studentGroups/registrationCompleted/${id}`);
   };
 
-  console.log(thumbnail);
-
   return (
     <div
       className="bg-white flex w-full justify-between mt-5 p-6 rounded-xl shadow-lg"
@@ -48,13 +46,17 @@ const StudentGrouplistItem: React.FC<contentProps> = ({
           {formatDate(createdAt)} | {nickname}
         </h1>
       </div>
-      <Image
-        src={"/" + thumbnail} // 슬래시(/)로 시작하는 상대 경로 사용
-        width={50}
-        height={50}
-        alt="gradientBackground"
-        className="w-28 h-28"
-      />
+      <div>
+        {/* {thumbnail && (
+          <Image
+            src={thumbnail}
+            width={50}
+            height={50}
+            alt="gradientBackground"
+            className="w-28 h-28"
+          />
+        )} */}
+      </div>
     </div>
   );
 };

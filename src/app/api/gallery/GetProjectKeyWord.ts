@@ -29,7 +29,7 @@ const GetProjectKeyWord = (buttonStates: { [key: string]: boolean }) => {
     const fetchProjectData = async () => {
       try {
         const response = await fetch(
-          "http://ec2-3-34-14-75.ap-northeast-2.compute.amazonaws.com:8080/api/project/keyword",
+          "https://ideacampus.site:8080/api/project/keyword",
           {
             body: JSON.stringify({
               booleanApp: buttonStates[0],

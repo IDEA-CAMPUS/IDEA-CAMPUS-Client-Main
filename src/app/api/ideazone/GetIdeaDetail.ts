@@ -28,7 +28,7 @@ const GetIdeaDeatil = (id: string) => {
     const fetchideaData = async () => {
       try {
         const response = await fetch(
-          `http://ec2-3-34-14-75.ap-northeast-2.compute.amazonaws.com:8080/api/idea/${id}`
+          `https://ideacampus.site:8080/api/idea/${id}`
         );
         const result: ApiResponse = await response.json();
         setideaData(result);

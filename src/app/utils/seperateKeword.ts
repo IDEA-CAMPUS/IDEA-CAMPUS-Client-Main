@@ -3,8 +3,8 @@ interface Idea {
 }
 
 // 키워드를 쉼표로 분리하는 함수
-const splitkeyWords = (keyWord: string): string[] => {
-  if (keyWord) {
+const splitkeyWords = (keyWord?: string | unknown): string[] => {
+  if (typeof keyWord === "string") {
     // 쉼표로 문자열을 분리하고 양쪽 공백을 제거한 후 반환
     return keyWord.split(",").map((keyWord) => keyWord.trim());
   } else {
