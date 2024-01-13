@@ -18,23 +18,12 @@ import getIdeaHome from "./api/home/GetIdeaHome";
 import getProjectHome from "./api/home/GetProjectHome";
 import { NavBar } from "./components/components/naviBar";
 import getClubHome from "./api/home/GetClubHome";
-
-interface Idea {
-  title: string;
-  simpleDescription: string;
-  keyWord: string;
-  nickName: string;
-  color: string;
-  onClick: () => void;
-}
-
-interface ApiResponse {
-  check: boolean;
-  information: Idea[];
-  message: string | null;
-}
+import GetBanner from "./api/GetBanner";
+import Banner from "./components/Banner";
 
 const page: React.FC = () => {
+  const bannerData = GetBanner();
+  const bannerList = bannerData?.information;
   const ideaData = getIdeaHome();
   const ideaList = ideaData?.information;
   const projectData = getProjectHome();
@@ -55,6 +44,8 @@ const page: React.FC = () => {
     { length: Math.ceil((clubList?.length || 0) / chunkSize) },
     (_, index) => clubList?.slice(index * chunkSize, (index + 1) * chunkSize)
   );
+  if (bannerList) console.log("b " + bannerList[0].saveFileUrl);
+  if (projectList) console.log("p " + projectList[1].thumbnail);
 
   return (
     <main className="bg-white h-auto w-full text-black flex flex-col items-center mx-auto">
@@ -63,7 +54,14 @@ const page: React.FC = () => {
         <Image src={HomeBackground} alt="HomeBackground" />
       </div>
       <div className="mt-[-4250px] w-[1204px] h-[400px] bg-gray-300">
-        banner
+        {/* {bannerList && projectList &&  ( 
+          <Image
+            src={projectList[1].title}
+            alt="banner"
+            width={1204}
+            height={400}
+          />
+        )} */}
       </div>
       <div className="mt-24 flex flex-col items-center justify-center">
         <Image src={Logo} alt="Logo" height={100} />
@@ -120,15 +118,9 @@ const page: React.FC = () => {
                     key={contentIndex}
                     title={content.title}
                     image={content.color}
-                    keyWord1={
-                      (splitkeyWords(content.keyWord)[0] as string) || ""
-                    }
-                    keyWord2={
-                      (splitkeyWords(content.keyWord)[1] as string) || ""
-                    }
-                    keyWord3={
-                      (splitkeyWords(content.keyWord)[2] as string) || ""
-                    }
+                    keyWord1={content.keyword[0]}
+                    keyWord2={content.keyword[1]}
+                    keyWord3={content.keyword[2]}
                     name={content.nickName}
                     explain={content.simpleDescription}
                     id={""}
