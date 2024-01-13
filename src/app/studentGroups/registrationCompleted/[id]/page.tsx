@@ -63,7 +63,10 @@ const RegistrationCompleted = () => {
             </p>
             <div className="grid grid-rows-2 grid-cols-4 gap-5 mt-4">
               {images.map((image, imageIndex) => (
-                <div className="flex p-2 items-center justify-center w-[200px] h-[200px] border-2 rounded-xl">
+                <div
+                  key={imageIndex}
+                  className="flex p-2 items-center justify-center w-[200px] h-[200px] border-2 rounded-xl"
+                >
                   <Image
                     src={image}
                     alt="01"
