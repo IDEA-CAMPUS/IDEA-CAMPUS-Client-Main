@@ -123,7 +123,7 @@ const page: React.FC = () => {
                     keyWord3={content.keyword[2]}
                     name={content.nickName}
                     explain={content.simpleDescription}
-                    id={""}
+                    id={0}
                   />
                 ))}
               </div>

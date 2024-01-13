@@ -9,7 +9,7 @@ interface Idea {
   url2: string;
 }
 
-const FixIdea = async (ideaData: Idea | undefined, id: string) => {
+const FixIdea = async (ideaData: Idea | undefined, id: number) => {
   try {
     const response = await fetch(
       `https://ideacampus.site:8080/api/idea/${id}`,

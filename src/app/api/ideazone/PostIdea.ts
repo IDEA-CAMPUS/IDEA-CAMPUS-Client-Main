@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 interface Idea {
-  keyWord: any;
+  keyWord: string;
   title: string;
   simpleDescription: string;
   detailedDescription: string;
@@ -19,13 +19,14 @@ const PostIdea = async (ideaData: Idea | undefined) => {
       },
       body: JSON.stringify({
         title: ideaData?.title,
-        keyWord: ideaData?.keyWord,
         simpleDescription: ideaData?.simpleDescription,
+        keyword: ideaData?.keyWord,
         detailedDescription: ideaData?.detailedDescription,
         url1: ideaData?.url1,
         url2: ideaData?.url2,
       }),
     });
+    console.log("Upload image:", ideaData);
   } catch (error) {
     console.error("Error fetching ideaData:", error);
   }
