@@ -3,14 +3,14 @@
 import React, { useState } from "react";
 
 import Image from "next/image";
-import projectDetailBackgroundTop from "public/ProjectGallery/ProjectDetailBackgroundTop.png";
-import projectGalleryIcon from "public/ProjectGallery/ProjectGalleryIcon.svg";
-import previousButton from "public/ProjectGallery/PreviousButton.svg";
-import nextButton from "public/ProjectGallery/NextButton.svg";
-import indexIcon from "public/ProjectGallery/IndexIcon.svg";
-import gitHubButton from "public/ProjectGallery/GitHubButton.svg";
-import googleButton from "public/ProjectGallery/GoogleButton.svg";
-import webButton from "public/ProjectGallery/WebButton.svg";
+import projectDetailBackgroundTop from "public/projectgallery/ProjectDetailBackgroundTop.png";
+import projectGalleryIcon from "public/projectgallery/ProjectGalleryIcon.svg";
+import previousButton from "public/projectgallery/PreviousButton.svg";
+import nextButton from "public/projectgallery/NextButton.svg";
+import indexIcon from "public/projectgallery/IndexIcon.svg";
+import gitHubButton from "public/projectgallery/GitHubButton.svg";
+import googleButton from "public/projectgallery/GoogleButton.svg";
+import webButton from "public/projectgallery/WebButton.svg";
 import { usePathname, useRouter } from "next/navigation";
 import GetProjectDetail from "@/app/api/gallery/GetProjectDetail";
 import { NavBar } from "@/app/components/components/naviBar";
