@@ -4,7 +4,7 @@ import "next/link";
 import Header from "../components/layout/Header";
 import GradientBackground from "@/assests/images/gradientBackground.png";
 import Image from "next/image";
-import StudentGrouplistItem from "./_components/StudentGroupListItem";
+import StudentGrouplistItem from "./components/StudentGroupListItem";
 import { useRouter } from "next/navigation";
 import getClub from "../api/club/GetClub";
 import { NavBar } from "../components/components/naviBar";

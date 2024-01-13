@@ -9,15 +9,15 @@ import StudentCard from "public/home/studentCard.svg";
 import Light from "public/home/light.svg";
 import Puzzle from "public/home/puzzle.svg";
 import Speaker from "public/home/speaker.svg";
-import IdeaContent from "./_components/ideazone/IdeaContent";
-import Content from "./_components/gallery/Content";
-import StudentGrouplistItem from "./studentGroups/_components/StudentGroupListItem";
+import IdeaContent from "./components/ideazone/IdeaContent";
+import Content from "./components/gallery/Content";
+import StudentGrouplistItem from "./studentGroups/components/StudentGroupListItem";
 
-import splitkeyWords from "./_utils/seperateKeword";
-import getIdeaHome from "./_api/home/GetIdeaHome";
-import getProjectHome from "./_api/home/GetProjectHome";
-import { NavBar } from "./_components/components/naviBar";
-import getClubHome from "./_api/home/GetClubHome";
+import splitkeyWords from "./utils/seperateKeword";
+import getIdeaHome from "./api/home/GetIdeaHome";
+import getProjectHome from "./api/home/GetProjectHome";
+import { NavBar } from "./components/components/naviBar";
+import getClubHome from "./api/home/GetClubHome";
 
 interface Idea {
   title: string;
