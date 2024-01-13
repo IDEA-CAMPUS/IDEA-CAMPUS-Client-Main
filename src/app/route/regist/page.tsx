@@ -1,14 +1,14 @@
 "use client";
 
-import { CheckBox, Input } from "@/app/_components/components/inputbox";
-import { NextButton, TextButton } from "@/app/_components/components/buttons";
+import { CheckBox, Input } from "@/app/components/components/inputbox";
+import { NextButton, TextButton } from "@/app/components/components/buttons";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { ChangeEvent } from "react";
-import { SelectBox } from "@/app/_components/components/select";
+import { SelectBox } from "@/app/components/components/select";
 // import { NaviBar } from "@/app/_components/components/naviBar";
-import { doubleCheck, regist } from "@/app/_api/regist";
+import { doubleCheck, regist } from "@/app/api/regist";
 
 export default function Regist() {
   const pathname = usePathname();

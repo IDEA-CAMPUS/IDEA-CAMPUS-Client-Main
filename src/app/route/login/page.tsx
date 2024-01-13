@@ -2,10 +2,10 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { findID, findPW, login } from "@/app/_api/login";
-import { useToast } from "@/app/_class/tost";
-import { NextButton, TextButton } from "@/app/_components/components/buttons";
-import { Input } from "@/app/_components/components/inputbox";
+import { findID, findPW, login } from "@/app/api/login";
+import { useToast } from "@/app/class/tost";
+import { NextButton, TextButton } from "@/app/components/components/buttons";
+import { Input } from "@/app/components/components/inputbox";
 
 export default function Login() {
   // const [findID, setFindID] = useState(false);
