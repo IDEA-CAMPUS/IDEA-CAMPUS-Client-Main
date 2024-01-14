@@ -117,18 +117,9 @@ const IdeaZone = () => {
                   id={content.id}
                   title={content.title}
                   image={content.color}
-                  keyWord1={
-                    (splitkeyWords(content.keyWord)[0] as unknown as string) ||
-                    ""
-                  }
-                  keyWord2={
-                    (splitkeyWords(content.keyWord)[1] as unknown as string) ||
-                    ""
-                  }
-                  keyWord3={
-                    (splitkeyWords(content.keyWord)[2] as unknown as string) ||
-                    ""
-                  }
+                  keyWord1={content.keyword[0]}
+                  keyWord2={content.keyword[1]}
+                  keyWord3={content.keyword[2]}
                   name={content.nickName}
                   explain={content.simpleDescription}
                 />

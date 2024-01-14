@@ -15,21 +15,26 @@ import fixIdea from "@/app/api/ideazone/FixIdea";
 interface IdeaFormData {
   title: string;
   simpleDescription: string;
+  keyWord1: string;
+  keyWord2: string;
+  keyWord3: string;
+  detailedDescription: string;
+  url1: string;
+  url2: string;
+}
+interface SubmitIdeaFormData {
+  title: string;
+  simpleDescription: string;
   keyWord: string;
   detailedDescription: string;
   url1: string;
   url2: string;
 }
-interface keyrwordFormData {
-  keyWord1: string;
-  keyWord2: string;
-  keyWord3: string;
-}
 
 const FixIdea = () => {
   //id가져오는 문자열 함수 ddd
   const pathname = usePathname();
-  const id = pathname.split("/")[2];
+  const id = Number(pathname.split("/")[2]);
   const [images, setImages] = useState<
     Array<{ name: string; url: string; size: string }>
   >([]);
@@ -37,25 +42,18 @@ const FixIdea = () => {
   const response = getIdeaDetail(id);
   const ideaFixData = response?.information;
 
-  useEffect(() => {
-    if (ideaFixData) {
-      setIdeaData({
-        title: ideaFixData.title,
-        simpleDescription: ideaFixData.simpleDescription,
-        keyWord: ideaFixData.keyWord,
-        detailedDescription: ideaFixData.detailedDescription,
-        url1: ideaFixData.url1,
-        url2: ideaFixData.url2,
-      });
-      setkeyWordData({
-        keyWord1: "", // You can set these to ideaFixData.keyWord1 if needed
-        keyWord2: "",
-        keyWord3: "",
-      });
-    }
-  }, [ideaFixData]);
-
   const [ideaData, setIdeaData] = useState<IdeaFormData>({
+    title: "",
+    simpleDescription: "",
+    keyWord1: "",
+    keyWord2: "",
+    keyWord3: "",
+    detailedDescription: "",
+    url1: "",
+    url2: "",
+  });
+
+  const [submitIdeaData, setSubmitIdeaData] = useState<SubmitIdeaFormData>({
     title: "",
     simpleDescription: "",
     keyWord: "",
@@ -64,11 +62,20 @@ const FixIdea = () => {
     url2: "",
   });
 
-  const [keyWordData, setkeyWordData] = useState<keyrwordFormData>({
-    keyWord1: "",
-    keyWord2: "",
-    keyWord3: "",
-  });
+  useEffect(() => {
+    if (ideaFixData) {
+      setIdeaData({
+        title: ideaFixData.title,
+        simpleDescription: ideaFixData.simpleDescription,
+        keyWord1: ideaFixData.keyWord[0],
+        keyWord2: ideaFixData.keyWord[1],
+        keyWord3: ideaFixData.keyWord[2],
+        detailedDescription: ideaFixData.detailedDescription,
+        url1: ideaFixData.url1,
+        url2: ideaFixData.url2,
+      });
+    }
+  }, [ideaFixData]);
 
   const router = useRouter();
 
@@ -79,36 +86,15 @@ const FixIdea = () => {
     setIdeaData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handlekeyWordChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-
-    setkeyWordData((prevData) => ({ ...prevData, [name]: value }));
-
-    // 각각의 키워드 값이 비어있지 않은 경우에만 추가
-    setIdeaData((prevData) => ({
-      ...prevData,
-      keyWord: [
-        keyWordData.keyWord1,
-        keyWordData.keyWord2,
-        keyWordData.keyWord3,
-      ]
-        .filter(Boolean)
-        .join(", "),
-    }));
-  };
-
   const isFormValid = () => {
     // 필수 필드인 title, simpleDescription, keyWord, detailedDescription이 모두 입력되었는지 검사
     return (
       ideaData.title.trim() !== "" &&
       ideaData.simpleDescription.trim() !== "" &&
-      ideaData.keyWord.trim() !== "" &&
       ideaData.detailedDescription.trim() !== "" &&
-      (keyWordData.keyWord1 !== "" ||
-        keyWordData.keyWord2 !== "" ||
-        keyWordData.keyWord3 !== "")
+      (ideaData.keyWord1 !== "" ||
+        ideaData.keyWord2 !== "" ||
+        ideaData.keyWord3 !== "")
     );
   };
 
@@ -117,9 +103,21 @@ const FixIdea = () => {
       // 필수 필드가 모두 입력되었는지 확인
       if (isFormValid()) {
         // 여기에 파일 업로드 로직 추가
-        console.log("Upload image:", ideaData);
-        await fixIdea(ideaData, id);
-        // Additional logic after successful upload, if needed
+        setSubmitIdeaData({
+          title: ideaData.title,
+          simpleDescription: ideaData.simpleDescription,
+          keyWord:
+            ideaData.keyWord1 +
+            "," +
+            ideaData.keyWord2 +
+            "," +
+            ideaData.keyWord3,
+          detailedDescription: ideaData.simpleDescription,
+          url1: ideaData.url1,
+          url2: ideaData.url2,
+        });
+        console.log("test" + ideaData.keyWord3);
+        await fixIdea(submitIdeaData, id);
         router.push("/IdeaZone");
       } else {
         // 필수 필드 중 하나라도 비어있다면 사용자에게 알림 등을 표시할 수 있습니다.
@@ -173,24 +171,24 @@ const FixIdea = () => {
             type="text"
             placeholder="5글자 이내."
             name="keyWord1"
-            value={keyWordData.keyWord1}
-            onChange={handlekeyWordChange}
+            value={ideaData.keyWord1}
+            onChange={handleInputChange}
           />
           <input
             className="bg-[#F5F5F5] h-12 mt-3 flex focus:outline-none focus:border-2 focus:border-purple-500 w-[100px] p-2 border-2 border-[#A6A6A6] rounded-xl"
             type="text"
             placeholder="5글자 이내."
             name="keyWord2"
-            value={keyWordData.keyWord2}
-            onChange={handlekeyWordChange}
+            value={ideaData.keyWord2}
+            onChange={handleInputChange}
           />
           <input
             className="bg-[#F5F5F5] h-12 mt-3 flex focus:outline-none focus:border-2 focus:border-purple-500 w-[100px] p-2 border-2 border-[#A6A6A6] rounded-xl"
             type="text"
             placeholder="5글자 이내."
             name="keyWord3"
-            value={keyWordData.keyWord3}
-            onChange={handlekeyWordChange}
+            value={ideaData.keyWord3}
+            onChange={handleInputChange}
           />
         </div>
 

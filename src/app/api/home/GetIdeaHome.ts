@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react";
 
-interface Idea {
-  keyword: string;
+type IdeaInformation = {
+  id: number;
   title: string;
   simpleDescription: string;
-  keyWord: string;
+  keyword: string[];
   nickName: string;
   color: string;
-}
+  hits: number;
+  createdAt: string;
+};
 
-interface ApiResponse {
+type ApiResponse = {
   check: boolean;
-  information: Idea[];
-  message: string | null;
-}
+  information: IdeaInformation[];
+};
 
 const GetIdeaHome = () => {
   const [ideaData, setIdeaData] = useState<ApiResponse | null>(null);

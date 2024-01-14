@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 interface Idea {
   keyword: string;
   keyWord: string;
-  id: string;
+  id: number;
   hits: any;
   title: string;
   thumbnail: string;
