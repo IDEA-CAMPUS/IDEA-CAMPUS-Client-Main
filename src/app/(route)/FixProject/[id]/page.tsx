@@ -2,17 +2,17 @@
 
 import React, { useState, ChangeEvent, useRef, useEffect } from "react";
 
-import ProjectGalleryRegisterBackGround from "public/ProjectGallery/ProjectGalleryRegisterBackGround.svg";
+import projectGalleryRegisterBackGround from "public/projectgallery/projectGalleryRegisterBackGround.svg";
 import Image from "next/image";
-import DeleteButton from "public/ProjectGallery/DeleteButton.svg";
-import SubmitButton from "@/app/_components/Gallery/SubmitButton";
-import FixButton from "@/app/_components/Gallery/FixButton";
-import KeywordButton from "@/app/_components/Gallery/KeywordButton";
-import { NavBar } from "@/app/_components/components/NaviBar";
+import deleteButton from "public/projectgallery/deleteButton.svg";
+import SubmitButton from "@/app/components/gallery/SubmitButton";
+import FixButton from "@/app/components/gallery/FixButton";
+import KeywordButton from "@/app/components/gallery/KeywordButton";
+import { NavBar } from "@/app/components/components/naviBar";
 import { usePathname, useRouter } from "next/navigation";
-import PostProject from "@/app/_api/Gallery/PostProject";
-import getProjectDetail from "@/app/_api/Gallery/GetProjectDetail";
-import fixProject from "@/app/_api/Gallery/FixProject";
+import PostProject from "@/app/api/gallery/PostProject";
+import getProjectDetail from "@/app/api/gallery/GetProjectDetail";
+import fixProject from "@/app/api/gallery/FixProject";
 
 interface ProjectFormData {
   title: string;
@@ -174,7 +174,7 @@ const RegisterProject = () => {
       <NavBar />
       <div className="items-start">
         <Image
-          src={ProjectGalleryRegisterBackGround}
+          src={projectGalleryRegisterBackGround}
           alt="projectgallerybackground1"
         />
       </div>
@@ -312,7 +312,7 @@ const RegisterProject = () => {
                       ({image.size})
                     </p>
                     <button onClick={() => handleDeleteImage(index)}>
-                      <Image src={DeleteButton} alt="deleteButton" />
+                      <Image src={deleteButton} alt="deleteButton" />
                     </button>
                   </div>
                 ))}

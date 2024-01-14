@@ -1,13 +1,13 @@
 "use client";
 
 import "next/link";
-import Header from "../_components/layout/Header";
+import Header from "../components/layout/Header";
 import GradientBackground from "@/assests/images/gradientBackground.png";
 import Image from "next/image";
-import StudentGrouplistItem from "./_components/StudentGroupListItem";
+import StudentGrouplistItem from "./components/StudentGroupListItem";
 import { useRouter } from "next/navigation";
-import getClub from "../_api/Club/GetClub";
-import { NavBar } from "../_components/components/NaviBar";
+import getClub from "../api/club/GetClub";
+import { NavBar } from "../components/components/naviBar";
 
 const IdeaManage = () => {
   const clubData = getClub();
@@ -17,13 +17,15 @@ const IdeaManage = () => {
 
   const handleonClick = () => {
     if (localStorage.getItem("login-token") !== null) {
-      // 클릭 시 다음 페이지로 이동
-      router.push("/studentGroups/registrationForms");
+      // 클릭 시 다음 페이지로 이동dd
+      router.push("/studentGroups/registrationFogrms");
     } else {
       alert("로그인 후 이용해주세요");
       router.push("/login");
     }
   };
+
+  // console.log(clubList[0].thumbnail);
 
   return (
     <div>
@@ -56,12 +58,12 @@ const IdeaManage = () => {
             {clubList?.map((item, index) => (
               <StudentGrouplistItem
                 key={index}
-                id={1}
+                id={item.id}
                 title={item.title}
                 description={item.description}
                 createdAt={item.createdAt}
                 nickname={item.nickname}
-                thumbnail={item.thumbnail}
+                thumbnail={item.thumbnail ?? ""}
               />
             ))}
           </div>

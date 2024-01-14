@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
-import Header from "../../_components/layout/Header";
+import Header from "../../components/layout/Header";
 import Image from "next/image";
 import { useState } from "react";
 import GradientBackgroundmyPage from "@/assests/images/graidentBackgroundmyPage.png";
-import AlertModal from "@/app/myPage/_components/AlertModal";
+// import AlertModal from "@/app/myPage/_components/AlertModal";
 import ColorChangeModal from "../_components/colorChangeModal";
 
 const ProfileChange = () => {

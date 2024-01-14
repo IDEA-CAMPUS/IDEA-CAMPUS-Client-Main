@@ -3,14 +3,14 @@
 import React, { useState, ChangeEvent, useRef, useEffect } from "react";
 import Image from "next/image";
 
-import RegisterIdeaZoneBackground from "public/IdeaZone/RegisterIdeaZoneBackground.svg";
-import SubmitButton from "@/app/_components/IdeaZone/SubmitButton";
-import FixButton from "@/app/_components/IdeaZone/FixButton";
-import { NavBar } from "@/app/_components/components/NaviBar";
+import registerIdeaZoneBackground from "public/ideazone/registerIdeaZoneBackground.svg";
+import SubmitButton from "@/app/components/ideazone/SubmitButton";
+import FixButton from "@/app/components/ideazone/FixButton";
+import { NavBar } from "@/app/components/components/naviBar";
 
 import { usePathname, useRouter } from "next/navigation";
-import getIdeaDeatil from "@/app/_api/IdeaZone/GetIdeaDetail";
-import fixIdea from "@/app/_api/IdeaZone/FixIdea";
+import getIdeaDetail from "@/app/api/ideazone/GetIdeaDetail";
+import fixIdea from "@/app/api/ideazone/FixIdea";
 
 interface IdeaFormData {
   title: string;
@@ -27,14 +27,14 @@ interface keyrwordFormData {
 }
 
 const FixIdea = () => {
-  //id가져오는 문자열 함수
+  //id가져오는 문자열 함수 ddd
   const pathname = usePathname();
   const id = pathname.split("/")[2];
   const [images, setImages] = useState<
     Array<{ name: string; url: string; size: string }>
   >([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const response = getIdeaDeatil(id);
+  const response = getIdeaDetail(id);
   const ideaFixData = response?.information;
 
   useEffect(() => {
@@ -137,7 +137,7 @@ const FixIdea = () => {
       <NavBar />
       <div className="items-start">
         <Image
-          src={RegisterIdeaZoneBackground}
+          src={registerIdeaZoneBackground}
           alt="projectgallerybackground1"
         />
       </div>

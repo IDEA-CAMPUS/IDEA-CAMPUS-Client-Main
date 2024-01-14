@@ -3,21 +3,21 @@
 import React, { useEffect } from "react";
 import Image from "next/image";
 
-import IdeaDetailBackground from "public/IdeaZone/IdeaDetailBackground.png";
-import FixButton from "@/app/_components/IdeaZone/FixButton";
-import Profile from "public/Profile.svg";
+import ideaDetailBackground from "public/ideazone/ideaDetailBackground.png";
+import FixButton from "@/app/components/ideazone/FixButton";
+import profile from "public/profile.svg";
 import { usePathname, useRouter } from "next/navigation";
-import getIdeaDetail from "@/app/_api/IdeaZone/GetIdeaDetail";
-import splitkeyWords from "@/app/_utils/seperateKeword";
-import { NavBar } from "@/app/_components/components/NaviBar";
-import deleteIdea from "@/app/_api/IdeaZone/DeleteIdea";
+import GetIdeaDetail from "@/app/api/ideazone/GetIdeaDetail";
+import splitkeyWords from "@/app/utils/seperateKeword";
+import { NavBar } from "@/app/components/components/naviBar";
+import DeleteIdea from "@/app/api/ideazone/DeleteIdea";
 
 const IdeaDetail = () => {
   const pathname = usePathname();
-  //id가져오는 문자열 함수
+  //id가져오는 문자열 함수g
   const id = pathname.split("/")[2];
 
-  const ideaData = getIdeaDetail(id)?.information;
+  const ideaData = GetIdeaDetail(id)?.information;
 
   const router = useRouter();
 
@@ -27,7 +27,7 @@ const IdeaDetail = () => {
 
   const handleDelete = () => {
     try {
-      deleteIdea(ideaData!.id);
+      DeleteIdea(ideaData!.id);
       alert("성공적으로 삭제되었습니다.");
       router.push("/IdeaZone");
     } catch (error) {
@@ -42,7 +42,7 @@ const IdeaDetail = () => {
       <NavBar />
       <div className="mt-[100px] h-full z-10">
         <Image
-          src={IdeaDetailBackground}
+          src={ideaDetailBackground}
           alt="ideaDetailBackground"
           width={1005}
         />
@@ -74,7 +74,7 @@ const IdeaDetail = () => {
             </div>
           </div>
           <div className="mr-24 items-center justify-center flex flex-col">
-            <Image src={Profile} alt="profile" width={70} />
+            <Image src={profile} alt="profile" width={70} />
             <p className="mt-3 text-black text-lg">{ideaData?.nickName}</p>
           </div>
         </div>

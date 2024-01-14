@@ -3,21 +3,21 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
-import HomeBackground from "public/HomeBackground.svg";
-import Logo from "public/Logo.svg";
-import StudentCard from "public/Home/StudentCard.svg";
-import Light from "public/Home/Light.svg";
-import Puzzle from "public/Home/Puzzle.svg";
-import Speaker from "public/Home/Speaker.svg";
-import IdeaContent from "./_components/IdeaZone/IdeaContent";
-import Content from "./_components/Gallery/Content";
-import StudentGrouplistItem from "./studentGroups/_components/StudentGroupListItem";
+import HomeBackground from "public/homeBackground.svg";
+import Logo from "public/logo.svg";
+import StudentCard from "public/home/studentCard.svg";
+import Light from "public/home/light.svg";
+import Puzzle from "public/home/puzzle.svg";
+import Speaker from "public/home/speaker.svg";
+import IdeaContent from "./components/ideazone/IdeaContent";
+import Content from "./components/gallery/Content";
+import StudentGrouplistItem from "./studentGroups/components/StudentGroupListItem";
 
-import splitkeyWords from "./_utils/seperateKeword";
-import getIdeaHome from "./_api/Home/GetIdeaHome";
-import getProjectHome from "./_api/Home/GetProjectHome";
-import { NavBar } from "./_components/components/NaviBar";
-import getClubHome from "./_api/Home/GetClubHome";
+import splitkeyWords from "./utils/seperateKeword";
+import getIdeaHome from "./api/home/GetIdeaHome";
+import getProjectHome from "./api/home/GetProjectHome";
+import { NavBar } from "./components/components/naviBar";
+import getClubHome from "./api/home/GetClubHome";
 
 interface Idea {
   title: string;
@@ -121,13 +121,13 @@ const page: React.FC = () => {
                     title={content.title}
                     image={content.color}
                     keyWord1={
-                      (splitkeyWords(content.keyword)[0] as string) || ""
+                      (splitkeyWords(content.keyWord)[0] as string) || ""
                     }
                     keyWord2={
-                      (splitkeyWords(content.keyword)[1] as string) || ""
+                      (splitkeyWords(content.keyWord)[1] as string) || ""
                     }
                     keyWord3={
-                      (splitkeyWords(content.keyword)[2] as string) || ""
+                      (splitkeyWords(content.keyWord)[2] as string) || ""
                     }
                     name={content.nickName}
                     explain={content.simpleDescription}

@@ -1,8 +1,8 @@
 "use client";
 
-import getClubDetail from "@/app/_api/Club/GetClubDetail";
-import { NavBar } from "@/app/_components/components/NaviBar";
-import Header from "@/app/_components/layout/Header";
+import getClubDetail from "@/app/api/club/GetClubDetail";
+import { NavBar } from "@/app/components/components/naviBar";
+import Header from "@/app/components/layout/Header";
 import GradientBackground from "@/assests/images/gradientBackground.png";
 import ThumbnailImage from "@/assests/images/Image.png";
 import Image from "next/image";
@@ -17,8 +17,12 @@ const RegistrationCompleted = () => {
 
   const clubData = getClubDetail(id)?.information;
 
-  const router = useRouter();
+  const thumbnail = clubData?.thumbnail ?? "";
+  const otherImages = clubData?.otherImages ?? [];
 
+  const images: string[] = [thumbnail, ...otherImages];
+
+  const router = useRouter();
   return (
     <div>
       <NavBar />
@@ -32,7 +36,13 @@ const RegistrationCompleted = () => {
         <div className="flex flex-col items-center mt-12 w-[71vw] z-20">
           {/* 텍스트 */}
           <div className="flex flex-col items-center">
-            <Image src="/Profile.svg" width={40} height={40} alt="Logo"></Image>
+            {/* 여기 프로필 색깔 코드 들어가야됨. */}
+            {/* <Image
+              src={clubData!.thumbnail}
+              width={200}
+              height={200}
+              alt="Logo"
+            /> */}
             <h5 className="text-base text-center mt-2">{clubData?.nickname}</h5>
             <h1 className="text-5xl mt-3 text-center">{clubData?.title}</h1>
           </div>
@@ -51,47 +61,21 @@ const RegistrationCompleted = () => {
             <p className="text-lg font-semibold text-black inline-block mr-1 mt-4">
               관련이미지
             </p>
-            <div className="grid grid-rows-2 grid-cols-4 gap-4 mt-4">
-              <Image
-                src={ThumbnailImage}
-                alt="01"
-                className="bg-gray-300 rounded-md"
-              />
-              <Image
-                src={ThumbnailImage}
-                alt="01"
-                className="bg-gray-300 rounded-md"
-              />
-              <Image
-                src={ThumbnailImage}
-                alt="01"
-                className="bg-gray-300 rounded-md"
-              />
-              <Image
-                src={ThumbnailImage}
-                alt="01"
-                className="bg-gray-300 rounded-md"
-              />
-              <Image
-                src={ThumbnailImage}
-                alt="01"
-                className="bg-gray-300 rounded-md"
-              />
-              <Image
-                src={ThumbnailImage}
-                alt="01"
-                className="bg-gray-300 rounded-md"
-              />
-              <Image
-                src={ThumbnailImage}
-                alt="01"
-                className="bg-gray-300 rounded-md"
-              />
-              <Image
-                src={ThumbnailImage}
-                alt="01"
-                className="bg-gray-300 rounded-md"
-              />
+            <div className="grid grid-rows-2 grid-cols-4 gap-5 mt-4">
+              {images.map((image, imageIndex) => (
+                <div
+                  key={imageIndex}
+                  className="flex p-2 items-center justify-center w-[200px] h-[200px] border-2 rounded-xl"
+                >
+                  <Image
+                    src={image}
+                    alt="01"
+                    className="bg-gray-300 rounded-md"
+                    width={1000}
+                    height={1000}
+                  />
+                </div>
+              ))}
             </div>
             <div className="flex flex-row justify-center gap-4 mt-8">
               <button className="bg-gray-400 hover:bg-gray-500 active:bg-gray-800 text-white px-4 py-2 w-22 h-10 rounded-2xl shrink-0">

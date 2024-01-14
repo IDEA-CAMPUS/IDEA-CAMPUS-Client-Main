@@ -2,21 +2,21 @@
 
 import React, { useMemo, useState } from "react";
 import Image from "next/image";
-import IdeaZoneBackground from "public/IdeaZone/IdeaZoneBackground.svg";
-import FlowerGray from "public/IdeaZone/FlowerGray.svg";
-import Flower from "public/IdeaZone/Flower.svg";
-import IdeaZoneIcon from "public/IdeaZone/IdeaZoneIcon.svg";
+import ideaZoneBackground from "public/ideazone/ideaZoneBackground.svg";
+import flowerGray from "public/ideazone/flowerGray.svg";
+import flower from "public/ideazone/flower.svg";
+import ideaZoneIcon from "public/ideazone/ideaZoneIcon.svg";
 
-import TextButton from "@/app/_components/IdeaZone/TextButotn";
-import SubmitButton from "@/app/_components/IdeaZone/SubmitButton";
-import IdeaContent from "@/app/_components/IdeaZone/IdeaContent";
-import { NavBar } from "@/app/_components/components/NaviBar";
-import getIdea from "@/app/_api/IdeaZone/GetIdea";
-import splitkeyWords from "@/app/_utils/seperateKeword";
+import TextButton from "@/app/components/ideazone/TextButotn";
+import SubmitButton from "@/app/components/ideazone/SubmitButton";
+import IdeaContent from "@/app/components/ideazone/IdeaContent";
+import { NavBar } from "@/app/components/components/naviBar";
+import GetIdea from "@/app/api/ideazone/GetIdea";
+import splitkeyWords from "@/app/utils/seperateKeword";
 
 const IdeaZone = () => {
   const [currentSort, setCurrentSort] = useState<"new" | "view">("new");
-  const ideaData = getIdea();
+  const ideaData = GetIdea();
   const ideaList = ideaData?.information;
 
   const chunkSize = 3;
@@ -55,7 +55,7 @@ const IdeaZone = () => {
       <div className="items-start">
         <Image
           className="flex-shrink-0"
-          src={IdeaZoneBackground}
+          src={ideaZoneBackground}
           alt="ideaZoneBackground"
         />
       </div>
@@ -65,7 +65,7 @@ const IdeaZone = () => {
           <div className="flex items-center justify-center">
             <p className="ml-8 text-3xl font-bold">아이디어 존</p>
             <Image
-              src={IdeaZoneIcon}
+              src={ideaZoneIcon}
               alt={"projectGalleryIcon"}
               className="ml-2 mt-5 mb-5"
             />
@@ -80,10 +80,10 @@ const IdeaZone = () => {
       </div>
       <div className="absolute mt-[370px] flex items-center justify-between w-full">
         <div className="flex-shrink-0 ml-80">
-          <Image src={FlowerGray} alt={"snowGray"} />
+          <Image src={flowerGray} alt={"snowGray"} />
         </div>
         <div className="flex-shrink-0 mr-80 mt-80">
-          <Image src={Flower} alt={"snow"} />
+          <Image src={flower} alt={"snow"} />
         </div>
       </div>
 
@@ -118,15 +118,15 @@ const IdeaZone = () => {
                   title={content.title}
                   image={content.color}
                   keyWord1={
-                    (splitkeyWords(content.keyword)[0] as unknown as string) ||
+                    (splitkeyWords(content.keyWord)[0] as unknown as string) ||
                     ""
                   }
                   keyWord2={
-                    (splitkeyWords(content.keyword)[1] as unknown as string) ||
+                    (splitkeyWords(content.keyWord)[1] as unknown as string) ||
                     ""
                   }
                   keyWord3={
-                    (splitkeyWords(content.keyword)[2] as unknown as string) ||
+                    (splitkeyWords(content.keyWord)[2] as unknown as string) ||
                     ""
                   }
                   name={content.nickName}

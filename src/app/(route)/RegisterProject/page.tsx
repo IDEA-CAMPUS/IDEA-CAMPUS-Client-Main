@@ -2,15 +2,28 @@
 
 import React, { useState, ChangeEvent, useRef } from "react";
 
-import ProjectGalleryRegisterBackGround from "public/ProjectGallery/ProjectGalleryRegisterBackGround.svg";
+import projectGalleryRegisterBackGround from "public/projectgallery/projectGalleryRegisterBackGround.svg";
 import Image from "next/image";
-import DeleteButton from "public/ProjectGallery/DeleteButton.svg";
-import SubmitButton from "@/app/_components/Gallery/SubmitButton";
-import FixButton from "@/app/_components/Gallery/FixButton";
-import KeywordButton from "@/app/_components/Gallery/KeywordButton";
-import { NavBar } from "@/app/_components/components/NaviBar";
+import deleteButton from "public/projectgallery/deleteButton.svg";
+import SubmitButton from "@/app/components/gallery/SubmitButton";
+import FixButton from "@/app/components/gallery/FixButton";
+import KeywordButton from "@/app/components/gallery/KeywordButton";
+import { NavBar } from "@/app/components/components/naviBar";
 import { useRouter } from "next/navigation";
-import PostProject from "@/app/_api/Gallery/PostProject";
+import PostProject from "@/app/api/gallery/PostProject";
+
+// const a = {
+//   "title": "asdf",
+//   "simpleDescription": "asdf설명02",
+//   "detailedDescription": "asdf설명02",
+//   "teamInformation": "팀asdf정보02",
+//   "githubUrl": "https://github.com/project/02",
+//   "webUrl": "https://project.com/02",
+//   "googlePlayUrl": "https://play.google.com/store/apps/details?id=com.project/02",
+//   "booleanWeb": 1,
+//   "booleanApp": 1,
+//   "booleanAi": 0
+// }
 
 interface ProjectFormData {
   title: string;
@@ -145,7 +158,7 @@ const RegisterProject = () => {
       <NavBar />
       <div className="items-start">
         <Image
-          src={ProjectGalleryRegisterBackGround}
+          src={projectGalleryRegisterBackGround}
           alt="projectgallerybackground1"
         />
       </div>
@@ -283,7 +296,7 @@ const RegisterProject = () => {
                       ({image.size})
                     </p>
                     <button onClick={() => handleDeleteImage(index)}>
-                      <Image src={DeleteButton} alt="deleteButton" />
+                      <Image src={deleteButton} alt="deleteButton" />
                     </button>
                   </div>
                 ))}

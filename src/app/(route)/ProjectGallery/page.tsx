@@ -2,19 +2,19 @@
 
 import React, { useMemo, useState } from "react";
 import Image from "next/image";
-import ProjectGalleryBackground1 from "public/ProjectGallery/ProjectGalleryBackground1.svg";
-import ProjectGalleryBackground2 from "public/ProjectGallery/ProjectGalleryBackground2.svg";
-import SnowGray from "public/ProjectGallery/SnowGray.svg";
-import Snow from "public/ProjectGallery/Snow.svg";
-import ProjectGalleryIcon from "public/ProjectGallery/ProjectGalleryIcon.svg";
+import projectGalleryBackground1 from "public/projectgallery/projectGalleryBackground1.svg";
+import projectGalleryBackground2 from "public/projectgallery/projectGalleryBackground2.svg";
+import snowGray from "public/projectgallery/snowGray.svg";
+import snow from "public/projectgallery/snow.svg";
+import projectGalleryIcon from "public/projectgallery/projectGalleryIcon.svg";
 
-import KeywordButton from "@/app/_components/Gallery/KeywordButton";
-import TextButton from "@/app/_components/Gallery/TextButotn";
-import SubmitButton from "@/app/_components/Gallery/SubmitButton";
-import Content from "@/app/_components/Gallery/Content";
-import { NavBar } from "@/app/_components/components/NaviBar";
-import getProject from "@/app/_api/Gallery/GetProject";
-import getProjectKeyWord from "@/app/_api/Gallery/GetProjectKeyWord";
+import KeywordButton from "@/app/components/gallery/KeywordButton";
+import TextButton from "@/app/components/gallery/TextButotn";
+import SubmitButton from "@/app/components/gallery/SubmitButton";
+import { NavBar } from "@/app/components/components/naviBar";
+import GetProject from "@/app/api/gallery/GetProject";
+import GetProjectKeyWord from "@/app/api/gallery/GetProjectKeyWord";
+import Content from "@/app/components/gallery/Content";
 
 const ProjectGalley = () => {
   const [currentSort, setCurrentSort] = useState<"new" | "view">("new");
@@ -31,7 +31,7 @@ const ProjectGalley = () => {
   // } else {
   //   projectData = getProjectKeyWord(buttonStates);
   // }
-  const projectData = getProject();
+  const projectData = GetProject();
   const projectList = projectData?.information.content;
   console.log(projectData);
 
@@ -76,11 +76,11 @@ const ProjectGalley = () => {
       <div className="items-start">
         <Image
           className="flex-shrink-0"
-          src={ProjectGalleryBackground1}
+          src={projectGalleryBackground1}
           alt="projectgallerybackground1"
         />
         <Image
-          src={ProjectGalleryBackground2}
+          src={projectGalleryBackground2}
           alt="projectgallerybackground2"
           className="my-0"
         />
@@ -91,7 +91,7 @@ const ProjectGalley = () => {
           <div className="flex items-center justify-center">
             <p className="ml-8 text-3xl font-bold">프로젝트 갤러리</p>
             <Image
-              src={ProjectGalleryIcon}
+              src={projectGalleryIcon}
               alt={"projectGalleryIcon"}
               className="mb-5"
             />
@@ -107,10 +107,10 @@ const ProjectGalley = () => {
       </div>
       <div className="absolute mt-[370px] flex items-center justify-between w-full">
         <div className="flex-shrink-0 ml-80">
-          <Image src={SnowGray} alt={"snowGray"} />
+          <Image src={snowGray} alt={"snowGray"} />
         </div>
         <div className="flex-shrink-0 mr-80 mt-80">
-          <Image src={Snow} alt={"snow"} />
+          <Image src={snow} alt={"snow"} />
         </div>
       </div>
 

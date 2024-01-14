@@ -1,15 +1,14 @@
 "use client";
 
-import { CheckBox, Input } from "@/app/_components/components/Inputbox";
-import { NextButton, TextButton } from "@/app/_components/components/Buttons";
+import { CheckBox, Input } from "@/app/components/components/inputbox";
+import { NextButton, TextButton } from "@/app/components/components/buttons";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { ChangeEvent } from "react";
-import { SelectBox } from "@/app/_components/components/select";
-import { NavBar } from "@/app/_components/components/NaviBar";
-import { doubleCheck, regist } from "@/app/_api/regist";
-import { useToast } from "@/app/_class/Tost";
+import { SelectBox } from "@/app/components/components/select";
+// import { NaviBar } from "@/app/_components/components/naviBar";
+import { doubleCheck, regist } from "@/app/api/regist";
 
 export default function Regist() {
   const pathname = usePathname();
@@ -439,14 +438,14 @@ export default function Regist() {
                   label={item.label}
                 ></CheckBox>
               ))}
-              <CheckBox
+              {/* <CheckBox
                 name="agreement"
                 value="check3"
                 checked={agreeMarketingSms}
                 onCheck={handleAgreeMarketingSms}
                 label="마케팅 수신 동의 (선택)"
                 className="round small"
-              ></CheckBox>
+              ></CheckBox> */}
             </div>
           </div>
           <div className="w-full flex justify-center">

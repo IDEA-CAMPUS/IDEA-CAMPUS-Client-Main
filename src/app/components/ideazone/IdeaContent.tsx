@@ -3,8 +3,8 @@
 import Image from "next/image";
 import React from "react";
 
-import Polygon8 from "public/IdeaZone/Polygon 8.svg";
-import Profile from "public/Profile.svg";
+import polygon8 from "public/ideazone/polygon8.svg";
+import profile from "public/profile.svg";
 import { useRouter } from "next/navigation";
 
 interface IdeaContentProps {
@@ -71,10 +71,10 @@ const IdeaContent: React.FC<IdeaContentProps> = ({
       </div>
       <div className="w-[328px] h-[215px] bg-[#FFF5DB] rounded-b-xl overflow-hidden">
         <div className="flex items-center justify-center mt-[-10px]">
-          <Image src={Polygon8} alt="polygon8" width={50} />
+          <Image src={polygon8} alt="polygon8" width={50} />
         </div>
         <div className="flex items-center justify-center mt-12">
-          <Image src={Profile} alt="polygon8" />
+          <Image src={profile} alt="polygon8" />
         </div>
         <p className="mt-5 text-lg text-center text-black">{name}</p>
       </div>

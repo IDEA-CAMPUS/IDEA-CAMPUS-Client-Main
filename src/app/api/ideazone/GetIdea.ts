@@ -2,11 +2,15 @@ import { useEffect, useState } from "react";
 
 interface Idea {
   keyword: string;
-  title: string;
-  simpleDescription: string;
   keyWord: string;
+  id: string;
+  hits: any;
+  title: string;
+  thumbnail: string;
   nickName: string;
+  simpleDescription: string;
   color: string;
+  createdAt: string;
 }
 
 interface ApiResponse {
@@ -15,26 +19,24 @@ interface ApiResponse {
   message: string | null;
 }
 
-const GetIdeaHome = () => {
-  const [ideaData, setIdeaData] = useState<ApiResponse | null>(null);
+const GetIdea = () => {
+  const [ideaData, setideaData] = useState<ApiResponse | null>(null);
 
   useEffect(() => {
-    const fetchIdeaData = async () => {
+    const fetchideaData = async () => {
       try {
-        const response = await fetch(
-          "http://ec2-3-34-14-75.ap-northeast-2.compute.amazonaws.com:8080/api/home/idea"
-        );
+        const response = await fetch("https://ideacampus.site:8080/api/idea");
         const result: ApiResponse = await response.json();
-        setIdeaData(result);
+        setideaData(result);
       } catch (error) {
         console.error("Error fetching ideaData:", error);
       }
     };
 
-    fetchIdeaData();
+    fetchideaData();
   }, []);
 
   return ideaData;
 };
 
-export default GetIdeaHome;
+export default GetIdea;

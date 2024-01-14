@@ -3,13 +3,13 @@
 import React, { useState, ChangeEvent, useRef } from "react";
 import Image from "next/image";
 
-import RegisterIdeaZoneBackground from "public/IdeaZone/RegisterIdeaZoneBackground.svg";
+import registerIdeaZoneBackground from "public/ideazone/registerIdeaZoneBackground.svg";
 import DeleteButton from "public/ProjectGallery/DeleteButton.svg";
-import SubmitButton from "@/app/_components/IdeaZone/SubmitButton";
-import FixButton from "@/app/_components/IdeaZone/FixButton";
-import { NavBar } from "@/app/_components/components/NaviBar";
-import PostIdea from "@/app/_api/IdeaZone/PostIdea";
-import { getCombinedkeyWords } from "@/app/_utils/getCombinedKeyWords";
+import SubmitButton from "@/app/components/ideazone/SubmitButton";
+import FixButton from "@/app/components/ideazone/FixButton";
+import { NavBar } from "@/app/components/components/naviBar";
+import PostIdea from "@/app/api/ideazone/PostIdea";
+// import { getCombinedkeyWords } from "@/app/_utils/getCombinedKeyWords";
 import { useRouter } from "next/navigation";
 
 interface IdeaFormData {
@@ -112,7 +112,7 @@ const RegisterIdea = () => {
       <NavBar />
       <div className="items-start">
         <Image
-          src={RegisterIdeaZoneBackground}
+          src={registerIdeaZoneBackground}
           alt="projectgallerybackground1"
         />
       </div>
