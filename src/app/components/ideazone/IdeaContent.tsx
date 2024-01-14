@@ -4,7 +4,7 @@ import Image from "next/image";
 import React from "react";
 
 import polygon8 from "public/ideazone/polygon8.svg";
-import profile from "public/profile.svg";
+import profile from "public/profile_empty.svg";
 import { useRouter } from "next/navigation";
 
 interface IdeaContentProps {

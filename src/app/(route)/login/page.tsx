@@ -55,6 +55,33 @@ export default function Login() {
           console.error("에러가 발생했습니다:", error);
         }
       };
+
+      const googleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        //토스트로직 만들기
+
+        try {
+          const response = await login({
+            email,
+            password,
+          });
+          console.log("response", response);
+
+          if (response?.accessToken) {
+            localStorage.setItem("login-token", response.accessToken);
+            console.log(response.tokenType);
+            if (router) {
+              router.push("/");
+            }
+          } else {
+            showToast("올바르지 않은 아이디 혹은 비밀번호입니다", 2000);
+          }
+
+          //정보저장
+        } catch (error) {
+          console.error("에러가 발생했습니다:", error);
+        }
+      };
       return (
         <div className="h-screen text-black bg-white flex justify-center items-center relative z-[10]">
           <div className="w-full h-[230px] bg-[url('/wave.svg')] fixed bottom-0 z-[-1]"></div>
@@ -65,7 +92,8 @@ export default function Login() {
               alt="logo"
               width={404}
               height={145}
-              className="mb-[50px]"
+              className="mb-[50px] cursor-pointer"
+              onClick={() => router.push("/")}
             ></Image>
 
             <form onSubmit={handleLogin} className="flex flex-col items-center">
@@ -115,6 +143,7 @@ export default function Login() {
               width={80}
               height={45}
               className="mt-[50px] cursor-pointer z-10"
+              onClick={() => googleLogin}
             ></Image>
           </div>
         </div>
@@ -201,12 +230,12 @@ export default function Login() {
         event.preventDefault();
 
         try {
-          const result: boolean | undefined = await findPW({
+          const response = await findPW({
             email,
             number,
           });
 
-          if (result === true) {
+          if (response) {
             if (router) {
               // router.push("/");
             }
@@ -259,7 +288,7 @@ export default function Login() {
                 text="비밀번호 찾기"
                 type="submit"
                 className="mt-[35px] "
-                onClick={() => setPage("returnPW")}
+                // onClick={() => setPage("returnPW")}
                 //api작업시 onClick삭제
               ></NextButton>
             </form>
