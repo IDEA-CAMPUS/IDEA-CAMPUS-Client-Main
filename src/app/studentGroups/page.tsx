@@ -6,13 +6,12 @@ import GradientBackground from "@/assests/images/gradientBackground.png";
 import Image from "next/image";
 import StudentGrouplistItem from "./components/StudentGroupListItem";
 import { useRouter } from "next/navigation";
-import getClub from "../api/club/GetClub";
+import GetClub from "../api/club/GetClub";
 import { NavBar } from "../components/components/naviBar";
 
 const IdeaManage = () => {
-  const clubData = getClub();
+  const clubData = GetClub();
   const clubList = clubData?.information.content;
-
   const router = useRouter();
 
   const handleonClick = () => {
@@ -55,15 +54,15 @@ const IdeaManage = () => {
             </button>
           </div>
           <div className="mt-40 w-full">
-            {clubList?.map((item, index) => (
+            {clubList?.map((content, contentIndex) => (
               <StudentGrouplistItem
-                key={index}
-                id={item.id}
-                title={item.title}
-                description={item.description}
-                createdAt={item.createdAt}
-                nickname={item.nickname}
-                thumbnail={item.thumbnail ?? ""}
+                key={contentIndex}
+                id={content.id}
+                title={content.title}
+                description={content.description}
+                createdAt={content.createdAt}
+                nickname={content.nickname}
+                thumbnail={content.thumbnail}
               />
             ))}
           </div>
