@@ -36,7 +36,7 @@ export const NavBar = () => {
 
   return (
     <div className="w-full h-[70px] bg-white box-border flex items-center justify-center">
-      <div className="flex">
+      <div className="flex flex-row lg:flex-row justify-between">
         <div className="flex gap-[64px] items-center">
           <img
             src="/logo.svg"
@@ -62,7 +62,7 @@ export const NavBar = () => {
             동아리·학회
           </div>
         </div>
-        <div className="flex justify-end gap-[42px] ml-[630px] items-center">
+        <div className="flex gap-[42px] ml-[630px] items-center">
           {isLogin ? (
             <>
               <div
