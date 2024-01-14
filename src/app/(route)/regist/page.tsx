@@ -1,15 +1,15 @@
 "use client";
 
-import { CheckBox, Input } from "@/app/_components/components/inputbox";
-import { NextButton, TextButton } from "@/app/_components/components/buttons";
+import { CheckBox, Input } from "@/app/_components/components/Inputbox";
+import { NextButton, TextButton } from "@/app/_components/components/Buttons";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { ChangeEvent } from "react";
 import { SelectBox } from "@/app/_components/components/select";
-import { NavBar } from "@/app/_components/components/naviBar";
+import { NavBar } from "@/app/_components/components/NaviBar";
 import { doubleCheck, regist } from "@/app/_api/regist";
-import { useToast } from "@/app/_class/tost";
+import { useToast } from "@/app/_class/Tost";
 
 export default function Regist() {
   const pathname = usePathname();
@@ -292,7 +292,7 @@ export default function Regist() {
   };
 
   return (
-    <div className="h-fit-content  bg-white flex flex-col justify-center items-center relative z-[10]">
+    <div className="h-fit-content text-black  bg-white flex flex-col justify-center items-center relative z-[10]">
       {/* <NavBar /> */}
       <div className="items-center flex flex-col justify-evenly box-border z-10">
         <ToastComponent />
@@ -419,7 +419,7 @@ export default function Regist() {
           </div>
 
           <div className="flex flex-col items-start w-full mt-[150px]">
-            <CheckBox
+            {/* <CheckBox
               name="agreement"
               value="all"
               checked={allIsChecked}
@@ -427,7 +427,7 @@ export default function Regist() {
               label="아래 약관에 모두 동의합니다."
             >
               모두 동의하기
-            </CheckBox>
+            </CheckBox> */}
             <div className="flex flex-col gap-[8px] box-border pl-[12px] mt-[12px]">
               {smallCheckBoxs.map((item) => (
                 <CheckBox
@@ -445,6 +445,7 @@ export default function Regist() {
                 checked={agreeMarketingSms}
                 onCheck={handleAgreeMarketingSms}
                 label="마케팅 수신 동의 (선택)"
+                className="round small"
               ></CheckBox>
             </div>
           </div>

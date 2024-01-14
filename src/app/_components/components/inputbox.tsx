@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 export const Input = ({
   placeholder,
@@ -60,20 +60,20 @@ export const Input = ({
   );
 };
 
-export const CheckBox = ({
+interface CheckBoxProps {
+  name: string;
+  value: string;
+  checked: boolean;
+  onCheck: (e: ChangeEvent<HTMLInputElement>) => void;
+  label: string;
+}
+
+export const CheckBox: React.FC<CheckBoxProps> = ({
   label,
   name,
   checked,
   onCheck,
-
   value,
-}: {
-  label: string;
-  name?: string;
-  checked?: boolean;
-  onCheck: (e: React.ChangeEvent<HTMLInputElement>) => void;
-
-  value: string;
 }) => {
   return (
     <div className="flex items-center">
@@ -83,7 +83,7 @@ export const CheckBox = ({
         value={value}
         checked={checked}
         onChange={onCheck}
-      ></input>
+      />
       <label className="ml-[15px]">{label}</label>
     </div>
   );

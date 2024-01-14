@@ -1,20 +1,16 @@
 interface Idea {
-  keyword: string;
+  keyWord: string;
 }
 
-const idea: Idea = {
-  keyword: "키워드1, 2, 3",
-};
-
 // 키워드를 쉼표로 분리하는 함수
-const splitKeywords = (keywords: string): string[] => {
-  // 쉼표로 문자열을 분리하고 양쪽 공백을 제거한 후 반환
-  return keywords.split(",").map((keyword) => keyword.trim());
+const splitkeyWords = (keyWord: string): string[] => {
+  if (keyWord) {
+    // 쉼표로 문자열을 분리하고 양쪽 공백을 제거한 후 반환
+    return keyWord.split(",").map((keyWord) => keyWord.trim());
+  } else {
+    // keyWords가 undefined인 경우 빈 배열 반환 또는 다른 처리를 수행할 수 있습니다.
+    return [];
+  }
 };
 
-// Idea 객체의 키워드를 분리
-const ideaKeywords = splitKeywords(idea.keyword);
-
-console.log(ideaKeywords); // ['키워드1', '2', '3']
-
-export default splitKeywords;
+export default splitkeyWords;

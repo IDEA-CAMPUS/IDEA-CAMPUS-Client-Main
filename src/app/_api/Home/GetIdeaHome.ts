@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 
 interface Idea {
+  keyword: string;
   title: string;
   simpleDescription: string;
-  keyword: string;
+  keyWord: string;
   nickName: string;
   color: string;
 }
@@ -14,7 +15,7 @@ interface ApiResponse {
   message: string | null;
 }
 
-const getIdeaHome = () => {
+const GetIdeaHome = () => {
   const [ideaData, setIdeaData] = useState<ApiResponse | null>(null);
 
   useEffect(() => {
@@ -36,4 +37,4 @@ const getIdeaHome = () => {
   return ideaData;
 };
 
-export default getIdeaHome;
+export default GetIdeaHome;

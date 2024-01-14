@@ -1,7 +1,7 @@
 interface Idea {
   title: string;
   simpleDescription: string;
-  keyword: string;
+  keyWord: string;
   nickName: string;
   color: string;
 }
@@ -150,6 +150,6 @@ export async function findPW({
       return false;
     }
   } catch (error) {
-    console.error("Error:", error.message || "Unknown error");
+    console.error("Error:", error || "Unknown error");
   }
 }

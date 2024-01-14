@@ -1,14 +1,27 @@
+"use client";
+
+import getClubDetail from "@/app/_api/Club/GetClubDetail";
+import { NavBar } from "@/app/_components/components/NaviBar";
 import Header from "@/app/_components/layout/Header";
 import GradientBackground from "@/assests/images/gradientBackground.png";
 import ThumbnailImage from "@/assests/images/Image.png";
 import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
 
 import React from "react";
 
-const registrationCompleted = () => {
+const RegistrationCompleted = () => {
+  const pathname = usePathname();
+  //id가져오는 문자열 함수
+  const id = pathname.split("/")[3];
+
+  const clubData = getClubDetail(id)?.information;
+
+  const router = useRouter();
+
   return (
     <div>
-      <Header />
+      <NavBar />
       <div className="flex flex-col w-[100vw] items-center bg-[#FAFAFA]">
         {/* 등록폼 박스 만들기 */}
         <Image
@@ -20,31 +33,21 @@ const registrationCompleted = () => {
           {/* 텍스트 */}
           <div className="flex flex-col items-center">
             <Image src="/Profile.svg" width={40} height={40} alt="Logo"></Image>
-            <h5 className="text-base text-center mt-2">사용자 닉네임</h5>
-            <h1 className="text-5xl mt-3 text-center">
-              제목이 들어갈 곳입니다.
-            </h1>
+            <h5 className="text-base text-center mt-2">{clubData?.nickname}</h5>
+            <h1 className="text-5xl mt-3 text-center">{clubData?.title}</h1>
           </div>
         </div>
         <div className="flex justify-center  mt-20 bg-white rounded-xl z-10 shadow-md">
           <div className="flex-col items-start w-[71vw] p-8 z-20">
-            <p className="text-lg text-left font-semibold text-black">제목</p>
-            <input
-              type="text"
-              id="formInput1"
-              name="formInput1"
-              className="w-full  px-3 py-2  border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 text-black"
-              placeholder="10글자 이내의 아이디어 제목을 입력해주세요"
-            />
             <p className="text-lg text-left font-semibold text-black mt-4 ">
               상세설명
             </p>
-            <textarea
+            <div
               id="formInput1"
-              name="formInput1"
-              className="w-full h-[342px] px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 text-black place-content-start"
-              placeholder="상세 설명을 입력해주세요"
-            />
+              className="bg-[#F5F5F5] h-[400px] mt-3 flex focus:outline-none focus:border-2 focus:border-purple-500 w-auto p-2 border-2 border-[#A6A6A6] rounded-xl"
+            >
+              <p className="text-black">{clubData?.description}</p>
+            </div>
             <p className="text-lg font-semibold text-black inline-block mr-1 mt-4">
               관련이미지
             </p>
@@ -105,4 +108,4 @@ const registrationCompleted = () => {
   );
 };
 
-export default registrationCompleted;
+export default RegistrationCompleted;
