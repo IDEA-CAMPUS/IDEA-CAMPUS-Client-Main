@@ -11,7 +11,7 @@ import GetIdeaDetail from "@/app/api/ideazone/GetIdeaDetail";
 import splitkeyWords from "@/app/utils/seperateKeword";
 import { NavBar } from "@/app/components/components/naviBar";
 import DeleteIdea from "@/app/api/ideazone/DeleteIdea";
-import GetCheckId from "@/app/api/ideazone/\bGetCheckId";
+import GetCheckId from "@/app/api/ideazone/GetCheckId";
 
 const IdeaDetail = () => {
   const pathname = usePathname();
