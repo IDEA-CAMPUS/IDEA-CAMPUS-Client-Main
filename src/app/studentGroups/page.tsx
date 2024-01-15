@@ -17,7 +17,7 @@ const IdeaManage = () => {
   const handleonClick = () => {
     if (localStorage.getItem("login-token") !== null) {
       // 클릭 시 다음 페이지로 이동dd
-      router.push("/studentGroups/registrationFogrms");
+      router.push("/studentGroups/registrationForms");
     } else {
       alert("로그인 후 이용해주세요");
       router.push("/login");

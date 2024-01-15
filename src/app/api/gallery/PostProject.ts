@@ -1,52 +1,22 @@
-import { useEffect } from "react";
-
-interface ProjectFormData {
-  title: string;
-  booleanWeb: boolean;
-  booleanApp: boolean;
-  booleanAi: boolean;
-  simpleDescription: string;
-  detailedDescription: string;
-  team: string;
-  githubUrl: string;
-  webUrl: string;
-  googlePlayUrl: string;
-}
-
-interface Images {
-  name: string;
-  url: string;
-  size: string;
-}
-[];
-
-// const dataToSend = {
-//   postProjectReq: {
-//     // 프로젝트 게시 Request에 대한 데이터를 여기에 추가
-//   },
-//   images: [
-//     // images 배열에 대한 데이터를 여기에 추가
-//   ],
-// };
-
-const PostProject = async (
-  ideaData: ProjectFormData | undefined,
-  images: { name: string; url: string; size: string }[]
-) => {
+const PostProject = async (formData: FormData) => {
   try {
     const response = await fetch("https://ideacampus.site:8080/api/project", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${localStorage.getItem("login-token")}`,
       },
-      body: JSON.stringify({
-        postProjectReq: ideaData,
-        images: images,
-      }),
+      body: formData,
     });
+
+    if (response.ok) {
+      const responseData = await response.json();
+      console.log("Successfully posted project:", responseData);
+    } else {
+      console.error("Failed to post project. Status:", response.status);
+    }
   } catch (error) {
-    console.error("Error fetching ideaData:", error);
+    console.error("Error posting project:", error);
   }
 };
 

@@ -33,6 +33,7 @@ const IdeaManage = () => {
     },
     images: [],
   });
+  const [formImages, setFormImages] = useState<string[]>([]);
   const [images, setImages] = useState<
     Array<{ name: string; url: string; size: string }>
   >([]);
@@ -69,15 +70,26 @@ const IdeaManage = () => {
 
     if (file) {
       const reader = new FileReader();
-      reader.onload = () => {
-        const imageSize = `${(file.size / 1024).toFixed(2)} KB`;
-        setImages((prevImages) => [
-          ...prevImages,
-          { name: file.name, url: reader.result as string, size: imageSize },
-        ]);
-      };
+      const imageLoadPromise = new Promise<string>((resolve) => {
+        reader.onload = () => {
+          const imageSize = `${(file.size / 1024).toFixed(2)} KB`;
+          setImages((prevImages) => [
+            ...prevImages,
+            { name: file.name, url: reader.result as string, size: imageSize },
+          ]);
+          setFormImages((prevFormImages) => [
+            ...prevFormImages,
+            reader.result as string,
+          ]);
+          resolve(reader.result as string);
+        };
+      });
+
       reader.readAsDataURL(file);
+      return imageLoadPromise;
     }
+
+    return Promise.resolve(""); // Return a resolved promise if no file is selected
   };
 
   const isFormValid = () => {
@@ -94,10 +106,17 @@ const IdeaManage = () => {
     try {
       // 필수 필드가 모두 입력되었는지 확인
       if (isFormValid() && images) {
-        console.log("Upload image:", images, clubData);
-        // 이 부분에 실제로 서버로ㄴ 이미지를 업로드하는 로직을 추가할 수 있습니다.
-        // 서버로의 업로드를 위해 fetch 또는 axios 등을 사용할 수 있습니다.
-        await PostClub(clubData, images);
+        // Set the clubData's images array to be the same as formImages
+        setClubData((prevClubData) => ({
+          ...prevClubData,
+          images: formImages,
+        }));
+
+        console.log("Upload image:", formImages, clubData);
+
+        // Call the PostClub function with updated clubData
+        await PostClub(clubData);
+
         // Additional logic after successful upload, if needed
         router.push("/studentGroups");
       } else {

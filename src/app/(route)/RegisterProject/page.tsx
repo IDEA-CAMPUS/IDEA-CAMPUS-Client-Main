@@ -32,7 +32,7 @@ interface ProjectFormData {
   booleanAi: boolean;
   simpleDescription: string;
   detailedDescription: string;
-  team: string;
+  teamInformation: string;
   githubUrl: string;
   webUrl: string;
   googlePlayUrl: string;
@@ -43,6 +43,7 @@ const RegisterProject = () => {
   const [images, setImages] = useState<
     Array<{ name: string; url: string; size: string }>
   >([]);
+  const [formImagesList, setFormImagesList] = useState<File[]>([]);
   const [projectData, setProjectData] = useState<ProjectFormData>({
     title: "",
     booleanWeb: true,
@@ -50,7 +51,7 @@ const RegisterProject = () => {
     booleanAi: true,
     simpleDescription: "",
     detailedDescription: "",
-    team: "",
+    teamInformation: "",
     githubUrl: "",
     webUrl: "",
     googlePlayUrl: "",
@@ -64,9 +65,12 @@ const RegisterProject = () => {
     AI: true,
   });
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+    const files = e.target.files;
 
-    if (file) {
+    if (files && files.length > 0) {
+      const file = files[0];
+      console.log("file: " + file);
+
       const reader = new FileReader();
       reader.onload = () => {
         const imageSize = `${(file.size / 1024).toFixed(2)} KB`;
@@ -76,8 +80,12 @@ const RegisterProject = () => {
         ]);
       };
       reader.readAsDataURL(file);
+
+      // If you want to handle multiple images, store them in an array
+      setFormImagesList((prevFiles) => [...prevFiles, file]);
     }
   };
+
   //키워드 버튼 true여부 확인 함수
   const handleKeywordButtonClick = (isClicked: boolean, title: string) => {
     setButtonStates((prevStates) => ({ ...prevStates, [title]: isClicked }));
@@ -119,36 +127,53 @@ const RegisterProject = () => {
       fileInputRef.current.click();
     }
   };
-  const handleCancel = () => {
-    router.push("/ProjectGallery");
-  };
+
   const isFormValid = () => {
     // 필수 필드인 title, simpleDescription, detailedDescription, team이 모두 입력되었는지 검사
     return (
       projectData.title.trim() !== "" &&
       projectData.simpleDescription.trim() !== "" &&
-      projectData.team.trim() !== "" &&
+      projectData.teamInformation.trim() !== "" &&
       projectData.detailedDescription.trim() !== ""
     );
   };
 
   const handleUpload = async () => {
     try {
-      // 필수 필드가 모두 입력되었는지 확인
-      if (isFormValid() && images) {
-        console.log("Upload image:", images, projectData);
-        // 이 부분에 실제로 서버로 이미지를 업로드하는 로직을 추가할 수 있습니다.
-        // 서버로의 업로드를 위해 fetch 또는 axios 등을 사용할 수 있습니다.
-        await PostProject(projectData, images);
-        // Additional logic after successful upload, if needed
+      if (isFormValid()) {
+        // 프로젝트 데이터 추가
+        // const blob1 = new Blob([JSON.stringify(projectData)], {
+        //   type: "application/json",
+        // });
+        formData.append("title", projectData.title);
+        formData.append("simpleDescription", projectData.simpleDescription);
+        formData.append("detailedDescription", projectData.detailedDescription);
+        formData.append("teamInformation", projectData.teamInformation);
+        formData.append("githubUrl", projectData.githubUrl);
+        formData.append("webUrl", projectData.webUrl);
+        formData.append("googlePlayUrl", projectData.googlePlayUrl);
+        formData.append("booleanApp", String(projectData.booleanApp));
+        formData.append("booleanWeb", String(projectData.booleanWeb));
+        formData.append("booleanAi", String(projectData.booleanAi));
+        formImagesList.forEach((file, index) => {
+          formData.append(`images[${index}]`, file);
+        });
+        // 이미지 파일 추가
+        // formImagesList.forEach((image, index) => {
+        //   if (image instanceof File && image.size > 0) {
+        //     formData.append("images", image);
+        //   }
+        // });
+
+        // formData.append("images", formImagesList!);
+
+        await PostProject(formData);
         router.push("/ProjectGallery");
       } else {
-        // 필수 필드 중 하나라도 비어있다면 사용자에게 알림 등을 표시할 수 있습니다.
         alert("선택항목을 제외한 모든 항목을 입력해주세요.");
       }
     } catch (error) {
       console.error("Error uploading image:", error);
-      // Display an error message to the user, e.g., using a toast or alert
       alert("이미지 업로드 중 오류가 발생했습니다. 나중에 다시 시도해주세요.");
     }
   };
@@ -223,9 +248,9 @@ const RegisterProject = () => {
         <input
           className="bg-[#F5F5F5] h-12 mt-3 flex focus:outline-none focus:border-2 focus:border-purple-500 w-full p-2 border-2 border-[#A6A6A6] rounded-xl"
           type="text"
-          name="team"
+          name="teamInformation"
           placeholder="팀과 팀원들을 소개해주세요."
-          value={projectData.team}
+          value={projectData.teamInformation}
           onChange={handleInputChange}
         />
         <div className="flex mt-12">

@@ -13,11 +13,14 @@ import IdeaContent from "@/app/components/ideazone/IdeaContent";
 import { NavBar } from "@/app/components/components/naviBar";
 import GetIdea from "@/app/api/ideazone/GetIdea";
 import splitkeyWords from "@/app/utils/seperateKeword";
+import GetBanner from "@/app/api/GetBanner";
 
 const IdeaZone = () => {
   const [currentSort, setCurrentSort] = useState<"new" | "view">("new");
   const ideaData = GetIdea();
   const ideaList = ideaData?.information;
+  const bannerData = GetBanner();
+  const bannerList = bannerData?.information;
 
   const chunkSize = 3;
   // 최신순 또는 조회순으로 정렬된 아이디어 리스트
@@ -50,17 +53,24 @@ const IdeaZone = () => {
   };
 
   return (
-    <main className="bg-white h-auto w-full text-black flex flex-col items-center mx-auto">
+    <main className="relative bg-white h-auto w-full text-black flex flex-col items-center mx-auto">
       <NavBar />
       <div className="items-start">
         <Image
           className="flex-shrink-0"
           src={ideaZoneBackground}
           alt="ideaZoneBackground"
+          layout="fixed"
+          width={1400}
+          height={50}
         />
       </div>
       <div className="mt-[-900px] ">
-        <div className="w-[1204px] h-[400px] bg-gray-300">banner</div>
+        <div className="relative w-[1204px] h-[400px] bg-gray-300">
+          {bannerList && (
+            <Image src={bannerList[0].saveFileUrl} alt="banner" layout="fill" />
+          )}
+        </div>
         <div className="mt-24 text-center text-black">
           <div className="flex items-center justify-center">
             <p className="ml-8 text-3xl font-bold">아이디어 존</p>

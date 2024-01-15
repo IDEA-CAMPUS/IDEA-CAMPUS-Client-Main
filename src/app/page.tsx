@@ -46,7 +46,7 @@ const page: React.FC = () => {
   );
   if (bannerList) console.log("b " + bannerList[0].saveFileUrl);
   if (projectList) console.log("p " + projectList[1].thumbnail);
-
+  console.log(bannerData?.information[0].saveFileUrl);
   return (
     <main className="bg-white text-black flex flex-col items-center mx-auto">
       <NavBar />
@@ -60,14 +60,13 @@ const page: React.FC = () => {
         />
         <div className="relative mt-10 mx-40" style={{ zIndex: 1 }}>
           <div className="relative mt-10 w-[1204px] h-[400px] bg-gray-300">
-            {/* {bannerList && projectList &&  ( 
-            <Image
-            src={projectList[1].title}
-            alt="banner"ㄴ
-            width={1204}
-            height={400}
-            />
-           )} */}
+            {bannerList && (
+              <Image
+                src={bannerList[0].saveFileUrl}
+                alt="banner"
+                layout="fill"
+              />
+            )}
           </div>
           <div>
             <div className="mt-12 flex flex-col items-center justify-center">
