@@ -3,8 +3,8 @@
 import getClubDetail from "@/app/api/club/GetClubDetail";
 import { NavBar } from "@/app/components/components/naviBar";
 import Header from "@/app/components/layout/Header";
-import GradientBackground from "@/assests/images/gradientBackground.png";
-import ThumbnailImage from "@/assests/images/Image.png";
+import GradientBackground from "../../../../../public/gradientBackground.png";
+import ThumbnailImage from "../../../../../public/studentGroups/thumbnailImage.png";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -13,7 +13,7 @@ import React from "react";
 const RegistrationCompleted = () => {
   const pathname = usePathname();
   //id가져오는 문자열 함수
-  const id = pathname.split("/")[3];
+  const id = pathname.split("/")[2];
 
   const clubData = getClubDetail(id)?.information;
 

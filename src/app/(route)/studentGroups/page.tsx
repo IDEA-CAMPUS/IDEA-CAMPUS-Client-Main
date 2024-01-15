@@ -1,24 +1,23 @@
 "use client";
 
 import "next/link";
-import Header from "../components/layout/Header";
-import GradientBackground from "@/assests/images/gradientBackground.png";
+import Header from "../../components/layout/Header";
+import GradientBackground from "../../../../public/gradientBackground.png";
 import Image from "next/image";
-import StudentGrouplistItem from "./components/StudentGroupListItem";
+import StudentGrouplistItem from "../../components/studentGroups/StudentGroupListItem";
 import { useRouter } from "next/navigation";
-import getClub from "../api/club/GetClub";
-import { NavBar } from "../components/components/naviBar";
+import GetClub from "../../api/club/GetClub";
+import { NavBar } from "../../components/components/naviBar";
 
-const IdeaManage = () => {
-  const clubData = getClub();
+const StudentGroupts = () => {
+  const clubData = GetClub();
   const clubList = clubData?.information.content;
-
   const router = useRouter();
 
   const handleonClick = () => {
     if (localStorage.getItem("login-token") !== null) {
       // 클릭 시 다음 페이지로 이동dd
-      router.push("/studentGroups/registrationFogrms");
+      router.push("/registrationForms");
     } else {
       alert("로그인 후 이용해주세요");
       router.push("/login");
@@ -55,15 +54,15 @@ const IdeaManage = () => {
             </button>
           </div>
           <div className="mt-40 w-full">
-            {clubList?.map((item, index) => (
+            {clubList?.map((content, contentIndex) => (
               <StudentGrouplistItem
-                key={index}
-                id={item.id}
-                title={item.title}
-                description={item.description}
-                createdAt={item.createdAt}
-                nickname={item.nickname}
-                thumbnail={item.thumbnail ?? ""}
+                key={contentIndex}
+                id={content.id}
+                title={content.title}
+                description={content.description}
+                createdAt={content.createdAt}
+                nickname={content.nickname}
+                thumbnail={content.thumbnail}
               />
             ))}
           </div>
@@ -73,4 +72,4 @@ const IdeaManage = () => {
   );
 };
 
-export default IdeaManage;
+export default StudentGroupts;

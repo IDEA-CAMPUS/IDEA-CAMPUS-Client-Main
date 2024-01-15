@@ -15,15 +15,15 @@ import { NavBar } from "@/app/components/components/naviBar";
 import GetProject from "@/app/api/gallery/GetProject";
 import GetProjectKeyWord from "@/app/api/gallery/GetProjectKeyWord";
 import Content from "@/app/components/gallery/Content";
+import GetBanner from "@/app/api/GetBanner";
 
 const ProjectGalley = () => {
   const [currentSort, setCurrentSort] = useState<"new" | "view">("new");
   const [buttonStates, setButtonStates] = useState<{ [key: string]: boolean }>({
-    앱: true,
-    웹: true,
-    AI: true,
+    booleanWeb: true,
+    booleanApp: true,
+    booleanAi: true,
   });
-
   // let projectData;
 
   // if (buttonStates[0] && buttonStates[1] && buttonStates[2]) {
@@ -31,10 +31,17 @@ const ProjectGalley = () => {
   // } else {
   //   projectData = getProjectKeyWord(buttonStates);
   // }
+  const bannerData = GetBanner();
+  const bannerList = bannerData?.information;
   const projectData = GetProject();
   const projectList = projectData?.information.content;
-  console.log(projectData);
-
+  const projectDataKeword = GetProjectKeyWord(
+    buttonStates.booleanWeb,
+    buttonStates.booleanApp,
+    buttonStates.booleanAi
+  );
+  const ProjectDataKewordList = projectDataKeword?.information.content;
+  // console.log("pro: " + projectDataKeword);
   const chunkSize = 3;
   // 최신순 또는 조회순으로 정렬된 아이디어 리스트
   const sortedprojectList = useMemo(() => {
@@ -78,15 +85,27 @@ const ProjectGalley = () => {
           className="flex-shrink-0"
           src={projectGalleryBackground1}
           alt="projectgallerybackground1"
+          layout="fixed"
+          width={1400}
+          height={50}
         />
         <Image
           src={projectGalleryBackground2}
           alt="projectgallerybackground2"
           className="my-0"
+          layout="fixed"
+          width={1400}
+          height={50}
         />
       </div>
-      <div className="mt-[-1200px]  ">
-        <div className="w-[1204px] h-[400px] bg-gray-300">banner</div>
+      <div className="mt-[-1200px]">
+        <div className="relative w-[1204px] h-[400px] bg-gray-300">
+          {" "}
+          {bannerList && (
+            <Image src={bannerList[0].saveFileUrl} alt="banner" layout="fill" />
+          )}
+          s
+        </div>
         <div className="mt-24 text-center text-white">
           <div className="flex items-center justify-center">
             <p className="ml-8 text-3xl font-bold">프로젝트 갤러리</p>

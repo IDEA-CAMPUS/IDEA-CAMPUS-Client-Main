@@ -30,7 +30,7 @@ const StudentGrouplistItem: React.FC<contentProps> = ({
   const router = useRouter();
 
   const handleClick = () => {
-    router.push(`/studentGroups/registrationCompleted/${id}`);
+    router.push(`/registrationCompleted/${id}`);
   };
 
   return (
@@ -47,7 +47,7 @@ const StudentGrouplistItem: React.FC<contentProps> = ({
         </h1>
       </div>
       <div>
-        {/* {thumbnail && (
+        {thumbnail && (
           <Image
             src={thumbnail}
             width={50}
@@ -55,7 +55,7 @@ const StudentGrouplistItem: React.FC<contentProps> = ({
             alt="gradientBackground"
             className="w-28 h-28"
           />
-        )} */}
+        )}
       </div>
     </div>
   );

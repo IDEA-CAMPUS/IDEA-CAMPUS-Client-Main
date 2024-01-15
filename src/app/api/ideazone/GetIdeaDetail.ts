@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 interface Idea {
   id: string;
   hits: any;
-  keyWord: any;
+  keyWord: string[];
   title: string;
   thumbnail: string;
   nickName: string;
@@ -21,7 +21,7 @@ interface ApiResponse {
   message: string | null;
 }
 
-const GetIdeaDeatil = (id: string) => {
+const GetIdeaDeatil = (id: number) => {
   const [ideaData, setideaData] = useState<ApiResponse | null>(null);
 
   useEffect(() => {

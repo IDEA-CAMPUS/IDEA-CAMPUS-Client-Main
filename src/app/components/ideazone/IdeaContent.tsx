@@ -8,7 +8,7 @@ import profile from "public/profile.svg";
 import { useRouter } from "next/navigation";
 
 interface IdeaContentProps {
-  id: string;
+  id: number;
   title: string;
   image: string;
   keyWord1: string;

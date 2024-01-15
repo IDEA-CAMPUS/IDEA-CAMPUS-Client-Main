@@ -48,13 +48,13 @@ const Content: React.FC<contentProps> = ({
         }}
       >
         <div className="flex items-center justify-center">
-          {/* <Image
+          <Image
             src={thumbnail}
             alt=""
-            width={250}
-            height={250}
+            width={300}
+            height={300}
             layout="fixed"
-          /> */}
+          />
         </div>
       </div>
       <div className="flex space-x-2 mt-2">

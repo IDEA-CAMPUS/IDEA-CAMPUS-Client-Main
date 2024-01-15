@@ -62,15 +62,17 @@ const RegisterIdea = () => {
     setkeyWordData((prevData) => ({ ...prevData, [name]: value }));
 
     // 각각의 키워드 값이 비어있지 않은 경우에만 추가
+    const keywords = [
+      keyWordData.keyWord1,
+      keyWordData.keyWord2,
+      keyWordData.keyWord3,
+    ]
+      .filter(Boolean)
+      .join(", ");
+
     setIdeaData((prevData) => ({
       ...prevData,
-      keyWord: [
-        keyWordData.keyWord1,
-        keyWordData.keyWord2,
-        keyWordData.keyWord3,
-      ]
-        .filter(Boolean)
-        .join(", "),
+      keyWord: keywords,
     }));
   };
 
@@ -92,9 +94,10 @@ const RegisterIdea = () => {
       // 필수 필드가 모두 입력되었는지 확인
       if (isFormValid()) {
         // 여기에 파일 업로드 로직 추가
-        console.log("Upload image:", ideaData);
+        // console.log("Upload image:", ideaData);
         await PostIdea(ideaData);
         // Additional logic after successful upload, if needed
+        alert("성공적으로 등록되었습니다.");
         router.push("/IdeaZone");
       } else {
         // 필수 필드 중 하나라도 비어있다면 사용자에게 알림 등을 표시할 수 있습니다.

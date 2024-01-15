@@ -21,20 +21,21 @@ interface ClubPostData {
 //   ],
 // };
 
-const PostClub = async (
-  clubData: ClubPostData | undefined,
-  images: { name: string; url: string; size: string }[]
-) => {
+const PostClub = async (clubData: ClubPostData) => {
   try {
     const response = await fetch("https://ideacampus.site:8080/api/club", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("login-token")}`,
       },
       body: JSON.stringify({
-        postclubReq: clubData?.clubPostReq,
-        images: clubData?.images,
+        clubPostReq: {
+          title: clubData.clubPostReq.title,
+          description: clubData.clubPostReq.description,
+          url1: clubData.clubPostReq.url1,
+          url2: clubData.clubPostReq.url2,
+        },
+        images: clubData.images,
       }),
     });
   } catch (error) {

@@ -38,13 +38,17 @@ const ProjectDetail = () => {
   };
 
   //이미지 배열
-  const images = [
-    projectGalleryIcon,
-    previousButton,
-    nextButton,
-    previousButton,
-    // ... 더 많은 이미지
-  ];
+  const images: string[] = [];
+  // thumbnail이 존재하면 추가
+  if (projectData?.thumbnail) {
+    images.push(projectData.thumbnail);
+  }
+
+  // otherImages가 존재하면 추가
+  if (projectData?.otherImages) {
+    images.push(...projectData.otherImages);
+  }
+
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const goToPrevious = () => {
@@ -103,7 +107,7 @@ const ProjectDetail = () => {
         <div className="flex flex-col items-center justify-center mt-10">
           <div className="flex items-center">
             {/* Previous Image */}
-            <div className="flex w-[250px] mr-[-50px] h-[250px] rounded-xl bg-white">
+            <div className="flex items-center justify-center w-[250px] mr-[-50px] h-[250px] rounded-xl bg-white">
               <Image
                 src={
                   images[
@@ -118,7 +122,7 @@ const ProjectDetail = () => {
               />
             </div>
             {/* Current Image */}
-            <div className="w-[300px] h-[300px] rounded-xl bg-white z-20">
+            <div className="flex items-center justify-center w-[300px] h-[300px] rounded-xl bg-white z-20">
               <Image
                 src={images[currentIndex]}
                 alt={`Slide ${currentIndex}`}
@@ -128,7 +132,7 @@ const ProjectDetail = () => {
             </div>
 
             {/* Next Image */}
-            <div className="right-[350px] w-[250px] ml-[-50px] h-[250px] rounded-xl bg-white">
+            <div className="flex items-center justify-center right-[350px] w-[250px] ml-[-50px] h-[250px] rounded-xl bg-white">
               <Image
                 src={
                   images[
