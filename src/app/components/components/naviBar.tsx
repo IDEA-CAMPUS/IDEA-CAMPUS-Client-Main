@@ -25,22 +25,22 @@ export const NavBar = () => {
         console.log("response", response);
         response?.check ? setIsLogin(true) : setIsLogin(false);
         setColor(response?.information?.color);
-        setNick(response?.information?.nickName);
+        setNick(response?.information?.nickname);
       } catch (error) {
         console.error("Error fetching login state:", error);
-        // 오류 처리를 여기에 추가할 수 있습니다.
       }
     };
+
     fetchData();
   }, []);
 
   return (
     <div className="w-full h-[70px] bg-white box-border flex items-center justify-center">
-      <div className="flex">
+      <div className="flex justify-around ">
         <div className="flex gap-[64px] items-center">
           <img
             src="/logo.svg"
-            className="w-[108px] h-[40px]"
+            className="w-[108px] h-[40px] cursor-pointer"
             onClick={() => handleRoute("/")}
           ></img>
           <div
@@ -62,9 +62,9 @@ export const NavBar = () => {
             동아리·학회
           </div>
         </div>
-        <div className="flex justify-end gap-[42px] ml-[630px] items-center">
+        <>
           {isLogin ? (
-            <>
+            <div className="flex justify-end gap-[42px] ml-[660px] items-center">
               <div
                 className={`flex justify-center pt-[6px] w-[46px] h-[46px] rounded-[100px] bg-[${color}] z-0 cursor-pointer`}
                 onClick={() => router.push("/myPage")}
@@ -81,9 +81,9 @@ export const NavBar = () => {
               >
                 {nick}
               </div>
-            </>
+            </div>
           ) : (
-            <>
+            <div className="flex justify-end gap-[42px] ml-[600px] items-center">
               <div
                 className="font-bold text-[18px] flex cursor-pointer"
                 onClick={() => handleRoute("/login")}
@@ -96,9 +96,9 @@ export const NavBar = () => {
               >
                 회원가입
               </div>
-            </>
+            </div>
           )}
-        </div>
+        </>
       </div>
     </div>
   );
