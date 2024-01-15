@@ -9,6 +9,10 @@ const PostProject = async (formData: FormData) => {
       body: formData,
     });
 
+    for (const key of formData.keys()) {
+      console.log(key, ":", formData.get(key));
+    }
+
     if (response.ok) {
       const responseData = await response.json();
       console.log("Successfully posted project:", responseData);

@@ -32,20 +32,19 @@ const GetProjectKeyWord = (
   useEffect(() => {
     const fetchProjectData = async () => {
       try {
-        const queryString = `?booleanWeb=${booleanWeb}&booleanApp=${booleanApp}&booleanAi=${booleanAi}`;
+        const queryParams = `?booleanWeb=${booleanWeb}&booleanApp=${booleanApp}&booleanAi=${booleanAi}`;
         const response = await fetch(
-          `https://ideacampus.site:8080/api/project/keyword${queryString}`
+          `https://ideacampus.site:8080/api/project/keyword?booleanWeb=true&booleanApp=true&booleanAi=true`
         );
         const result: ApiResponse = await response.json();
         setProjectData(result);
-        console.log("pro; " + projectData);
       } catch (error) {
         console.error("Error fetching ProjectData:", error);
       }
     };
 
     fetchProjectData();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [booleanWeb, booleanApp, booleanAi]);
 
   return projectData;
 };

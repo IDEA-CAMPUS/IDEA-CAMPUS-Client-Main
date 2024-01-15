@@ -21,22 +21,14 @@ interface ClubPostData {
 //   ],
 // };
 
-const PostClub = async (clubData: ClubPostData) => {
+const PostClub = async (formData: FormData) => {
   try {
     const response = await fetch("https://ideacampus.site:8080/api/club", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("login-token")}`,
       },
-      body: JSON.stringify({
-        clubPostReq: {
-          title: clubData.clubPostReq.title,
-          description: clubData.clubPostReq.description,
-          url1: clubData.clubPostReq.url1,
-          url2: clubData.clubPostReq.url2,
-        },
-        images: clubData.images,
-      }),
+      body: formData,
     });
   } catch (error) {
     console.error("Error fetching ideaData:", error);

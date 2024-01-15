@@ -6,6 +6,7 @@ import React from "react";
 import polygon8 from "public/ideazone/polygon8.svg";
 import profile from "public/profile.svg";
 import { useRouter } from "next/navigation";
+import ColorChangeModal from "../myPage/colorChangeModal";
 
 interface IdeaContentProps {
   id: number;
@@ -74,7 +75,18 @@ const IdeaContent: React.FC<IdeaContentProps> = ({
           <Image src={polygon8} alt="polygon8" width={50} />
         </div>
         <div className="flex items-center justify-center mt-12">
-          <Image src={profile} alt="polygon8" />
+          <svg width={60} height={60}>
+            <circle cx="30" cy="30" r="30" fill={image || "#FFCF4A"} />
+          </svg>
+        </div>
+        <div className="relative">
+          <Image
+            src="/profile_emptybg.svg"
+            alt="프로필"
+            width={5}
+            height={5}
+            layout="fixed"
+          ></Image>
         </div>
         <p className="mt-5 text-lg text-center text-black">{name}</p>
       </div>

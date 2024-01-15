@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import projectGalleryBackground1 from "public/projectgallery/projectGalleryBackground1.svg";
 import projectGalleryBackground2 from "public/projectgallery/projectGalleryBackground2.svg";
@@ -33,30 +33,32 @@ const ProjectGalley = () => {
   // }
   const bannerData = GetBanner();
   const bannerList = bannerData?.information;
-  const projectData = GetProject();
-  const projectList = projectData?.information.content;
-  const projectDataKeword = GetProjectKeyWord(
+  // const projectData = GetProject();
+  // const projectList = projectData?.information.content;
+  let projectDataKeword = GetProjectKeyWord(
     buttonStates.booleanWeb,
     buttonStates.booleanApp,
     buttonStates.booleanAi
   );
-  const ProjectDataKewordList = projectDataKeword?.information.content;
+
   // console.log("pro: " + projectDataKeword);
   const chunkSize = 3;
   // 최신순 또는 조회순으로 정렬된 아이디어 리스트
   const sortedprojectList = useMemo(() => {
     if (currentSort === "new") {
-      return projectList
+      return projectDataKeword?.information.content
         ?.slice()
         .sort(
           (a, b) =>
             new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
         );
     } else if (currentSort === "view") {
-      return projectList?.slice().sort((a, b) => b.hits - a.hits);
+      return projectDataKeword?.information.content
+        ?.slice()
+        .sort((a, b) => b.hits - a.hits);
     }
-    return projectList; // 기본값은 그대로 반환
-  }, [currentSort, projectList]);
+    return projectDataKeword?.information.content; // 기본값은 그대로 반환
+  }, [currentSort, projectDataKeword?.information.content]);
 
   const projectContents = useMemo(
     () =>
@@ -74,7 +76,16 @@ const ProjectGalley = () => {
 
   //키워드 버튼 true여부 확인 함수
   const handleButtonClick = (isClicked: boolean, title: string) => {
-    setButtonStates((prevStates) => ({ ...prevStates, [title]: isClicked }));
+    setButtonStates((prevStates) => {
+      const newButtonStates = { ...prevStates, [title]: isClicked };
+      // 업데이트된 상태를 사용하여 프로젝트 데이터 가져오기
+      projectDataKeword = GetProjectKeyWord(
+        newButtonStates.booleanWeb,
+        newButtonStates.booleanApp,
+        newButtonStates.booleanAi
+      );
+      return newButtonStates;
+    });
   };
 
   return (
