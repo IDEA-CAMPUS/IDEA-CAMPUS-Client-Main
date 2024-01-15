@@ -1,13 +1,13 @@
 "use client";
 
 import "next/link";
-import Header from "../components/layout/Header";
-import GradientBackground from "@/assests/images/gradientBackground.png";
+import Header from "../../components/layout/Header";
+import GradientBackground from "../../../../public/gradientBackground.png";
 import Image from "next/image";
-import StudentGrouplistItem from "./components/StudentGroupListItem";
+import StudentGrouplistItem from "../../components/studentGroups/StudentGroupListItem";
 import { useRouter } from "next/navigation";
-import GetClub from "../api/club/GetClub";
-import { NavBar } from "../components/components/naviBar";
+import GetClub from "../../api/club/GetClub";
+import { NavBar } from "../../components/components/naviBar";
 
 const IdeaManage = () => {
   const clubData = GetClub();

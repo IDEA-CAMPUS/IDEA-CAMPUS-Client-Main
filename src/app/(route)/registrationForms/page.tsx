@@ -2,7 +2,7 @@
 
 import "next/link";
 import Header from "@/app/components/layout/Header";
-import GradientBackground from "@/assests/images/gradientBackground.png";
+import GradientBackground from "public/gradientBackground.png";
 import Image from "next/image";
 import DeleteButton from "public/projectgallery/deleteButton.svg";
 import SubmitButton from "@/app/components/gallery/SubmitButton";

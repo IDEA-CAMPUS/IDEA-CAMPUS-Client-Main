@@ -11,7 +11,7 @@ import Puzzle from "public/home/puzzle.svg";
 import Speaker from "public/home/speaker.svg";
 import IdeaContent from "./components/ideazone/IdeaContent";
 import Content from "./components/gallery/Content";
-import StudentGrouplistItem from "./studentGroups/components/StudentGroupListItem";
+import StudentGrouplistItem from "./components/studentGroups/StudentGroupListItem";
 
 import splitkeyWords from "./utils/seperateKeword";
 import getIdeaHome from "./api/home/GetIdeaHome";

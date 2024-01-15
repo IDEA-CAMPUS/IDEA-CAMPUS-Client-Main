@@ -1,7 +1,7 @@
 import "next/link";
-import Header from "../components/layout/Header";
 import Image from "next/image";
-import GradientBackgroundmyPage from "@/assests/images/graidentBackgroundmyPage.png";
+import GradientBackgroundmyPage from "../../../../public/gradientBackground.png";
+import { NavBar } from "../../components/components/naviBar";
 
 const IdeaManage = () => {
   const data = [
@@ -27,7 +27,7 @@ const IdeaManage = () => {
 
   return (
     <div>
-      <Header />
+      <NavBar />
       <div className="flex flex-col w-[100vw] items-center bg-[#FAFAFA]">
         <div className="flex flex-col items-center mt-12 w-[71vw] z-20">
           <div className="flex flex-row w-full justify-between items-center">
@@ -79,7 +79,7 @@ const IdeaManage = () => {
       <Image
         src={GradientBackgroundmyPage}
         alt="배경색"
-        className="w-full object-cover bg-[#FAFAFA]"
+        className="w-full bottom-0 fixed object-cover bg-[#FAFAFA]"
       ></Image>
     </div>
   );
