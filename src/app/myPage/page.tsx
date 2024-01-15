@@ -1,9 +1,14 @@
+"use client";
+
 import "next/link";
 import Header from "../components/layout/Header";
 import Image from "next/image";
 import GradientBackgroundmyPage from "@/assests/images/graidentBackgroundmyPage.png";
+import { NavBar } from "../components/components/naviBar";
+import { usePathname, useRouter } from "next/navigation";
 
 const IdeaManage = () => {
+  const router = useRouter();
   const data = [
     {
       title: "익명 편지 아이디어",
@@ -27,7 +32,7 @@ const IdeaManage = () => {
 
   return (
     <div>
-      <Header />
+      <NavBar />
       <div className="flex flex-col w-[100vw] items-center bg-[#FAFAFA]">
         <div className="flex flex-col items-center mt-12 w-[71vw] z-20">
           <div className="flex flex-row w-full justify-between items-center">
@@ -45,7 +50,10 @@ const IdeaManage = () => {
                 </p>
               </div>
             </div>
-            <button className="bg-purple-500 hover:bg-purple-600 active:bg-purple-800 text-white px-4 py-1 rounded-2xl shrink-0">
+            <button
+              className="bg-purple-500 hover:bg-purple-600 active:bg-purple-800 text-white px-4 py-1 rounded-2xl shrink-0"
+              onClick={() => router.push("/myPage/profileChange")}
+            >
               프로필 수정
             </button>
           </div>

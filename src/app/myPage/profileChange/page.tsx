@@ -7,6 +7,7 @@ import { useState } from "react";
 import GradientBackgroundmyPage from "@/assests/images/graidentBackgroundmyPage.png";
 // import AlertModal from "@/app/myPage/_components/AlertModal";
 import ColorChangeModal from "../_components/colorChangeModal";
+import { NavBar } from "@/app/components/components/naviBar";
 
 const ProfileChange = () => {
   // Sample data for initial values
@@ -55,7 +56,7 @@ const ProfileChange = () => {
   return (
     <div className="flex flex-col w-full h-full">
       <div className="fixed w-full">
-        <Header />
+        <NavBar />
       </div>
       <div className="flex flex-col w-[100vw] h-screen items-center bg-[#FAFAFA]">
         <div className="flex flex-col items-center justify-center mt-44 mb-10">
