@@ -1,5 +1,4 @@
 import "next/link";
-import Header from "../../components/layout/Header";
 import Image from "next/image";
 import GradientBackgroundmyPage from "../../../../public/gradientBackground.png";
 import { NavBar } from "../../components/components/naviBar";
