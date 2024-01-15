@@ -22,7 +22,7 @@ const IdeaZone = () => {
   const bannerData = GetBanner();
   const bannerList = bannerData?.information;
 
-  const chunkSize = 3;
+  // const chunkSize = 3;
   // 최신순 또는 조회순으로 정렬된 아이디어 리스트
   const sortedIdeaList = useMemo(() => {
     if (currentSort === "new") {
@@ -38,6 +38,7 @@ const IdeaZone = () => {
     return ideaList; // 기본값은 그대로 반환
   }, [currentSort, ideaList]);
 
+  const chunkSize = 3;
   const ideaContents = useMemo(
     () =>
       Array.from(
