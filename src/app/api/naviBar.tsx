@@ -15,7 +15,7 @@ interface ServerResponse {
     }
   ];
   check?: boolean;
-  information?: { nickName?: string; color?: string };
+  information?: { nickname?: string; color?: string };
 }
 
 export async function LoginState() {
