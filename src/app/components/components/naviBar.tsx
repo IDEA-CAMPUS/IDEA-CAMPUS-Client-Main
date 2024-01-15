@@ -18,6 +18,8 @@ export const NavBar = () => {
     }
   };
 
+  const nowPage = window.location.pathname;
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -32,6 +34,8 @@ export const NavBar = () => {
     };
 
     fetchData();
+
+    console.log("window.location.pathname", window.location.pathname);
   }, []);
 
   return (
@@ -44,19 +48,29 @@ export const NavBar = () => {
             onClick={() => handleRoute("/")}
           ></img>
           <div
-            className="text-[#B034F7] font-bold text-[18px] flex cursor-pointer"
+            className={` font-bold text-[18px] flex cursor-pointer ${
+              window.location.pathname === "/IdeaZone" ? "text-[#B034F7]" : ""
+            }`}
             onClick={() => router.push("/IdeaZone")}
           >
             아이디어 존
           </div>
           <div
-            className="font-bold text-[18px] flex cursor-pointer"
+            className={` font-bold text-[18px] flex cursor-pointer ${
+              window.location.pathname === "/ProjectGallery"
+                ? "text-[#B034F7]"
+                : ""
+            }`}
             onClick={() => router.push("/ProjectGallery")}
           >
             프로젝트 갤러리
           </div>
           <div
-            className="font-bold text-[18px] flex cursor-pointer"
+            className={` font-bold text-[18px] flex cursor-pointer ${
+              window.location.pathname === "/studentGroups"
+                ? "text-[#B034F7]"
+                : ""
+            }`}
             onClick={() => router.push("/studentGroups")}
           >
             동아리·학회
