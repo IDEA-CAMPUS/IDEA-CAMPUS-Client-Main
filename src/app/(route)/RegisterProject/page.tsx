@@ -43,7 +43,7 @@ const RegisterProject = () => {
   const [images, setImages] = useState<
     Array<{ name: string; url: string; size: string }>
   >([]);
-  const [formImagesList, setFormImagesList] = useState<File[]>([]);
+  const [formImagesList, setFormImagesList] = useState<File>();
   const [projectData, setProjectData] = useState<ProjectFormData>({
     title: "",
     booleanWeb: true,
@@ -82,7 +82,7 @@ const RegisterProject = () => {
       reader.readAsDataURL(file);
 
       // If you want to handle multiple images, store them in an array
-      setFormImagesList((prevFiles) => [...prevFiles, file]);
+      setFormImagesList(file);
     }
   };
 
@@ -155,9 +155,8 @@ const RegisterProject = () => {
         formData.append("booleanApp", String(projectData.booleanApp));
         formData.append("booleanWeb", String(projectData.booleanWeb));
         formData.append("booleanAi", String(projectData.booleanAi));
-        formImagesList.forEach((file, index) => {
-          formData.append(`images[${index}]`, file);
-        });
+        formData.append("images", formImagesList || "");
+
         // 이미지 파일 추가
         // formImagesList.forEach((image, index) => {
         //   if (image instanceof File && image.size > 0) {
@@ -167,7 +166,35 @@ const RegisterProject = () => {
 
         // formData.append("images", formImagesList!);
 
-        await PostProject(formData);
+        // await PostProject(formData);
+
+        try {
+          const response = await fetch(
+            "https://ideacampus.site:8080/api/project",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "multipart/form-data",
+                Authorization: `Bearer ${localStorage.getItem("login-token")}`,
+              },
+              body: formData,
+            }
+          );
+
+          for (const key of formData.keys()) {
+            console.log(key, ":", formData.get(key));
+          }
+
+          if (response.ok) {
+            const responseData = await response.json();
+            console.log("Successfully posted project:", responseData);
+          } else {
+            console.error("Failed to post project. Status:", response.status);
+          }
+        } catch (error) {
+          console.error("Error posting project:", error);
+        }
+
         router.push("/ProjectGallery");
       } else {
         alert("선택항목을 제외한 모든 항목을 입력해주세요.");

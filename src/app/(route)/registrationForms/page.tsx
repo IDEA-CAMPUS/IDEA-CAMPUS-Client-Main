@@ -33,7 +33,7 @@ const IdeaManage = () => {
     },
     images: [],
   });
-  const [formImages, setFormImages] = useState<string[]>([]);
+  const [selectedFile, setSelectedFile] = useState<File[]>([]);
   const [images, setImages] = useState<
     Array<{ name: string; url: string; size: string }>
   >([]);
@@ -66,30 +66,24 @@ const IdeaManage = () => {
   };
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+    const file = e.target.files;
 
     if (file) {
+      const newFiles: File[] = Array.from(file);
+
+      setSelectedFile((prevFiles) => [...prevFiles, ...newFiles]);
       const reader = new FileReader();
-      const imageLoadPromise = new Promise<string>((resolve) => {
-        reader.onload = () => {
-          const imageSize = `${(file.size / 1024).toFixed(2)} KB`;
-          setImages((prevImages) => [
-            ...prevImages,
-            { name: file.name, url: reader.result as string, size: imageSize },
-          ]);
-          setFormImages((prevFormImages) => [
-            ...prevFormImages,
-            reader.result as string,
-          ]);
-          resolve(reader.result as string);
-        };
-      });
 
-      reader.readAsDataURL(file);
-      return imageLoadPromise;
+      reader.onload = () => {
+        const imageSize = `${(file[0].size / 1024).toFixed(2)} KB`;
+        setImages((prevImages) => [
+          ...prevImages,
+          { name: file[0].name, url: reader.result as string, size: imageSize },
+        ]);
+      };
+
+      reader.readAsDataURL(file[0]);
     }
-
-    return Promise.resolve(""); // Return a resolved promise if no file is selected
   };
 
   const isFormValid = () => {
@@ -107,15 +101,22 @@ const IdeaManage = () => {
       // 필수 필드가 모두 입력되었는지 확인
       if (isFormValid() && images) {
         // Set the clubData's images array to be the same as formImages
-        setClubData((prevClubData) => ({
-          ...prevClubData,
-          images: formImages,
-        }));
+        const formData = new FormData();
+        if (selectedFile) {
+          formData.append("title", clubData.clubPostReq.title);
+          formData.append("description", clubData.clubPostReq.description);
+          formData.append("url1", clubData.clubPostReq.url1);
+          formData.append("url2", clubData.clubPostReq.url2);
+          selectedFile.forEach((file, index) => {
+            formData.append(`images`, file, file.name);
+          });
+        }
 
-        console.log("Upload image:", formImages, clubData);
-
+        for (const key of formData.keys()) {
+          console.log(key, ":", formData.get(key));
+        }
         // Call the PostClub function with updated clubData
-        await PostClub(clubData);
+        await PostClub(formData);
 
         // Additional logic after successful upload, if needed
         router.push("/studentGroups");
@@ -260,7 +261,6 @@ const IdeaManage = () => {
                 </label>
                 <input
                   type="file"
-                  accept="image/*"
                   onChange={handleImageChange}
                   ref={fileInputRef}
                   style={{ display: "none" }}
