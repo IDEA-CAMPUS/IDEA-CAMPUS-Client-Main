@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import GetClub from "../../api/club/GetClub";
 import { NavBar } from "../../components/components/naviBar";
 
-const IdeaManage = () => {
+const StudentGroupts = () => {
   const clubData = GetClub();
   const clubList = clubData?.information.content;
   const router = useRouter();
@@ -17,7 +17,7 @@ const IdeaManage = () => {
   const handleonClick = () => {
     if (localStorage.getItem("login-token") !== null) {
       // 클릭 시 다음 페이지로 이동dd
-      router.push("/studentGroups/registrationForms");
+      router.push("/registrationForms");
     } else {
       alert("로그인 후 이용해주세요");
       router.push("/login");
@@ -72,4 +72,4 @@ const IdeaManage = () => {
   );
 };
 
-export default IdeaManage;
+export default StudentGroupts;

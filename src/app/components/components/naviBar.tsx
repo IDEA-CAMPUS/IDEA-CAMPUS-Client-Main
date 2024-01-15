@@ -67,17 +67,17 @@ export const NavBar = () => {
             <>
               <div
                 className={`flex justify-center pt-[6px] w-[46px] h-[46px] rounded-[100px] bg-[${color}] z-0 cursor-pointer`}
-                onClick={() => router.push("/myPage")}
+                onClick={() => router.push("/MyPage")}
               >
                 <img
                   src="/user.svg"
                   className="w-[40px] h-[40px] z-10 cursor-pointer"
-                  onClick={() => router.push("/myPage")}
+                  onClick={() => router.push("/MyPage")}
                 />
               </div>
               <div
                 className="font-bold text-[18px] flex cursor-pointer"
-                onClick={() => router.push("/myPage")}
+                onClick={() => router.push("/MyPage")}
               >
                 {nick}
               </div>

@@ -30,7 +30,7 @@ const StudentGrouplistItem: React.FC<contentProps> = ({
   const router = useRouter();
 
   const handleClick = () => {
-    router.push(`/studentGroups/registrationCompleted/${id}`);
+    router.push(`/registrationCompleted/${id}`);
   };
 
   return (

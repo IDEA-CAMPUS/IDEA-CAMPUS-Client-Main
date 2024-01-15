@@ -13,7 +13,7 @@ import React from "react";
 const RegistrationCompleted = () => {
   const pathname = usePathname();
   //id가져오는 문자열 함수
-  const id = pathname.split("/")[3];
+  const id = pathname.split("/")[2];
 
   const clubData = getClubDetail(id)?.information;
 
