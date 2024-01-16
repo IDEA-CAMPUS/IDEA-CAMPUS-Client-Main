@@ -146,11 +146,7 @@ const IdeaManage = () => {
             {/* 텍스트 */}
             <div>
               <h5 className="text-5xl text-center">홍보글 등록하기</h5>
-              <h1 className="text-lg mt-3 text-center">
-                당신의 아이디어를 마음껏 뽐내주세요
-                <br />
-                당신의 아이디어를 마음껏 뽑내주세요. 조금 더 긴 글씨
-              </h1>
+              <h1 className="text-lg mt-3 text-center"></h1>
             </div>
           </div>
         </div>
