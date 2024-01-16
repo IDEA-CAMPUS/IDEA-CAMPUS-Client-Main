@@ -19,7 +19,7 @@ interface ApiResponse {
   message: null | string;
 }
 
-const GetClubDetail = (id: string) => {
+const GetClubDetail = (id: number) => {
   const [clubData, setClubData] = useState<ApiResponse | null>(null);
 
   useEffect(() => {
