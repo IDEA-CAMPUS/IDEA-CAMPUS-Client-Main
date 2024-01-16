@@ -7,15 +7,17 @@ import Image from "next/image";
 import DeleteButton from "public/projectgallery/deleteButton.svg";
 import SubmitButton from "@/app/components/gallery/SubmitButton";
 import FixButton from "@/app/components/gallery/FixButton";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import PostClub from "@/app/api/club/PostClub";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import GetClubDetail from "@/app/api/club/GetClubDetail";
+import PutClub from "@/app/api/club/PutClub";
 
 interface ClubPostRequest {
   title: string;
   description: string;
-  url1: string;
-  url2: string;
+  url1: string | "";
+  url2: string | "";
 }
 
 interface ClubPostData {
@@ -37,7 +39,11 @@ const IdeaManage = () => {
   const [images, setImages] = useState<
     Array<{ name: string; url: string; size: string }>
   >([]);
+  const pathname = usePathname();
+  const id = Number(pathname.split("/")[2]);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const response = GetClubDetail(id);
+  const clubFixData = response?.information;
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -51,6 +57,19 @@ const IdeaManage = () => {
       },
     }));
   };
+  useEffect(() => {
+    if (clubFixData) {
+      setClubData({
+        clubPostReq: {
+          title: clubFixData.title,
+          description: clubFixData.description,
+          url1: clubFixData.url1,
+          url2: clubFixData.url2,
+        },
+        images: [clubFixData.thumbnail, ...clubFixData.otherImages],
+      });
+    }
+  }, [clubFixData]);
   const handleDeleteImage = (index: number) => {
     setImages((prevImages) => {
       const newImages = [...prevImages];
@@ -116,7 +135,7 @@ const IdeaManage = () => {
           console.log(key, ":", formData.get(key));
         }
         // Call the PostClub function with updated clubData
-        await PostClub(formData);
+        await PutClub(formData, id);
 
         // Additional logic after successful upload, if needed
         router.push("/studentGroups");
