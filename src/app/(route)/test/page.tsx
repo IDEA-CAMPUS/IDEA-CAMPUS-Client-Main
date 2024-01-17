@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/navigation";
+import { NavBar } from "@/app/components/components/naviBar";
 
 const YourPage: NextPage = () => {
   const [file, setFile] = useState<File | null>(null);

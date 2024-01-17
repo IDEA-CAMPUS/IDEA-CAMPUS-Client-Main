@@ -27,7 +27,7 @@ const StudentGroupts = () => {
   // console.log(clubList[0].thumbnail);
 
   return (
-    <div>
+    <div className="text-black">
       <NavBar />
       <div className="flex flex-col w-[100vw] items-center bg-[#FAFAFA]">
         <Image

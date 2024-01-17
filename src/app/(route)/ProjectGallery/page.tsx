@@ -83,130 +83,136 @@ const ProjectGalley = () => {
   };
 
   return (
-    <main className="bg-white min-h-screen w-full text-black flex flex-col items-center mx-auto">
+    <main className="text-black">
       <NavBar />
-      <div className="items-start">
-        <Image
-          className="flex-shrink-0"
-          src={projectGalleryBackground1}
-          alt="projectgallerybackground1"
-          layout="fixed"
-          width={1400}
-          height={50}
-        />
-        <Image
-          src={projectGalleryBackground2}
-          alt="projectgallerybackground2"
-          className="my-0"
-          layout="fixed"
-          width={1400}
-          height={50}
-        />
-      </div>
-      <div className="mt-[-1200px]">
-        <div className="relative w-[1204px] h-[400px] bg-gray-300">
-          {bannerList && (
-            <Image src={bannerList[0].saveFileUrl} alt="banner" layout="fill" />
-          )}
-          s
-        </div>
-        <div className="mt-24 text-center text-white">
-          <div className="flex items-center justify-center">
-            <p className="ml-8 text-3xl font-bold">프로젝트 갤러리</p>
-            <Image
-              src={projectGalleryIcon}
-              alt={"projectGalleryIcon"}
-              className="mb-5"
-            />
-          </div>
-          <p className="mt-8 text-xl">
-            제작이 완료된 프로젝트가 당신을 기다리고 있어요.
-            <br />
-            아이디어 캠퍼스의 졸업을 앞둔 여러 프로젝트를 둘러보지 않을 수
-            없겠죠?
-            <br />더 넓은 곳으로 나아갈 멋진 프로젝트의 앞날을 응원해주세요!
-          </p>
-        </div>
-      </div>
-      <div className="absolute mt-[370px] flex items-center justify-between w-full">
-        <div className="flex-shrink-0 ml-80">
-          <Image src={snowGray} alt={"snowGray"} />
-        </div>
-        <div className="flex-shrink-0 mr-80 mt-80">
-          <Image src={snow} alt={"snow"} />
-        </div>
-      </div>
-
-      <div className="mx-24 mt-12">
-        <h1 className="font-bold text-3xl">완성 프로젝트</h1>
-        <div className="mt-8 space-x-4">
-          <KeywordButton
-            title={"앱"}
-            onButtonClick={(isClicked) =>
-              handleButtonClick(isClicked, "booleanApp")
-            }
+      <div className="bg-white min-h-screen w-full text-black flex flex-col items-center mx-auto">
+        <div className="items-start">
+          <Image
+            className="flex-shrink-0"
+            src={projectGalleryBackground1}
+            alt="projectgallerybackground1"
+            layout="fixed"
+            width={1400}
+            height={50}
           />
-          <KeywordButton
-            title={"웹"}
-            onButtonClick={(isClicked) =>
-              handleButtonClick(isClicked, "booleanWeb")
-            }
-          />
-          <KeywordButton
-            title={"AI"}
-            onButtonClick={(isClicked) =>
-              handleButtonClick(isClicked, "booleanAi")
-            }
+          <Image
+            src={projectGalleryBackground2}
+            alt="projectgallerybackground2"
+            className="my-0"
+            layout="fixed"
+            width={1400}
+            height={50}
           />
         </div>
-        <div className="flex items-center justify-between mt-4">
-          <div className="flex">
-            <TextButton
-              title={"최신순"}
-              isHover={currentSort === "new"}
-              onClick={() => handleTextButtonClick("new")}
-            />
-            <p className="text-[#B034F7] text-lg font-bold mt-1">|</p>
-            <TextButton
-              title={"조회순"}
-              isHover={currentSort === "view"}
-              onClick={() => handleTextButtonClick("view")}
-            />
+        <div className="mt-[-1200px]">
+          <div className="relative w-[1204px] h-[400px] bg-gray-300">
+            {bannerList && (
+              <Image
+                src={bannerList[0].saveFileUrl}
+                alt="banner"
+                layout="fill"
+              />
+            )}
+            s
           </div>
-          {/* 핸들러 구현 */}
-          <div>
-            <SubmitButton title="등록 하기" url="/RegisterProject" />
-          </div>
-        </div>
-        <div className="mt-10 ml-10 mr-10">
-          {projectContents.map((chunk, chunkIndex) => (
-            <div key={chunkIndex} className="flex space-x-5">
-              {chunk
-                ?.filter((content) => {
-                  // Check if the project matches the selected criteria
-                  return (
-                    (buttonStates.booleanWeb && content.booleanWeb) ||
-                    (buttonStates.booleanApp && content.booleanApp) ||
-                    (buttonStates.booleanAi && content.booleanAi)
-                  );
-                })
-                .map((content, contentIndex) => (
-                  <Content
-                    key={contentIndex}
-                    id={content.id}
-                    booleanWeb={content.booleanWeb}
-                    booleanApp={content.booleanApp}
-                    booleanAi={content.booleanAi}
-                    team={content.team}
-                    simpleDescription={content.simpleDescription}
-                    thumbnail={content.thumbnail}
-                    hits={content.hits}
-                    createdAt={content.createdAt}
-                    title={content.title}
-                  />
-                ))}
+          <div className="mt-24 text-center text-white">
+            <div className="flex items-center justify-center">
+              <p className="ml-8 text-3xl font-bold">프로젝트 갤러리</p>
+              <Image
+                src={projectGalleryIcon}
+                alt={"projectGalleryIcon"}
+                className="mb-5"
+              />
             </div>
-          ))}
+            <p className="mt-8 text-xl">
+              제작이 완료된 프로젝트가 당신을 기다리고 있어요.
+              <br />
+              아이디어 캠퍼스의 졸업을 앞둔 여러 프로젝트를 둘러보지 않을 수
+              없겠죠?
+              <br />더 넓은 곳으로 나아갈 멋진 프로젝트의 앞날을 응원해주세요!
+            </p>
+          </div>
+        </div>
+        <div className="absolute mt-[370px] flex items-center justify-between w-full">
+          <div className="flex-shrink-0 ml-80">
+            <Image src={snowGray} alt={"snowGray"} />
+          </div>
+          <div className="flex-shrink-0 mr-80 mt-80">
+            <Image src={snow} alt={"snow"} />
+          </div>
+        </div>
+
+        <div className="mx-24 mt-12">
+          <h1 className="font-bold text-3xl">완성 프로젝트</h1>
+          <div className="mt-8 space-x-4">
+            <KeywordButton
+              title={"앱"}
+              onButtonClick={(isClicked) =>
+                handleButtonClick(isClicked, "booleanApp")
+              }
+            />
+            <KeywordButton
+              title={"웹"}
+              onButtonClick={(isClicked) =>
+                handleButtonClick(isClicked, "booleanWeb")
+              }
+            />
+            <KeywordButton
+              title={"AI"}
+              onButtonClick={(isClicked) =>
+                handleButtonClick(isClicked, "booleanAi")
+              }
+            />
+          </div>
+          <div className="flex items-center justify-between mt-4">
+            <div className="flex">
+              <TextButton
+                title={"최신순"}
+                isHover={currentSort === "new"}
+                onClick={() => handleTextButtonClick("new")}
+              />
+              <p className="text-[#B034F7] text-lg font-bold mt-1">|</p>
+              <TextButton
+                title={"조회순"}
+                isHover={currentSort === "view"}
+                onClick={() => handleTextButtonClick("view")}
+              />
+            </div>
+            {/* 핸들러 구현 */}
+            <div>
+              <SubmitButton title="등록 하기" url="/RegisterProject" />
+            </div>
+          </div>
+          <div className="mt-10 ml-10 mr-10">
+            {projectContents.map((chunk, chunkIndex) => (
+              <div key={chunkIndex} className="flex space-x-5">
+                {chunk
+                  ?.filter((content) => {
+                    // Check if the project matches the selected criteria
+                    return (
+                      (buttonStates.booleanWeb && content.booleanWeb) ||
+                      (buttonStates.booleanApp && content.booleanApp) ||
+                      (buttonStates.booleanAi && content.booleanAi)
+                    );
+                  })
+                  .map((content, contentIndex) => (
+                    <Content
+                      key={contentIndex}
+                      id={content.id}
+                      booleanWeb={content.booleanWeb}
+                      booleanApp={content.booleanApp}
+                      booleanAi={content.booleanAi}
+                      team={content.team}
+                      simpleDescription={content.simpleDescription}
+                      thumbnail={content.thumbnail}
+                      hits={content.hits}
+                      createdAt={content.createdAt}
+                      title={content.title}
+                    />
+                  ))}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </main>
