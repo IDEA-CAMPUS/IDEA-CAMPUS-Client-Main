@@ -1,7 +1,15 @@
+"use client";
+
 import "next/link";
 import Image from "next/image";
 import GradientBackgroundmyPage from "../../../../public/gradientBackground.png";
 import { NavBar } from "../../components/components/naviBar";
+import GetHeaderInfo from "@/app/api/mypage/HeaderInfo";
+import {
+  MemberInfoEdit,
+  informationItem,
+} from "@/app/api/mypage/MemberInfoEdit";
+import { useEffect, useState } from "react";
 
 const IdeaManage = () => {
   const data = [
@@ -25,6 +33,21 @@ const IdeaManage = () => {
     { title: "유용한 리소스", category: "기술 블로그", date: "2022-08-25" },
   ];
 
+  // const data_memberInfo = MemberInfoEdit();
+
+  // console.log(data_memberInfo?.information);
+
+  const [memberInfo, setMemberInfo] = useState<informationItem[]>([]);
+
+  useEffect(() => {
+    //@ts-ignore
+    MemberInfoEdit().then((res) => setMemberInfo(res));
+  }, []);
+
+  useEffect(() => {
+    console.log(memberInfo);
+  }, [memberInfo]);
+
   return (
     <div>
       <NavBar />
@@ -39,7 +62,7 @@ const IdeaManage = () => {
                 alt="Logo"
               ></Image>
               <div className="ml-4">
-                <p className="text-2xl text-black">김명지</p>
+                <p className="text-2xl text-black"></p>
                 <p className="text-base font-medium text-gray-600">
                   소속 동아리 : UMC
                 </p>
@@ -64,11 +87,11 @@ const IdeaManage = () => {
                 </tr>
               </thead>
               <tbody>
-                {data.map((item) => (
+                {memberInfo.map((item) => (
                   <tr key={item.title}>
                     <td className="py-2 px-4 text-black">{item.title}</td>
-                    <td className="py-2 px-4  text-black">{item.category}</td>
-                    <td className="py-2 px-4  text-black">{item.date}</td>
+                    <td className="py-2 px-4  text-black">{item.type}</td>
+                    <td className="py-2 px-4  text-black">{item.createdAt}</td>
                   </tr>
                 ))}
               </tbody>
