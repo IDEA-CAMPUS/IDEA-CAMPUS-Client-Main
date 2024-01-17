@@ -2,8 +2,10 @@ import "next/link";
 import Image from "next/image";
 import GradientBackgroundmyPage from "../../../../public/gradientBackground.png";
 import { NavBar } from "../../components/components/naviBar";
+import { usePathname, useRouter } from "next/navigation";
 
 const IdeaManage = () => {
+  const router = useRouter();
   const data = [
     {
       title: "익명 편지 아이디어",
@@ -45,7 +47,10 @@ const IdeaManage = () => {
                 </p>
               </div>
             </div>
-            <button className="bg-purple-500 hover:bg-purple-600 active:bg-purple-800 text-white px-4 py-1 rounded-2xl shrink-0">
+            <button
+              className="bg-purple-500 hover:bg-purple-600 active:bg-purple-800 text-white px-4 py-1 rounded-2xl shrink-0"
+              onClick={() => router.push("/myPage/profileChange")}
+            >
               프로필 수정
             </button>
           </div>
