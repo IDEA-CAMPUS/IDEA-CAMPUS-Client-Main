@@ -71,9 +71,7 @@ const page: React.FC = () => {
           <div>
             <div className="mt-12 flex flex-col items-center justify-center">
               <Image src={Logo} alt="Logo" height={100} />
-              <p className="mt-4 text-xl">
-                아이디어 캠퍼스 카피 한 줄 어쩌구 길이는 이 정도
-              </p>
+              <p className="mt-4 text-xl">대학 연합 IT동아리 홍보 플랫폼</p>
             </div>
 
             <div className="mt-24 flex  items-center justify-center bg-opacity-20 mb-20 w-[1200px] h-auto rounded-2xl shadow-lg bg-white">
@@ -87,8 +85,9 @@ const page: React.FC = () => {
                     <p className="ml-2 mt-4 text-lg">
                       우리 아이디어 캠퍼스는 <br />
                       대학생의 아이디어가 성장하는 순간을 함께합니다 . <br />
-                      대학생의 다양한 프로젝트를 구경해보세요 어쩌구.. <br />
-                      당신의 아이디어를 마음껏 펼쳐주세요!{" "}
+                      각 팀의 작품을 구경하고, 나만의 아이디어를 펼쳐보세요.{" "}
+                      <br />
+                      동아리에 지원하여 협업을 경험해 보세요!{" "}
                     </p>
                   </div>
                   <div className="ml-[-64px] mt-[-70px]">
@@ -103,13 +102,11 @@ const page: React.FC = () => {
                       </p>
                       <p className="ml-2 font-bold text-3xl">아이디어 존</p>
                       <p className="ml-2 mt-4 text-lg">
-                        아이디어를 등록 및 전시하는 공간입니다.
                         <br />
-                        멋진 아이디어를 등록하고 함께 프로젝트를 진행할 팀원을
-                        모아봅시다.
+                        나만의 아이디어를 등록 및 홍보하는 공간입니다.
                         <br />
-                        당신과 딱 맞는 아이디어를 발견했다면 적극적으로 협업을
-                        제안해봅시다!
+                        구현 되기를 바라는 마음으로 멋진 아이디어를
+                        제안해보세요!
                       </p>
                     </div>
                     <div className="mt-[-100px]">
@@ -144,10 +141,7 @@ const page: React.FC = () => {
                       <p className="ml-2 font-bold text-3xl">프로젝트 갤러리</p>
                       <p className="ml-2 mt-4 text-lg">
                         완성된 프로젝트를 등록 및 전시하는 공간입니다. <br />
-                        프로젝트를 다른 사람과 공유해 봅시다.
-                        <br />
-                        어쩌면 또 다른 성장의 기회가 찾아올지도 모르죠!
-                        <br />
+                        당신의 멋진 작품을 갤러리에 전시해 보세요!
                       </p>
                     </div>
                     <div className="mt-[-180px]">
