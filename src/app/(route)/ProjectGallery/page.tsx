@@ -33,32 +33,30 @@ const ProjectGalley = () => {
   // }
   const bannerData = GetBanner();
   const bannerList = bannerData?.information;
-  // const projectData = GetProject();
-  // const projectList = projectData?.information.content;
-  let projectDataKeword = GetProjectKeyWord(
-    buttonStates.booleanWeb,
-    buttonStates.booleanApp,
-    buttonStates.booleanAi
-  );
+  const projectData = GetProject();
+  const projectList = projectData?.information.content;
+  // let projectDataKeword = GetProjectKeyWord(
+  //   buttonStates.booleanWeb,
+  //   buttonStates.booleanApp,
+  //   buttonStates.booleanAi
+  // );
 
   // console.log("pro: " + projectDataKeword);
   const chunkSize = 3;
   // 최신순 또는 조회순으로 정렬된 아이디어 리스트
   const sortedprojectList = useMemo(() => {
     if (currentSort === "new") {
-      return projectDataKeword?.information.content
+      return projectList
         ?.slice()
         .sort(
           (a, b) =>
             new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
         );
     } else if (currentSort === "view") {
-      return projectDataKeword?.information.content
-        ?.slice()
-        .sort((a, b) => b.hits - a.hits);
+      return projectList?.slice().sort((a, b) => b.hits - a.hits);
     }
-    return projectDataKeword?.information.content; // 기본값은 그대로 반환
-  }, [currentSort, projectDataKeword?.information.content]);
+    return projectList; // 기본값은 그대로 반환
+  }, [currentSort, projectList]);
 
   const projectContents = useMemo(
     () =>
@@ -79,11 +77,7 @@ const ProjectGalley = () => {
     setButtonStates((prevStates) => {
       const newButtonStates = { ...prevStates, [title]: isClicked };
       // 업데이트된 상태를 사용하여 프로젝트 데이터 가져오기
-      projectDataKeword = GetProjectKeyWord(
-        newButtonStates.booleanWeb,
-        newButtonStates.booleanApp,
-        newButtonStates.booleanAi
-      );
+
       return newButtonStates;
     });
   };
@@ -111,7 +105,6 @@ const ProjectGalley = () => {
       </div>
       <div className="mt-[-1200px]">
         <div className="relative w-[1204px] h-[400px] bg-gray-300">
-          {" "}
           {bannerList && (
             <Image src={bannerList[0].saveFileUrl} alt="banner" layout="fill" />
           )}
@@ -149,15 +142,21 @@ const ProjectGalley = () => {
         <div className="mt-8 space-x-4">
           <KeywordButton
             title={"앱"}
-            onButtonClick={(isClicked) => handleButtonClick(isClicked, "앱")}
+            onButtonClick={(isClicked) =>
+              handleButtonClick(isClicked, "booleanApp")
+            }
           />
           <KeywordButton
             title={"웹"}
-            onButtonClick={(isClicked) => handleButtonClick(isClicked, "웹")}
+            onButtonClick={(isClicked) =>
+              handleButtonClick(isClicked, "booleanWeb")
+            }
           />
           <KeywordButton
             title={"AI"}
-            onButtonClick={(isClicked) => handleButtonClick(isClicked, "AI")}
+            onButtonClick={(isClicked) =>
+              handleButtonClick(isClicked, "booleanAi")
+            }
           />
         </div>
         <div className="flex items-center justify-between mt-4">
@@ -182,21 +181,30 @@ const ProjectGalley = () => {
         <div className="mt-10 ml-10 mr-10">
           {projectContents.map((chunk, chunkIndex) => (
             <div key={chunkIndex} className="flex space-x-5">
-              {chunk?.map((content, contentIndex) => (
-                <Content
-                  key={contentIndex}
-                  id={content.id}
-                  booleanWeb={content.booleanWeb}
-                  booleanApp={content.booleanApp}
-                  booleanAi={content.booleanAi}
-                  team={content.team}
-                  simpleDescription={content.simpleDescription}
-                  thumbnail={content.thumbnail}
-                  hits={content.hits}
-                  createdAt={content.createdAt}
-                  title={content.title}
-                />
-              ))}
+              {chunk
+                ?.filter((content) => {
+                  // Check if the project matches the selected criteria
+                  return (
+                    (buttonStates.booleanWeb && content.booleanWeb) ||
+                    (buttonStates.booleanApp && content.booleanApp) ||
+                    (buttonStates.booleanAi && content.booleanAi)
+                  );
+                })
+                .map((content, contentIndex) => (
+                  <Content
+                    key={contentIndex}
+                    id={content.id}
+                    booleanWeb={content.booleanWeb}
+                    booleanApp={content.booleanApp}
+                    booleanAi={content.booleanAi}
+                    team={content.team}
+                    simpleDescription={content.simpleDescription}
+                    thumbnail={content.thumbnail}
+                    hits={content.hits}
+                    createdAt={content.createdAt}
+                    title={content.title}
+                  />
+                ))}
             </div>
           ))}
         </div>

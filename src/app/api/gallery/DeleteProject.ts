@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
 
-interface ApiResponse {
-  message: string;
-}
-
-const DeleteProject = async (id: string) => {
+const DeleteProject = async (id: Number) => {
   try {
     const response = await fetch(
       `https://ideacampus.site:8080/api/project/${id}`,
@@ -17,7 +13,6 @@ const DeleteProject = async (id: string) => {
         },
       }
     );
-    const result: ApiResponse = await response.json();
   } catch (error) {
     console.error("Error fetching ideaData:", error);
   }
