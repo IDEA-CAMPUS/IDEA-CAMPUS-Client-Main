@@ -30,7 +30,7 @@ interface ProjectFormData {
 const RegisterProject = () => {
   const formData = new FormData();
   const pathname = usePathname();
-  const id = pathname.split("/")[2];
+  const id = Number(pathname.split("/")[2]);
   const [images, setImages] = useState<
     Array<{ name: string; url: string; size: string }>
   >([]);
