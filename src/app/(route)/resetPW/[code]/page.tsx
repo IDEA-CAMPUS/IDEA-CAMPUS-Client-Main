@@ -1,13 +1,34 @@
 "use client";
 
+import resetPw from "@/app/api/resetPw";
 import { NextButton } from "@/app/components/components/buttons";
 import { Input } from "@/app/components/components/inputbox";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
 
 const resetPW = () => {
   const [newPassword, setNewPassword] = useState<string>("");
   const [reNewPassword, setReNewPassword] = useState<string>("");
-  const handleResetPW = () => {};
+
+  // const router = useRouter();
+  const pathname = usePathname();
+  const code = pathname.split("/")[2];
+
+  const handleResetPW = async () => {
+    const response = await resetPw(code, newPassword, reNewPassword);
+    const router = useRouter();
+    router.push("/");
+    if (response?.check) {
+      alert(" 비밀번호가 변경되었습니다.");
+    } else {
+      if (response?.information.status === 405) {
+        alert("비밀번호는 영문과 숫자 조합으로 8 ~ 16자리까지 가능합니다.");
+      } else if (response?.information.status === 400) {
+        alert(response.information.message.split(":s")[1]);
+      }
+    }
+  };
   return (
     <div className="h-screen  text-black  bg-white flex justify-center items-center relative z-[10]">
       <div className="w-full h-[230px] bg-[url('/wave.svg')] fixed bottom-0 z-[-1]"></div>

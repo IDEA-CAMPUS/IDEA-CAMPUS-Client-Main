@@ -207,11 +207,13 @@ export default function Login() {
             number,
           });
 
-          if (response) {
+          if (response?.check) {
+            alert("이메일이 전송 되었습니다.");
             if (router) {
               // router.push("/");
             }
           } else {
+            alert("error");
             showToast("존재하는 계정이 없습니다.", 2000);
           }
 
