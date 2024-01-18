@@ -78,7 +78,7 @@ export const NavBar = () => {
             >
               <img
                 src="/user.svg"
-                className="w-[40px] h-[40px] z-10 cursor-pointer"
+                className="w-[40px] h-[40px] ml-1 z-10 cursor-pointer"
                 onClick={() => router.push("/MyPage")}
               />
             </div>

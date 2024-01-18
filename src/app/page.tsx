@@ -61,13 +61,12 @@ const page: React.FC = () => {
           />
           <div className="relative mt-10 mx-40" style={{ zIndex: 1 }}>
             <div className="relative mt-10 w-[1204px] h-[400px] bg-gray-300">
-              {bannerList && (
-                <Image
-                  src={bannerList[0].saveFileUrl}
-                  alt="banner"
-                  layout="fill"
-                />
-              )}
+              <Image
+                // src={bannerList[0].saveFileUrl}
+                src="/banner.svg"
+                alt="banner"
+                layout="fill"
+              />
             </div>
             <div>
               <div className="mt-12 flex flex-col items-center justify-center">
