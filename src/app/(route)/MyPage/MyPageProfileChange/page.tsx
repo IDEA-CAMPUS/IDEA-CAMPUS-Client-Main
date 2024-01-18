@@ -1,37 +1,46 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import { useState } from "react";
 import GradientBackgroundmyPage from "public/myPage/graidentBackgroundmyPage.png";
 // import AlertModal from "@/app/myPage/_components/AlertModal";
 import { NavBar } from "@/app/components/components/naviBar";
-import ColorChangeModal from "@/app/components/myPage/colorChangeModal";
+import { ColorChangeModal } from "@/app/components/myPage/colorChangeModal";
+import { MyPageUserInfo } from "@/app/api/mypage/getUserInfo";
+import { UserInfoType } from "@/app/api/mypage/getUserInfo";
+import profileImage from "@/../public/profileImage.png";
+import { editUserInfo } from "@/app/api/mypage/editUserInfo";
 
 const ProfileChange = () => {
-  // Sample data for initial values
-  const initialInfo = {
-    이름: "홍길동",
-    닉네임: "길동",
-    아이디: "hong123",
-    휴대폰: "010-1234-5678",
-    소속동아리: "UMC",
+  const [userInfo, setUserInfo] = useState<UserInfoType>({
+    color: "",
+    name: "",
+    nickname: "",
+    email: "",
+    phoneNumber: "",
+    organization: "",
+  });
+
+  const handleChangeInput = (e: { target: { value: any; name: any } }) => {
+    const { name, value } = e.target;
+    setUserInfo({
+      ...userInfo,
+      [name]: value,
+    });
   };
 
-  // 편집 가능한 정보를 관리하는 상태
-  const [editableInfo, setEditableInfo] = useState({ ...initialInfo });
+  const handleColorChange = (color: string) => {
+    setUserInfo({
+      ...userInfo,
+      color: color,
+    });
+  };
+
+  console.log(userInfo.color);
 
   // 폼이 현재 편집 모드인지 여부를 관리하는 상태
   const [editMode, setEditMode] = useState<boolean>(false);
-
-  console.log(editMode);
-
-  // 폼 제출을 처리하는 함수
-  const handleFormSubmit = () => {
-    // 사용자 정보를 업데이트하는 로직 수행 (예: API 호출)
-    // 성공적인 업데이트 이후, 폼을 초기화하고 편집 모드를 비활성화할 수 있습니다.
-    setEditableInfo({ ...initialInfo });
-  };
 
   const handlefixUser = () => {
     setEditMode(!editMode);
@@ -40,99 +49,120 @@ const ProfileChange = () => {
 
   const [isShow, setIsShow] = useState<boolean>(false);
 
-  const handler = () => {
-    setIsShow(!isShow);
+  const handleModalToggle = () => {
+    setIsShow((prev) => !prev);
   };
 
+  useEffect(() => {
+    MyPageUserInfo({ setter: setUserInfo });
+  }, []);
+
   const handleSaveUser = () => {
-    // 여기에 사용자 정보를 업데이트하는 로직 추가
-    console.log("User information saved!");
+    // 여기에 사용자 정보를 업데이트하는 로직 추가    API
+    // const formData = new FormData();
+    // formData.append("name", userInfo.name);
+    // formData.append("color", userInfo.color);
+    // formData.append("nickname", userInfo.nickname);
+    // formData.append("organization", userInfo.organization);
+    // formData.append("phoneNumber", userInfo.phoneNumber);
+
+    const bodyData = {
+      name: userInfo.name,
+      color: userInfo.color,
+      nickname: userInfo.nickname,
+      organization: userInfo.organization,
+      phoneNumber: userInfo.phoneNumber,
+      email: userInfo.email,
+    };
+
+    editUserInfo(bodyData);
     // 성공적인 업데이트 이후, 폼을 초기화하고 편집 모드를 비활성화할 수 있습니다.
-    setEditableInfo({ ...initialInfo });
     setEditMode(false);
   };
 
   return (
-    <div className="flex flex-col w-full h-full">
+    <div className="flex flex-col w-full">
       <div className="fixed w-full">
         <NavBar />
       </div>
-      <div className="flex flex-col w-[100vw] h-screen items-center bg-[#FAFAFA]">
-        <div className="flex flex-col items-center justify-center mt-44 mb-10">
-          <Image
-            src="/Profile.svg"
-            alt="프로필 이미지"
-            width={80}
-            height={80}
-          ></Image>
+      <div className="flex flex-col w-[100vw] items-center bg-[#FAFAFA]">
+        <div className="flex flex-col items-center justify-center mt-44 mb-10 z-30">
+          <div
+            style={{
+              backgroundColor: `${userInfo.color}`,
+            }}
+            className={`w-36 h-36 rounded-[100%] relative`}
+          >
+            <Image src={profileImage} alt="프로필이미지" className="mt-3" />
+          </div>
           <button
-            onClick={handler}
+            onClick={handleModalToggle}
             className="bg-[#F9F9f9] hover:bg-purple-600 active:bg-purple-700 border-2 border-[#B034F7] text-[#262626] px-4 py-1 rounded-2xl shrink-0 m-6"
           >
             배경색 변경
           </button>
           {isShow && (
             <>
-              <div className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-30"></div>
+              <div className="fixed top-0 left-0 w-full bg-black opacity-50 z-30"></div>
               <div className="w-[400px] h-[600px] bg-white mt-[-200px] text-black z-40 shadow-xl rounded-xl">
-                <ColorChangeModal />
-              </div>
-              <div className="flex flex-row justify-center gap-4 mt-[-70px] z-50">
-                <button
-                  onClick={handler}
-                  className="bg-white text-black hover:bg-gsssray-200 font-semibold px-4 py-2 rounded-md"
-                >
-                  취소
-                </button>
-                <button
-                  onClick={handler}
-                  className="bg-white text-purple-700 hover:bg-purple-200 font-semibold px-4 py-2 rounded-md"
-                >
-                  저장
-                </button>
+                <ColorChangeModal
+                  userInfoData={userInfo}
+                  onChange={handleColorChange}
+                  onToggle={handleModalToggle}
+                />
               </div>
             </>
           )}
-          <div className="flex flex-col w-[30vw] text-black m-4">
-            {/* Display information in a table */}
-            <table className="w-full text-left">
-              <tbody>
-                {Object.entries(editableInfo).map(([key, value]) => (
-                  <tr key={key}>
-                    <td
-                      className={
-                        key === "닉네임"
-                          ? "border-b w-32 border-purple-500 text-left font-bold text-purple-500 px-2 py-2"
-                          : "text-left font-bold text-purple-500 py-2 px-2"
-                      }
-                    >
-                      {key}
-                    </td>
-                    <td
-                      className={
-                        key === "닉네임"
-                          ? "text-left border-b border-purple-500 py-2 px-2"
-                          : "text-left py-2 px-2 "
-                      }
-                    >
-                      {editMode ? (
-                        <input
-                          value={value}
-                          onChange={(e) =>
-                            setEditableInfo({
-                              ...editableInfo,
-                              [key]: e.target.value,
-                            })
-                          }
-                        />
-                      ) : (
-                        value
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="flex flex-col w-[32vw] text-black">
+            <div className="flex w-full justify-between py-5">
+              <p className="text-purple-600">이름</p>
+              <input
+                name="name"
+                value={userInfo.name}
+                className="bg-transparent w-80 outline-none"
+                onChange={handleChangeInput}
+                readOnly={!editMode}
+              />
+            </div>
+            <div className="flex w-full justify-between py-5 border-b-2 border-purple-600">
+              <p className="text-purple-600">닉네임</p>
+              <input
+                name="nickname"
+                onChange={handleChangeInput}
+                value={userInfo.nickname}
+                className="bg-transparent w-80 outline-none"
+                readOnly={!editMode}
+              />
+            </div>
+            <div className="flex w-full justify-between py-5">
+              <p className="text-purple-600">아이디(이메일)</p>
+              <input
+                name="email"
+                onChange={handleChangeInput}
+                value={userInfo.email}
+                className="bg-transparent w-80 outline-none"
+                readOnly
+              />
+            </div>
+            <div className="flex w-full justify-between py-5">
+              <p className="text-purple-600">휴대폰</p>
+              <input
+                name="phoneNumber"
+                onChange={handleChangeInput}
+                value={userInfo.phoneNumber}
+                className="bg-transparent w-80 outline-none"
+                readOnly={!editMode}
+              />
+            </div>
+            <div className="flex w-full justify-between py-5">
+              <p className="text-purple-600">소속동아리</p>
+              <input
+                onChange={handleChangeInput}
+                value={userInfo.organization}
+                className="bg-transparent w-80 outline-none"
+                readOnly={!editMode}
+              />
+            </div>
           </div>
           <div className="flex flex-col items-center justify-between">
             {/* Display the "정보수정하기" button */}
@@ -146,7 +176,7 @@ const ProfileChange = () => {
             ) : (
               <div className="flex flex-col items-center justify-center">
                 <button
-                  onClick={() => handlefixUser()}
+                  onClick={handlefixUser}
                   className="bg-purple-500 hover:bg-purple-600 active:bg-purple-800 w-32 text-white px-4 py-2 rounded-xl shrink-0 m-7"
                 >
                   정보수정하기
@@ -165,7 +195,7 @@ const ProfileChange = () => {
             src={GradientBackgroundmyPage}
             alt="배경색"
             className="w-full bg-[#FAFAFA]"
-          ></Image>
+          />
         </div>
       </div>
     </div>

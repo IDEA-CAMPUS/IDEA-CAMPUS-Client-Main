@@ -1,19 +1,14 @@
-
 interface UserFormData {
-    name : string;
-    nickname : string;
-    email : string;
-    phoneNumber : string;
-    organization : string;
-    color : string;
-
+  name: string;
+  nickname: string;
+  email: string;
+  phoneNumber: string;
+  organization: string;
+  color: string;
 }
 
-
-const MyPageUserFormData = async (
-    userData: UserFormData | undefined
-)=> {
-   try {
+const MyPageUserFormData = async (userData: UserFormData | undefined) => {
+  try {
     const response = await fetch(
       `https://ideacampus.site:8080/api/my-page/user-info`,
       {
@@ -24,18 +19,17 @@ const MyPageUserFormData = async (
         },
         body: JSON.stringify({
           name: userData?.name,
-          nickname : userData?.nickname,
-          email : userData?.email,
-          phoneNumber : userData?.phoneNumber,
-          organization : userData?.organization,
-          color : userData?.color
+          nickname: userData?.nickname,
+          email: userData?.email,
+          phoneNumber: userData?.phoneNumber,
+          organization: userData?.organization,
+          color: userData?.color,
         }),
       }
     );
-   } catch (error) {
+  } catch (error) {
     console.error("Error fetching userFormData :", error);
-   }
-}
+  }
+};
 
-export default MyPageUserFormData
-
+export default MyPageUserFormData;

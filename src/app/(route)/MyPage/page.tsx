@@ -4,11 +4,8 @@ import "next/link";
 import Image from "next/image";
 import GradientBackgroundmyPage from "../../../../public/myPage/graidentBackgroundmyPage.png";
 import { NavBar } from "../../components/components/naviBar";
-import GetHeaderInfo from "@/app/api/mypage/HeaderInfo";
-import {
-  MemberInfoEdit,
-  informationItem,
-} from "@/app/api/mypage/MemberInfoEdit";
+import GetHeaderInfo from "@/app/api/mypage/getHeaderInfo";
+import { getUserPosts, informationItem } from "@/app/api/mypage/getUserPosts";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -35,15 +32,11 @@ const IdeaManage = () => {
     { title: "유용한 리소스", category: "기술 블로그", date: "2022-08-25" },
   ];
 
-  // const data_memberInfo = MemberInfoEdit();
-
-  // console.log(data_memberInfo?.information);
-
   const [memberInfo, setMemberInfo] = useState<informationItem[]>([]);
 
   useEffect(() => {
     //@ts-ignore
-    MemberInfoEdit().then((res) => setMemberInfo(res));
+    getUserPosts().then((res) => setMemberInfo(res));
   }, []);
 
   useEffect(() => {
@@ -72,7 +65,7 @@ const IdeaManage = () => {
             </div>
             <button
               className="bg-purple-500 hover:bg-purple-600 active:bg-purple-800 text-white px-4 py-1 rounded-2xl shrink-0"
-              onClick={() => router.push("/myPage/profileChange")}
+              onClick={() => router.push("MyPage/MyPageProfileChange")}
             >
               프로필 수정
             </button>
