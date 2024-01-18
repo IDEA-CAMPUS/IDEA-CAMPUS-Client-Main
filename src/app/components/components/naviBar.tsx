@@ -17,7 +17,7 @@ export const NavBar = () => {
       router.push(link);
     }
   };
-  const nowPage = window.location.pathname;
+  const nowPage = typeof window !== "undefined" ? window.location.pathname : "";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,7 +46,7 @@ export const NavBar = () => {
         ></img>
         <div
           className={` font-bold text-[18px] flex cursor-pointer ${
-            window.location.pathname === "/IdeaZone" ? "text-[#B034F7]" : ""
+            nowPage === "/IdeaZone" ? "text-[#B034F7]" : ""
           }`}
           onClick={() => router.push("/IdeaZone")}
         >
@@ -54,9 +54,7 @@ export const NavBar = () => {
         </div>
         <div
           className={` font-bold text-[18px] flex cursor-pointer ${
-            window.location.pathname === "/ProjectGallery"
-              ? "text-[#B034F7]"
-              : ""
+            nowPage === "/ProjectGallery" ? "text-[#B034F7]" : ""
           }`}
           onClick={() => router.push("/ProjectGallery")}
         >
@@ -64,9 +62,7 @@ export const NavBar = () => {
         </div>
         <div
           className={` font-bold text-[18px] flex cursor-pointer ${
-            window.location.pathname === "/studentGroups"
-              ? "text-[#B034F7]"
-              : ""
+            nowPage === "/studentGroups" ? "text-[#B034F7]" : ""
           }`}
           onClick={() => router.push("/studentGroups")}
         >
