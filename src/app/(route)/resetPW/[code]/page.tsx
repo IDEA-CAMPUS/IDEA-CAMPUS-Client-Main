@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 
-const resetPW = () => {
+const ResetPW = () => {
   const [newPassword, setNewPassword] = useState<string>("");
   const [reNewPassword, setReNewPassword] = useState<string>("");
 
@@ -70,4 +70,4 @@ const resetPW = () => {
   );
 };
 
-export default resetPW;
+export default ResetPW;
