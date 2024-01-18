@@ -34,7 +34,7 @@ const Content: React.FC<contentProps> = ({
   };
   return (
     <main
-      className="zw-[330px] h-[456px] mb-10 border-2 border-gray-100 rounded-2xl bg-white p-5 shadow-lg"
+      className="w-[330px] h-[456px] mb-10 border-2 border-gray-100 rounded-2xl bg-white p-5 shadow-lg"
       onClick={handleClick}
       style={{ cursor: "pointer" }}
     >
@@ -51,13 +51,13 @@ const Content: React.FC<contentProps> = ({
           <Image
             src={thumbnail}
             alt=""
-            width={300}
+            width={280}
             height={300}
             layout="fixed"
           />
         </div>
       </div>
-      <div className="flex space-x-2 mt-2">
+      <div className="flex space-x-2 mt-5">
         {booleanWeb && (
           <p className="w-9 h-8 rounded-full bg-[#D085FA] border-2 border-purple-500 flex items-center justify-center">
             웹
@@ -80,7 +80,7 @@ const Content: React.FC<contentProps> = ({
         )}
       </div>
       <p className="p-1 mt-2 font-bold text-2xl">{title}</p>
-      <p className="ml-5">
+      <p className="ml-1">
         {simpleDescription.length > 50
           ? `${simpleDescription.slice(0, 50)}...`
           : simpleDescription}
