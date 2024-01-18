@@ -105,15 +105,13 @@ const ProjectGalley = () => {
           />
         </div>
         <div className="mt-[-1200px]">
-          <div className="relative w-[1204px] h-[400px] bg-gray-300">
-            {bannerList && (
-              <Image
-                src={bannerList[0].saveFileUrl}
-                alt="banner"
-                layout="fill"
-              />
-            )}
-            s
+          <div className="relative mt-10 w-[1204px] h-[400px] bg-gray-300">
+            <Image
+              // src={bannerList[0].saveFileUrl}
+              src="/banner.svg"
+              alt="banner"
+              layout="fill"
+            />
           </div>
           <div className="mt-24 text-center text-white">
             <div className="flex items-center justify-center">

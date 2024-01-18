@@ -29,7 +29,7 @@ const StudentGroupts = () => {
   return (
     <div className="text-black">
       <NavBar />
-      <div className="flex flex-col w-[100vw] items-center bg-[#FAFAFA]">
+      <div className="flex flex-col min-h-screen w-[100vw] items-center bg-[#FAFAFA]">
         <Image
           src={GradientBackground}
           alt="gradientBackground"

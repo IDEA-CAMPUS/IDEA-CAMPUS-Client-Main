@@ -69,13 +69,12 @@ const IdeaZone = () => {
         </div>
         <div className="mt-[-900px] ">
           <div className="relative w-[1204px] h-[400px] bg-gray-300">
-            {bannerList && (
-              <Image
-                src={bannerList[0].saveFileUrl}
-                alt="banner"
-                layout="fill"
-              />
-            )}
+            <Image
+              // src={bannerList[0].saveFileUrl}
+              src="/banner.svg"
+              alt="banner"
+              layout="fill"
+            />
           </div>
           <div className="mt-24 text-center text-black">
             <div className="flex items-center justify-center">
