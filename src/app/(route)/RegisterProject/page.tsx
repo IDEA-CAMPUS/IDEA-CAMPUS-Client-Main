@@ -42,7 +42,7 @@ const RegisterProject = () => {
   const [images, setImages] = useState<
     Array<{ name: string; url: string; size: string }>
   >([]);
-  const [selectedFile, setSelectedFile] = useState<File>();
+  const [selectedFile, setSelectedFile] = useState<File[]>([]);
   const [projectData, setProjectData] = useState<ProjectFormData>({
     title: "",
     booleanWeb: true,
@@ -70,7 +70,7 @@ const RegisterProject = () => {
       const newFiles: File[] = Array.from(file);
 
       if (e.target.files && e.target.files.length > 0) {
-        setSelectedFile(e.target.files[0]);
+        setSelectedFile((prevFiles) => [...prevFiles, ...newFiles]);
       }
       const reader = new FileReader();
 
@@ -141,28 +141,6 @@ const RegisterProject = () => {
   const handleUpload = async () => {
     try {
       if (isFormValid() && images) {
-        // 프로젝트 데이터 추가
-        // const blob1 = new Blob([JSON.stringify(projectData)], {
-        //   type: "application/json",
-        // });
-        // if (selectedFile) {
-        //   formData.append("title", projectData.title);
-        //   formData.append("simpleDescription", projectData.simpleDescription);
-        //   formData.append(
-        //     "detailedDescription",
-        //     projectData.detailedDescription
-        //   );
-        //   formData.append("teamInformation", projectData.teamInformation);
-        //   formData.append("githubUrl", projectData.githubUrl);
-        //   formData.append("webUrl", projectData.webUrl);
-        //   formData.append("googlePlayUrl", projectData.googlePlayUrl);
-        //   formData.append("booleanApp", String(projectData.booleanApp));
-        //   formData.append("booleanWeb", String(projectData.booleanWeb));
-        //   formData.append("booleanAi", String(projectData.booleanAi));
-        //   selectedFile.forEach((file, index) => {
-        //     formData.append(`images`, file, file.name);
-        //   });
-        // }
         const formdata = new FormData();
         formdata.append("title", projectData.title);
         formdata.append("simpleDescription", projectData.simpleDescription);
@@ -176,7 +154,9 @@ const RegisterProject = () => {
         formdata.append("booleanAi", String(projectData.booleanAi));
 
         if (selectedFile) {
-          formdata.append("images", selectedFile, selectedFile.name);
+          selectedFile.forEach((file, index) => {
+            formdata.append(`images`, file, file.name);
+          });
         }
 
         await PostProject(formdata);

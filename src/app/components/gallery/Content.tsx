@@ -34,7 +34,7 @@ const Content: React.FC<contentProps> = ({
   };
   return (
     <main
-      className="w-[330px] h-[456px] mb-10 border-2 border-gray-100 rounded-2xl bg-white p-5 shadow-lg"
+      className="zw-[330px] h-[456px] mb-10 border-2 border-gray-100 rounded-2xl bg-white p-5 shadow-lg"
       onClick={handleClick}
       style={{ cursor: "pointer" }}
     >

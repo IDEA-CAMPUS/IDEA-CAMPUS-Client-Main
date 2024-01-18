@@ -53,23 +53,16 @@ const FixIdea = () => {
     url2: "",
   });
 
-  const [submitIdeaData, setSubmitIdeaData] = useState<SubmitIdeaFormData>({
-    title: "",
-    simpleDescription: "",
-    keyWord: "",
-    detailedDescription: "",
-    url1: "",
-    url2: "",
-  });
+  const [submitIdeaData, setSubmitIdeaData] = useState<SubmitIdeaFormData>();
 
   useEffect(() => {
     if (ideaFixData) {
       setIdeaData({
         title: ideaFixData.title,
         simpleDescription: ideaFixData.simpleDescription,
-        keyWord1: ideaFixData.keyWord[0],
-        keyWord2: ideaFixData.keyWord[1],
-        keyWord3: ideaFixData.keyWord[2],
+        keyWord1: ideaFixData.keyWord[0] || "",
+        keyWord2: ideaFixData.keyWord[1] || "",
+        keyWord3: ideaFixData.keyWord[2] || "",
         detailedDescription: ideaFixData.detailedDescription,
         url1: ideaFixData.url1,
         url2: ideaFixData.url2,
@@ -84,6 +77,16 @@ const FixIdea = () => {
   ) => {
     const { name, value } = e.target;
     setIdeaData((prevData) => ({ ...prevData, [name]: value }));
+
+    setSubmitIdeaData({
+      title: ideaData.title,
+      simpleDescription: ideaData.simpleDescription,
+      keyWord:
+        ideaData.keyWord1 + "," + ideaData.keyWord2 + "," + ideaData.keyWord3,
+      detailedDescription: ideaData.detailedDescription,
+      url1: ideaData.url1,
+      url2: ideaData.url2,
+    });
   };
 
   const isFormValid = () => {
@@ -103,20 +106,7 @@ const FixIdea = () => {
       // 필수 필드가 모두 입력되었는지 확인
       if (isFormValid()) {
         // 여기에 파일 업로드 로직 추가
-        setSubmitIdeaData({
-          title: ideaData.title,
-          simpleDescription: ideaData.simpleDescription,
-          keyWord:
-            ideaData.keyWord1 +
-            "," +
-            ideaData.keyWord2 +
-            "," +
-            ideaData.keyWord3,
-          detailedDescription: ideaData.simpleDescription,
-          url1: ideaData.url1,
-          url2: ideaData.url2,
-        });
-        console.log("test" + ideaData.keyWord3);
+
         await fixIdea(submitIdeaData, id);
         router.push("/IdeaZone");
       } else {

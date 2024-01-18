@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, ChangeEvent, useRef } from "react";
+import React, { useState, ChangeEvent, useRef, useEffect } from "react";
 import Image from "next/image";
 
 import registerIdeaZoneBackground from "public/ideazone/registerIdeaZoneBackground.svg";
@@ -60,8 +60,10 @@ const RegisterIdea = () => {
     const { name, value } = e.target;
 
     setkeyWordData((prevData) => ({ ...prevData, [name]: value }));
+  };
 
-    // 각각의 키워드 값이 비어있지 않은 경우에만 추가
+  // 아이디어 데이터를 업데이트하는 부분에서 각 키워드를 합치는 로직을 수정
+  useEffect(() => {
     const keywords = [
       keyWordData.keyWord1,
       keyWordData.keyWord2,
@@ -74,7 +76,7 @@ const RegisterIdea = () => {
       ...prevData,
       keyWord: keywords,
     }));
-  };
+  }, [keyWordData]);
 
   const isFormValid = () => {
     // 필수 필드인 title, simpleDescription, keyWord, detailedDescription이 모두 입력되었는지 검사
@@ -98,7 +100,7 @@ const RegisterIdea = () => {
         await PostIdea(ideaData);
         // Additional logic after successful upload, if needed
         alert("성공적으로 등록되었습니다.");
-        // router.push("/IdeaZone");
+        router.push("/IdeaZone");
         console.log(ideaData.keyWord);
       } else {
         // 필수 필드 중 하나라도 비어있다면 사용자에게 알림 등을 표시할 수 있습니다.

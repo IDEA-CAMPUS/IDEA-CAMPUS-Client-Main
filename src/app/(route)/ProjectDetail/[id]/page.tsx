@@ -78,8 +78,7 @@ const ProjectDetail = () => {
       console.error("Error fetching ideaData:", error);
     }
   };
-  console.log(projectData?.githubUrl);
-
+  console.log(images);
   return (
     <div>
       <NavBar />
