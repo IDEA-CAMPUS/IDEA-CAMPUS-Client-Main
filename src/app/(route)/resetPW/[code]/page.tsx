@@ -4,19 +4,18 @@ import resetPw from "@/app/api/resetPw";
 import { NextButton } from "@/app/components/components/buttons";
 import { Input } from "@/app/components/components/inputbox";
 import { usePathname, useRouter } from "next/navigation";
-import React, { useState } from "react";
+import { useState } from "react";
 
 const ResetPW = () => {
   const [newPassword, setNewPassword] = useState<string>("");
   const [reNewPassword, setReNewPassword] = useState<string>("");
 
-  // const router = useRouter();
+  const router = useRouter();
   const pathname = usePathname();
   const code = pathname.split("/")[2];
 
   const handleResetPW = async () => {
     const response = await resetPw(code, newPassword, reNewPassword);
-    const router = useRouter();
     router.push("/");
     if (response?.check) {
       alert(" 비밀번호가 변경되었습니다.");
