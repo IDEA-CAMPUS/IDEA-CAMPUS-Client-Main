@@ -38,7 +38,7 @@ export const NavBar = () => {
 
   return (
     <div className="h-[70px] bg-white box-border flex items-center justify-between">
-      <div className="flex gap-[64px] items-center">
+      <div className="flex ml-12 gap-[64px] items-center">
         <img
           src="/logo.svg"
           className="w-[108px] h-[40px] cursor-pointer"
@@ -73,11 +73,11 @@ export const NavBar = () => {
           동아리·학회
         </div>
       </div>
-      <div className="flex  gap-[42px] items-center">
+      <div className="flex  gap-[42px] mr-12 items-center">
         {isLogin ? (
           <div className="flex gap-[42px] items-center">
             <div
-              className={`flex justify-center pt-[6px] w-[46px] h-[46px] rounded-[100px] bg-[${color}] z-0 cursor-pointer`}
+              className={`flex pt-[6px] w-[46px] h-[46px] rounded-[100px] bg-[${color}] z-0 cursor-pointer`}
               onClick={() => router.push("/MyPage")}
             >
               <img
@@ -94,7 +94,7 @@ export const NavBar = () => {
             </div>
           </div>
         ) : (
-          <div className="flex justify-end gap-[42px] ml-[600px] items-center">
+          <div className="flex gap-[42px] items-center">
             <div
               className="font-bold text-[18px] flex cursor-pointer"
               onClick={() => handleRoute("/login")}
@@ -113,3 +113,4 @@ export const NavBar = () => {
     </div>
   );
 };
+// ml-[600px]

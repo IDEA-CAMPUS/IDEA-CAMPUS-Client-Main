@@ -78,6 +78,7 @@ const ProjectDetail = () => {
       console.error("Error fetching ideaData:", error);
     }
   };
+  console.log(projectData?.githubUrl);
 
   return (
     <main className="flex flex-col bg-white items-center justify-center relative">
