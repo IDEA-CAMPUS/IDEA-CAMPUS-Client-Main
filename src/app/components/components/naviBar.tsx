@@ -3,6 +3,8 @@
 import { LoginState } from "@/app/api/naviBar";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import profileImage from "@/../public/profileImage.png";
+import Image from "next/image";
 
 export const NavBar = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -72,7 +74,7 @@ export const NavBar = () => {
       <div className="flex  gap-[42px] mr-12 items-center">
         {isLogin ? (
           <div className="flex gap-[42px] items-center">
-            <div
+            {/* <div
               className={`flex pt-[6px] w-[46px] h-[46px] rounded-[100px] bg-[${color}] z-0 cursor-pointer`}
               onClick={() => router.push("/MyPage")}
             >
@@ -81,6 +83,16 @@ export const NavBar = () => {
                 className="w-[40px] h-[40px] ml-1 z-10 cursor-pointer"
                 onClick={() => router.push("/MyPage")}
               />
+              
+            </div> */}
+            <div
+              style={{
+                backgroundColor: `${color}`,
+              }}
+              className={`w-[40px] h-[40px] rounded-[100%] relative`}
+              onClick={() => router.push("/MyPage")}
+            >
+              <Image src={profileImage} alt="프로필이미지" className="mt-2" />
             </div>
             <div
               className="font-bold text-[18px] flex cursor-pointer"
