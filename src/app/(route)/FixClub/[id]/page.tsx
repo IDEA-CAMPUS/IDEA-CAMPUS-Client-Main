@@ -12,6 +12,7 @@ import PostClub from "@/app/api/club/PostClub";
 import { usePathname, useRouter } from "next/navigation";
 import GetClubDetail from "@/app/api/club/GetClubDetail";
 import PutClub from "@/app/api/club/PutClub";
+import { NavBar } from "@/app/components/components/naviBar";
 
 interface ClubPostRequest {
   title: string;
@@ -152,7 +153,7 @@ const IdeaManage = () => {
 
   return (
     <div>
-      <Header />
+      <NavBar />
       <div className="flex flex-col w-[100vw] items-center bg-[#FAFAFA]">
         {/* 등록폼 박스 만들기 */}
         <Image

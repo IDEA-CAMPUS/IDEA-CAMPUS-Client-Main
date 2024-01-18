@@ -61,7 +61,7 @@ export default function Login() {
           <ToastComponent />
           <div className="flex flex-col items-center box-border justify-evenly z-10">
             <Image
-              src="/Logo.svg"
+              src="/logo.svg"
               alt="logo"
               width={404}
               height={145}
