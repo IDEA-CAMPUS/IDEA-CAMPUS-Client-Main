@@ -6,7 +6,6 @@ import React from "react";
 import polygon8 from "public/ideazone/polygon8.svg";
 import profile from "public/profile.svg";
 import { useRouter } from "next/navigation";
-import ColorChangeModal from "../myPage/colorChangeModal";
 
 interface IdeaContentProps {
   id: number;
