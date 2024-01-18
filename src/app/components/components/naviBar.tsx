@@ -117,7 +117,7 @@ export const NavBar = () => {
               onClick={() => router.push("/MyPage")}
             >
               {nick}
-
+            </div>
 
             {showNavBar && (
               <div className="absolute top-[50px] right-12 bg-white p-2 border rounded z-10">
