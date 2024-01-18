@@ -23,7 +23,7 @@ interface ApiResponse {
   message: null | string;
 }
 
-const GetProjectDetail = (id: string) => {
+const GetProjectDetail = (id: Number) => {
   const [projectData, setProjectData] = useState<ApiResponse | null>(null);
 
   useEffect(() => {

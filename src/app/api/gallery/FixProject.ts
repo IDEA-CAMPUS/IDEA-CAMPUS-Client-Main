@@ -22,7 +22,7 @@ interface Images {
 
 const FixProject = async (
   projectData: ProjectFormData | undefined,
-  id: string,
+  id: number,
   images: Array<{ name: string; url: string; size: string }>
 ) => {
   try {

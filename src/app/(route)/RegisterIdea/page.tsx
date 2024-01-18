@@ -98,7 +98,8 @@ const RegisterIdea = () => {
         await PostIdea(ideaData);
         // Additional logic after successful upload, if needed
         alert("성공적으로 등록되었습니다.");
-        router.push("/IdeaZone");
+        // router.push("/IdeaZone");
+        console.log(ideaData.keyWord);
       } else {
         // 필수 필드 중 하나라도 비어있다면 사용자에게 알림 등을 표시할 수 있습니다.
         alert("선택항목을 제외한 모든 항목을 입력해주세요.");

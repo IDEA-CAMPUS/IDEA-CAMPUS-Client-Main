@@ -7,9 +7,9 @@ interface Information {
   description: string;
   createdAt: string;
   url1: string;
-  url2: string | null;
+  url2: string;
   nickname: string;
-  thumbnail: string | null;
+  thumbnail: string;
   otherImages: string[];
 }
 
@@ -19,7 +19,7 @@ interface ApiResponse {
   message: null | string;
 }
 
-const GetClubDetail = (id: string) => {
+const GetClubDetail = (id: number) => {
   const [clubData, setClubData] = useState<ApiResponse | null>(null);
 
   useEffect(() => {
