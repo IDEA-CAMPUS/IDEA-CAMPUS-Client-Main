@@ -37,7 +37,7 @@ export const NavBar = () => {
   }, []);
 
   return (
-    <div className="h-[70px] bg-white box-border flex items-center justify-between">
+    <div className="h-[70px] text-black bg-white box-border flex items-center justify-between">
       <div className="flex ml-12 gap-[64px] items-center">
         <img
           src="/logo.svg"

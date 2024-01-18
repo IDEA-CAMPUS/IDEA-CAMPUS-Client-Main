@@ -81,182 +81,186 @@ const ProjectDetail = () => {
   console.log(projectData?.githubUrl);
 
   return (
-    <main className="flex flex-col bg-white items-center justify-center relative">
+    <div>
       <NavBar />
-      <div className="mt-[100px] h-full z-10">
-        <Image
-          src={projectDetailBackgroundTop}
-          alt={"projectDetailBackground"}
-          width={1005}
-        />
-      </div>
-
-      <div className="mt-[-800px] p-10 w-[1000px] mx-auto items-center justify-center flex flex-col text-center z-10">
-        <p className="text-white text-4xl font-bold">{projectData?.title}</p>
-        <div className="flex">
-          {projectData?.booleanWeb && (
-            <p className="mt-5 w-20 h-8 p-1 ml-1 text-sm border-2 border-[#B034F7] rounded-3xl bg-white text-black">
-              웹
-            </p>
-          )}
-          {projectData?.booleanApp && (
-            <p className="mt-5 w-20 h-8 p-1 ml-1 text-sm border-2 border-[#B034F7] rounded-3xl bg-white text-black">
-              앱
-            </p>
-          )}
-          {projectData?.booleanAi && (
-            <p className="mt-5 w-20 h-8 p-1 ml-1 text-sm border-2 border-[#B034F7] rounded-3xl bg-white text-black">
-              AI
-            </p>
-          )}
+      <main className="flex flex-col bg-white items-center justify-center relative">
+        <div className="mt-[100px] h-full z-10">
+          <Image
+            src={projectDetailBackgroundTop}
+            alt={"projectDetailBackground"}
+            width={1005}
+          />
         </div>
 
-        <div className="flex flex-col items-center justify-center mt-10">
-          <div className="flex items-center">
-            {/* Previous Image */}
-            <div className="flex items-center justify-center w-[250px] mr-[-50px] h-[250px] rounded-xl bg-white">
-              <Image
-                src={
-                  images[
+        <div className="mt-[-800px] p-10 w-[1000px] mx-auto items-center justify-center flex flex-col text-center z-10">
+          <p className="text-white text-4xl font-bold">{projectData?.title}</p>
+          <div className="flex">
+            {projectData?.booleanWeb && (
+              <p className="mt-5 w-20 h-8 p-1 ml-1 text-sm border-2 border-[#B034F7] rounded-3xl bg-white text-black">
+                웹
+              </p>
+            )}
+            {projectData?.booleanApp && (
+              <p className="mt-5 w-20 h-8 p-1 ml-1 text-sm border-2 border-[#B034F7] rounded-3xl bg-white text-black">
+                앱
+              </p>
+            )}
+            {projectData?.booleanAi && (
+              <p className="mt-5 w-20 h-8 p-1 ml-1 text-sm border-2 border-[#B034F7] rounded-3xl bg-white text-black">
+                AI
+              </p>
+            )}
+          </div>
+
+          <div className="flex flex-col items-center justify-center mt-10">
+            <div className="flex items-center">
+              {/* Previous Image */}
+              <div className="flex items-center justify-center w-[250px] mr-[-50px] h-[250px] rounded-xl bg-white">
+                <Image
+                  src={
+                    images[
+                      currentIndex === 0 ? images.length - 1 : currentIndex - 1
+                    ]
+                  }
+                  alt={`Slide ${
                     currentIndex === 0 ? images.length - 1 : currentIndex - 1
-                  ]
-                }
-                alt={`Slide ${
-                  currentIndex === 0 ? images.length - 1 : currentIndex - 1
-                }`}
-                width={250}
-                height={250}
-              />
-            </div>
-            {/* Current Image */}
-            <div className="flex items-center justify-center w-[300px] h-[300px] rounded-xl bg-white z-20">
-              <Image
-                src={images[currentIndex]}
-                alt={`Slide ${currentIndex}`}
-                width={300}
-                height={300}
-              />
-            </div>
+                  }`}
+                  width={250}
+                  height={250}
+                />
+              </div>
+              {/* Current Image */}
+              <div className="flex items-center justify-center w-[300px] h-[300px] rounded-xl bg-white z-20">
+                <Image
+                  src={images[currentIndex]}
+                  alt={`Slide ${currentIndex}`}
+                  width={300}
+                  height={300}
+                />
+              </div>
 
-            {/* Next Image */}
-            <div className="flex items-center justify-center right-[350px] w-[250px] ml-[-50px] h-[250px] rounded-xl bg-white">
-              <Image
-                src={
-                  images[
+              {/* Next Image */}
+              <div className="flex items-center justify-center right-[350px] w-[250px] ml-[-50px] h-[250px] rounded-xl bg-white">
+                <Image
+                  src={
+                    images[
+                      currentIndex === images.length - 1 ? 0 : currentIndex + 1
+                    ]
+                  }
+                  alt={`Slide ${
                     currentIndex === images.length - 1 ? 0 : currentIndex + 1
-                  ]
-                }
-                alt={`Slide ${
-                  currentIndex === images.length - 1 ? 0 : currentIndex + 1
-                }`}
-                width={250}
-                height={250}
-              />
+                  }`}
+                  width={250}
+                  height={250}
+                />
+              </div>
+            </div>
+            <div className="flex items-center mt-[-170px] justify-between space-x-48 z-20">
+              <button className="flex items-center p-4" onClick={goToPrevious}>
+                <Image src={previousButton} alt="nextButton" />
+              </button>
+              <button className="flex items-center p-4" onClick={goToNext}>
+                <Image src={nextButton} alt="nextButton" />
+              </button>
             </div>
           </div>
-          <div className="flex items-center mt-[-170px] justify-between space-x-48 z-20">
-            <button className="flex items-center p-4" onClick={goToPrevious}>
-              <Image src={previousButton} alt="nextButton" />
-            </button>
-            <button className="flex items-center p-4" onClick={goToNext}>
-              <Image src={nextButton} alt="nextButton" />
-            </button>
-          </div>
+          <p className="text-xl mt-40 text-white">
+            {projectData?.simpleDescription}
+          </p>
         </div>
-        <p className="text-xl mt-40 text-white">
-          {projectData?.simpleDescription}
-        </p>
-      </div>
-      <div className="mt-[-100px] mb-20 w-[1000px] h-auto border-2 border-gray-100 rounded-2xl shadow-lg bg-white">
-        <div className="flex mx-32 mt-[350px]">
-          <div className="flex items-center space-x-2 border-l-2 border-solid h-auto border-purple-500 mb-10">
-            <div className="ml-[-10px] mt-[-10px]">
-              <div className="flex flex-col">
-                <div className="flex">
-                  <Image src={indexIcon} alt="indexIcon" />
-                  <p className="text-black font-bold text-2xl ml-4">
-                    상세 설명
+        <div className="mt-[-100px] mb-20 w-[1000px] h-auto border-2 border-gray-100 rounded-2xl shadow-lg bg-white">
+          <div className="flex mx-32 mt-[350px]">
+            <div className="flex items-center space-x-2 border-l-2 border-solid h-auto border-purple-500 mb-10">
+              <div className="ml-[-10px] mt-[-10px]">
+                <div className="flex flex-col">
+                  <div className="flex">
+                    <Image src={indexIcon} alt="indexIcon" />
+                    <p className="text-black font-bold text-2xl ml-4">
+                      상세 설명
+                    </p>
+                  </div>
+                  <p className="mt-5 ml-12 text-black text-lg">
+                    {projectData?.detailedDescription}
                   </p>
                 </div>
-                <p className="mt-5 ml-12 text-black text-lg">
-                  {projectData?.detailedDescription}
-                </p>
-              </div>
 
-              <div className="flex flex-col mt-20">
-                <div className="flex">
-                  <Image src={indexIcon} alt="indexIcon" />
-                  <p className="text-black font-bold text-2xl ml-4">팀 정보</p>
-                </div>
-                <p className="mt-5 ml-12 text-black text-lg">
-                  {projectData?.teamInformation}
-                </p>
-              </div>
-              <div className="flex flex-col mt-20">
-                <div className="flex">
-                  <Image src={indexIcon} alt="indexIcon" />
-                  <p className="text-black font-bold text-2xl ml-4">
-                    GitHub 링크
+                <div className="flex flex-col mt-20">
+                  <div className="flex">
+                    <Image src={indexIcon} alt="indexIcon" />
+                    <p className="text-black font-bold text-2xl ml-4">
+                      팀 정보
+                    </p>
+                  </div>
+                  <p className="mt-5 ml-12 text-black text-lg">
+                    {projectData?.teamInformation}
                   </p>
                 </div>
-                <p className="mt-5 ml-12 text-black text-lg">
-                  클릭 시 해당 주소로 이동합니다.
-                </p>
-                <div className="mt-6 ml-24 mb-10 flex space-x-4">
-                  {projectData?.githubUrl && (
-                    <Image
-                      src={gitHubButton}
-                      alt="GitHubButton"
-                      onClick={() => handleButtonClick(projectData.githubUrl)}
-                      style={{ cursor: "pointer" }}
-                    />
-                  )}
-                  {projectData?.webUrl && (
-                    <Image
-                      src={webButton}
-                      alt="WebButton"
-                      onClick={() => handleButtonClick(projectData.webUrl)}
-                      style={{ cursor: "pointer" }}
-                    />
-                  )}
-                  {projectData?.googlePlayUrl && (
-                    <Image
-                      src={googleButton}
-                      alt="GoogleButton"
-                      onClick={() =>
-                        handleButtonClick(projectData.googlePlayUrl)
-                      }
-                      style={{ cursor: "pointer" }}
-                    />
-                  )}
+                <div className="flex flex-col mt-20">
+                  <div className="flex">
+                    <Image src={indexIcon} alt="indexIcon" />
+                    <p className="text-black font-bold text-2xl ml-4">
+                      GitHub 링크
+                    </p>
+                  </div>
+                  <p className="mt-5 ml-12 text-black text-lg">
+                    클릭 시 해당 주소로 이동합니다.
+                  </p>
+                  <div className="mt-6 ml-24 mb-10 flex space-x-4">
+                    {projectData?.githubUrl && (
+                      <Image
+                        src={gitHubButton}
+                        alt="GitHubButton"
+                        onClick={() => handleButtonClick(projectData.githubUrl)}
+                        style={{ cursor: "pointer" }}
+                      />
+                    )}
+                    {projectData?.webUrl && (
+                      <Image
+                        src={webButton}
+                        alt="WebButton"
+                        onClick={() => handleButtonClick(projectData.webUrl)}
+                        style={{ cursor: "pointer" }}
+                      />
+                    )}
+                    {projectData?.googlePlayUrl && (
+                      <Image
+                        src={googleButton}
+                        alt="GoogleButton"
+                        onClick={() =>
+                          handleButtonClick(projectData.googlePlayUrl)
+                        }
+                        style={{ cursor: "pointer" }}
+                      />
+                    )}
+                  </div>
                 </div>
-              </div>
-              <div className="flex">
-                <Image src={indexIcon} alt="indexIcon" />
+                <div className="flex">
+                  <Image src={indexIcon} alt="indexIcon" />
+                </div>
               </div>
             </div>
           </div>
+          {checkId && (
+            <div className="items-center justify-center mb-20 mt-24 flex space-x-5">
+              <button
+                className="w-20 h-9 p-1 text-xs bg-gray-400 hover:bg-purple-500 rounded-xl text-white"
+                type="button"
+                onClick={() => handleFix()}
+              >
+                수정하기
+              </button>
+              <button
+                className="w-20 h-9 p-1 text-xs bg-gray-400  hover:bg-purple-500  rounded-xl text-white"
+                type="button"
+                onClick={() => handleDelete()}
+              >
+                삭제하기
+              </button>
+            </div>
+          )}
         </div>
-        {checkId && (
-          <div className="items-center justify-center mb-20 mt-24 flex space-x-5">
-            <button
-              className="w-20 h-9 p-1 text-xs bg-gray-400 hover:bg-purple-500 rounded-xl text-white"
-              type="button"
-              onClick={() => handleFix()}
-            >
-              수정하기
-            </button>
-            <button
-              className="w-20 h-9 p-1 text-xs bg-gray-400  hover:bg-purple-500  rounded-xl text-white"
-              type="button"
-              onClick={() => handleDelete()}
-            >
-              삭제하기
-            </button>
-          </div>
-        )}
-      </div>
-    </main>
+      </main>
+    </div>
   );
 };
 
