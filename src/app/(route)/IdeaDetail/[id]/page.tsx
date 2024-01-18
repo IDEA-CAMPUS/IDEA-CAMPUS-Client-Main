@@ -75,7 +75,24 @@ const IdeaDetail = () => {
               </div>
             </div>
             <div className="mr-24 items-center justify-center flex flex-col">
-              <Image src="/user.svg" alt="profile" width={70} height={70} />
+              {/* <Image src="/user.svg" alt="profile" width={70} height={70} /> */}
+              <svg width={60} height={60}>
+                <circle
+                  cx="30"
+                  cy="30"
+                  r="30"
+                  fill={ideaData?.color || "#FFCF4A"}
+                />
+              </svg>
+              <div className="absolute mt-[-44px]">
+                <Image
+                  src="/profile_emptybg.svg"
+                  alt="프로필"
+                  width={58}
+                  height={58}
+                  layout="fixed"
+                />
+              </div>{" "}
               <p className="mt-3 text-black text-lg">{ideaData?.nickName}</p>
             </div>
           </div>

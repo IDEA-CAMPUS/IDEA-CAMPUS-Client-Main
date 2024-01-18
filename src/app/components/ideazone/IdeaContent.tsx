@@ -78,16 +78,17 @@ const IdeaContent: React.FC<IdeaContentProps> = ({
           <svg width={60} height={60}>
             <circle cx="30" cy="30" r="30" fill={image || "#FFCF4A"} />
           </svg>
+          <div className="absolute">
+            <Image
+              src="/profile_emptybg.svg"
+              alt="프로필"
+              width={59}
+              height={59}
+              layout="fixed"
+            />
+          </div>
         </div>
-        <div className="relative">
-          <Image
-            src="/profile_emptybg.svg"
-            alt="프로필"
-            width={5}
-            height={5}
-            layout="fixed"
-          ></Image>
-        </div>
+
         <p className="mt-5 text-lg text-center text-black">{name}</p>
       </div>
     </main>

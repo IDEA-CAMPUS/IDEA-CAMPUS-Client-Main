@@ -109,14 +109,14 @@ export default function Login() {
               ></TextButton>
             </div>
 
-            <Image
+            {/* <Image
               src="/google.svg"
               alt="google"
               width={80}
               height={45}
               className="mt-[50px] cursor-pointer z-10"
               // onClick={() => googleLogin}
-            ></Image>
+            ></Image> */}
           </div>
         </div>
       );
