@@ -10,7 +10,7 @@ import {
   informationItem,
 } from "@/app/api/mypage/MemberInfoEdit";
 import { useEffect, useState } from "react";
-
+import { useRouter } from "next/navigation";
 
 const IdeaManage = () => {
   const router = useRouter();
