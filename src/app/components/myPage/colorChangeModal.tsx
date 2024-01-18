@@ -2,15 +2,26 @@
 import React, { useState } from "react";
 import ColorPalette from "./ColorPalette";
 import Image from "next/image";
+import { editUserInfo } from "@/app/api/mypage/editUserInfo";
 
-export default function ColorChangeModal() {
-  const [selectedColor, setSelectedColor] = useState<string | null>(null);
+interface ownProps {
+  onChange: (color: string) => void;
+  onToggle: () => void;
+  userInfoData: {};
+}
+
+export const ColorChangeModal = (props: ownProps) => {
+  const {
+    onChange: handleChange,
+    onToggle: handleToggle,
+    userInfoData,
+  } = props;
+
+  const [selectedColor, setSelectedColor] = useState<string>("");
 
   const handleButtonClick = (colorCode: string) => {
     setSelectedColor(colorCode);
   };
-
-  console.log(selectedColor);
 
   const colorCodes = [
     "#B034F7",
@@ -34,6 +45,17 @@ export default function ColorChangeModal() {
     "#F69630",
     "#FA7F60",
   ];
+
+  const handleColorSave = () => {
+    const bodyData = {
+      ...userInfoData,
+      color: selectedColor,
+    };
+    editUserInfo(bodyData);
+
+    // handleChange(selectedColor);
+    // handleToggle();
+  };
 
   return (
     <div>
@@ -68,16 +90,21 @@ export default function ColorChangeModal() {
             />
           ))}
         </div>
-        {/* <div className="flex flex-row justify-center gap-4 mt-4">
-          <button className="bg-white text-black hover:bg-gray-200 font-semibold px-4 py-2 rounded-md"
->
+        <div className="flex flex-row justify-center gap-4 mt-4">
+          <button
+            onClick={handleToggle}
+            className="bg-white text-black hover:bg-gray-200 font-semibold px-4 py-2 rounded-md"
+          >
             취소
           </button>
-          <button className="bg-white text-purple-700 hover:bg-purple-200 font-semibold px-4 py-2 rounded-md">
+          <button
+            onClick={handleColorSave}
+            className="bg-white text-purple-700 hover:bg-purple-200 font-semibold px-4 py-2 rounded-md"
+          >
             저장
           </button>
-        </div> */}
+        </div>
       </div>
     </div>
   );
-}
+};
