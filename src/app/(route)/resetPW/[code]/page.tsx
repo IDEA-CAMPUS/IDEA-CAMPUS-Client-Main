@@ -3,8 +3,7 @@
 import resetPw from "@/app/api/resetPw";
 import { NextButton } from "@/app/components/components/buttons";
 import { Input } from "@/app/components/components/inputbox";
-import { usePathname } from "next/navigation";
-import { useRouter } from "next/router";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const ResetPW = () => {
