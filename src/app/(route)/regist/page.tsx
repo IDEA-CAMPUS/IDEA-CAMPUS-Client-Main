@@ -9,6 +9,8 @@ import { ChangeEvent } from "react";
 import { useToast } from "@/app/class/tost";
 import { doubleCheck, regist } from "@/app/api/regist";
 import { SelectBox } from "@/app/components/components/select";
+import AlertModal from "@/app/components/myPage/AlertModal";
+import { ok } from "assert";
 
 export default function Regist() {
   const pathname = usePathname();
@@ -33,6 +35,7 @@ export default function Regist() {
 
   const [idRight, setIdRight] = useState<boolean | undefined>(undefined);
   const [nickRight, setNickRight] = useState<boolean | undefined>(undefined);
+  const [isAlert, setIsAlert] = useState<boolean>(false);
 
   const inputStates = [
     email,
@@ -114,12 +117,10 @@ export default function Regist() {
         agreeMarketingSms,
       });
       console.log("response", response);
-      if (response?.check == true) {
-        if (router) {
-          console.log("response", response);
-          router.push("/login");
-        }
+      if (response?.check === true) {
+        setIsAlert(true);
       } else {
+        alert("오류가 발생했습니다.");
       }
 
       //정보저장
@@ -208,13 +209,25 @@ export default function Regist() {
           return true;
         }
       case "name":
-        if (name.localeCompare("aa") >= 0) {
-          return false;
-        } else if (name === "") {
-          return false;
-        } else {
-          return true;
+        //자음만 있는 것이 아닌 올바른 한글인가를 검증하는 정규식
+        const hasAlphabetOrHangul = /^(?=.*[a-zA-Z가-힣])[a-zA-Z가-힣]+$/.test(
+          name
+        );
+        if (name === "") {
+          return true; // 빈 문자열이면 오류 상태 (true 반환)
         }
+
+        if (name.length < 2) {
+          return true; // 2글자 미만이면 오류 상태 (true 반환)
+        }
+
+        if (!hasAlphabetOrHangul) {
+          return true; // 영어 또는 한글이 하나 이상 포함되지 않으면 오류 상태 (true 반환)
+        }
+
+        // 모든 조건을 통과하면 거짓 반환
+        return false;
+
       case "nickName":
         if (nickRight == undefined) {
           return false;
@@ -279,7 +292,8 @@ export default function Regist() {
 
       if (response === true) {
         setNickRight(true);
-        showToast("사용 가능한 닉네임입니다.", 2000);
+        alert("사용 가능한 닉네임입니다.");
+        // showToast("사용 가능한 닉네임입니다.", 2000);
       } else {
         setNickRight(false);
       }
@@ -457,6 +471,9 @@ export default function Regist() {
             ></NextButton>
           </div>
         </form>
+        {isAlert && (
+          <AlertModal text="아이디어 캠퍼스 입학을 축하드립니다!" url="login" />
+        )}
       </div>
       <div className="w-full h-[230px] bg-[url('/wave.svg')] bottom-0 z-[-1]"></div>
     </div>
