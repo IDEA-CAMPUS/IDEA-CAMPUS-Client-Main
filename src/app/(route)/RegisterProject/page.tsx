@@ -39,11 +39,10 @@ interface ProjectFormData {
 }
 
 const RegisterProject = () => {
-  const formData = new FormData();
   const [images, setImages] = useState<
     Array<{ name: string; url: string; size: string }>
   >([]);
-  const [formImagesList, setFormImagesList] = useState<File[]>([]);
+  const [selectedFile, setSelectedFile] = useState<File>();
   const [projectData, setProjectData] = useState<ProjectFormData>({
     title: "",
     booleanWeb: true,
@@ -65,24 +64,25 @@ const RegisterProject = () => {
     AI: true,
   });
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
+    const file = e.target.files;
 
-    if (files && files.length > 0) {
-      const file = files[0];
-      console.log("file: " + file);
+    if (file) {
+      const newFiles: File[] = Array.from(file);
 
+      if (e.target.files && e.target.files.length > 0) {
+        setSelectedFile(e.target.files[0]);
+      }
       const reader = new FileReader();
+
       reader.onload = () => {
-        const imageSize = `${(file.size / 1024).toFixed(2)} KB`;
+        const imageSize = `${(file[0].size / 1024).toFixed(2)} KB`;
         setImages((prevImages) => [
           ...prevImages,
-          { name: file.name, url: reader.result as string, size: imageSize },
+          { name: file[0].name, url: reader.result as string, size: imageSize },
         ]);
       };
-      reader.readAsDataURL(file);
 
-      // If you want to handle multiple images, store them in an array
-      setFormImagesList((prevFiles) => [...prevFiles, file]);
+      reader.readAsDataURL(file[0]);
     }
   };
 
@@ -140,34 +140,51 @@ const RegisterProject = () => {
 
   const handleUpload = async () => {
     try {
-      if (isFormValid()) {
+      if (isFormValid() && images) {
         // 프로젝트 데이터 추가
         // const blob1 = new Blob([JSON.stringify(projectData)], {
         //   type: "application/json",
         // });
-        formData.append("title", projectData.title);
-        formData.append("simpleDescription", projectData.simpleDescription);
-        formData.append("detailedDescription", projectData.detailedDescription);
-        formData.append("teamInformation", projectData.teamInformation);
-        formData.append("githubUrl", projectData.githubUrl);
-        formData.append("webUrl", projectData.webUrl);
-        formData.append("googlePlayUrl", projectData.googlePlayUrl);
-        formData.append("booleanApp", String(projectData.booleanApp));
-        formData.append("booleanWeb", String(projectData.booleanWeb));
-        formData.append("booleanAi", String(projectData.booleanAi));
-        formImagesList.forEach((file, index) => {
-          formData.append(`images[${index}]`, file);
-        });
-        // 이미지 파일 추가
-        // formImagesList.forEach((image, index) => {
-        //   if (image instanceof File && image.size > 0) {
-        //     formData.append("images", image);
-        //   }
-        // });
+        // if (selectedFile) {
+        //   formData.append("title", projectData.title);
+        //   formData.append("simpleDescription", projectData.simpleDescription);
+        //   formData.append(
+        //     "detailedDescription",
+        //     projectData.detailedDescription
+        //   );
+        //   formData.append("teamInformation", projectData.teamInformation);
+        //   formData.append("githubUrl", projectData.githubUrl);
+        //   formData.append("webUrl", projectData.webUrl);
+        //   formData.append("googlePlayUrl", projectData.googlePlayUrl);
+        //   formData.append("booleanApp", String(projectData.booleanApp));
+        //   formData.append("booleanWeb", String(projectData.booleanWeb));
+        //   formData.append("booleanAi", String(projectData.booleanAi));
+        //   selectedFile.forEach((file, index) => {
+        //     formData.append(`images`, file, file.name);
+        //   });
+        // }
+        const formdata = new FormData();
+        formdata.append("title", projectData.title);
+        formdata.append("simpleDescription", projectData.simpleDescription);
+        formdata.append("detailedDescription", projectData.detailedDescription);
+        formdata.append("teamInformation", projectData.teamInformation);
+        formdata.append("githubUrl", projectData.githubUrl);
+        formdata.append("webUrl", projectData.webUrl);
+        formdata.append("googlePlayUrl", projectData.googlePlayUrl);
+        formdata.append("booleanWeb", String(projectData.booleanWeb));
+        formdata.append("booleanApp", String(projectData.booleanApp));
+        formdata.append("booleanAi", String(projectData.booleanAi));
 
-        // formData.append("images", formImagesList!);
+        if (selectedFile) {
+          formdata.append("images", selectedFile, selectedFile.name);
+        }
 
-        await PostProject(formData);
+        await PostProject(formdata);
+
+        for (const key of formdata.keys()) {
+          console.log(key, ":", formdata.get(key));
+        }
+
         router.push("/ProjectGallery");
       } else {
         alert("선택항목을 제외한 모든 항목을 입력해주세요.");
@@ -327,17 +344,20 @@ const RegisterProject = () => {
                 ))}
               </div>
             </div>
-            <div className="absolute mt-56 ml-[300px]">
+            <div className="absolute mt-56 ml-[700px]">
+              <label
+                htmlFor="fileInput"
+                className="cursor-pointer bg-[#EFD6FD] hover:bg-purple-400 active:bg-purple-800 text-white px-4 py-2 rounded-xl shrink-"
+                onClick={handleButtonClick}
+              >
+                파일 찾기
+              </label>
               <input
                 type="file"
-                accept="image/*"
                 onChange={handleImageChange}
                 ref={fileInputRef}
                 style={{ display: "none" }}
               />
-              <div className="ml-[500px] items-cente">
-                <SubmitButton title="파일 찾기" onClick={handleButtonClick} />
-              </div>
             </div>
           </div>
         </div>

@@ -9,13 +9,16 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 
 import React from "react";
+import GetCheckClubId from "@/app/api/club/GetCheckClubId";
+import DeleteClub from "@/app/api/club/DeleteClub";
 
 const RegistrationCompleted = () => {
   const pathname = usePathname();
   //id가져오는 문자열 함수
-  const id = pathname.split("/")[2];
+  const id = Number(pathname.split("/")[2]);
 
   const clubData = getClubDetail(id)?.information;
+  const checkId = GetCheckClubId(id);
 
   const thumbnail = clubData?.thumbnail ?? "";
   const otherImages = clubData?.otherImages ?? [];
@@ -23,10 +26,19 @@ const RegistrationCompleted = () => {
   const images: string[] = [thumbnail, ...otherImages];
 
   const router = useRouter();
+
+  const handleFix = () => {
+    router.push(`/FixClub/${id}`);
+  };
+  const handleDelete = () => {
+    DeleteClub(id);
+    router.push("/studentGroups");
+  };
+
   return (
     <div>
       <NavBar />
-      <div className="flex flex-col w-[100vw] items-center bg-[#FAFAFA]">
+      <div className="flex min-h-screen flex-col w-[100vw] items-center bg-[#FAFAFA]">
         {/* 등록폼 박스 만들기 */}
         <Image
           src={GradientBackground}
@@ -77,14 +89,22 @@ const RegistrationCompleted = () => {
                 </div>
               ))}
             </div>
-            <div className="flex flex-row justify-center gap-4 mt-8">
-              <button className="bg-gray-400 hover:bg-gray-500 active:bg-gray-800 text-white px-4 py-2 w-22 h-10 rounded-2xl shrink-0">
-                수정하기
-              </button>
-              <button className="bg-gray-400 hover:bg-gray-500 active:bg-gray-800 px-4 py-2 w-22 h-10 rounded-2xl shrink-0">
-                삭제하기
-              </button>
-            </div>
+            {checkId && (
+              <div className="flex flex-row justify-center gap-4 mt-8">
+                <button
+                  className="bg-gray-400 hover:bg-gray-500 active:bg-gray-800 text-white px-4 py-2 w-22 h-10 rounded-2xl shrink-0"
+                  onClick={() => handleFix()}
+                >
+                  수정하기
+                </button>
+                <button
+                  className="bg-gray-400 hover:bg-gray-500 active:bg-gray-800 px-4 py-2 w-22 h-10 rounded-2xl shrink-0"
+                  onClick={() => handleDelete()}
+                >
+                  삭제하기
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

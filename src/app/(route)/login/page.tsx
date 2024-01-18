@@ -65,7 +65,7 @@ export default function Login() {
               alt="logo"
               width={404}
               height={145}
-              className="mb-[50px]"
+              className="mb-[50px] cursor-pointer"
             ></Image>
 
             <form onSubmit={handleLogin} className="flex flex-col items-center">
@@ -115,6 +115,7 @@ export default function Login() {
               width={80}
               height={45}
               className="mt-[50px] cursor-pointer z-10"
+              // onClick={() => googleLogin}
             ></Image>
           </div>
         </div>
@@ -201,16 +202,18 @@ export default function Login() {
         event.preventDefault();
 
         try {
-          const result: boolean | undefined = await findPW({
+          const response = await findPW({
             email,
             number,
           });
 
-          if (result === true) {
+          if (response?.check) {
+            alert("이메일이 전송 되었습니다.");
             if (router) {
               // router.push("/");
             }
           } else {
+            alert("error");
             showToast("존재하는 계정이 없습니다.", 2000);
           }
 
@@ -259,7 +262,7 @@ export default function Login() {
                 text="비밀번호 찾기"
                 type="submit"
                 className="mt-[35px] "
-                onClick={() => setPage("returnPW")}
+                // onClick={() => setPage("returnPW")}
                 //api작업시 onClick삭제
               ></NextButton>
             </form>
