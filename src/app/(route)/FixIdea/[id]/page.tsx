@@ -71,6 +71,17 @@ const FixIdea = () => {
   }, [ideaFixData]);
 
   const router = useRouter();
+  useEffect(() => {
+    setSubmitIdeaData({
+      title: ideaData.title,
+      simpleDescription: ideaData.simpleDescription,
+      keyWord:
+        ideaData.keyWord1 + "," + ideaData.keyWord2 + "," + ideaData.keyWord3,
+      detailedDescription: ideaData.detailedDescription,
+      url1: ideaData.url1,
+      url2: ideaData.url2,
+    });
+  }, [ideaData]);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
