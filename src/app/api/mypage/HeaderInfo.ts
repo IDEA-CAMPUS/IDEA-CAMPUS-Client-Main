@@ -25,7 +25,7 @@ const GetHeaderInfo = () => {
                     headers: {
                         "Content-Type" : "application/json",
                         Authorization: `Bearer ${localStorage.getItem("login-token")}`,
-                        //eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyNCIsImlhdCI6MTcwNTMyMDE1NywiZXhwIjoxNzA1MzIzNzU3fQ.r83sK2F1T3zOicqEjVZLfHtOomjS0WrSjxXXPs67Zjqwv0-cMnhLBr1YcprYiqJnkkwrw2iQ8fTSoUHqQfjP-g
+                    
                     }
                 }
             );
