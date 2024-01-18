@@ -2,7 +2,7 @@
 
 import "next/link";
 import Image from "next/image";
-import GradientBackgroundmyPage from "../../../../public/gradientBackground.png";
+import GradientBackgroundmyPage from "../../../../public/myPage/graidentBackgroundmyPage.png";
 import { NavBar } from "../../components/components/naviBar";
 import GetHeaderInfo from "@/app/api/mypage/HeaderInfo";
 import {
@@ -10,7 +10,7 @@ import {
   informationItem,
 } from "@/app/api/mypage/MemberInfoEdit";
 import { useEffect, useState } from "react";
-
+import { useRouter } from "next/navigation";
 
 const IdeaManage = () => {
   const router = useRouter();
@@ -53,15 +53,15 @@ const IdeaManage = () => {
   return (
     <div>
       <NavBar />
-      <div className="flex flex-col w-[100vw] items-center bg-[#FAFAFA]">
+      <div className="flex flex-col w-[100vw] min-h-screen items-center bg-[#FAFAFA]">
         <div className="flex flex-col items-center mt-12 w-[71vw] z-20">
           <div className="flex flex-row w-full justify-between items-center">
             <div className="flex flex-row">
               <Image
-                src="/Profile.svg"
+                src="/profile.svg"
                 width={60}
                 height={60}
-                alt="Logo"
+                alt="profile"
               ></Image>
               <div className="ml-4">
                 <p className="text-2xl text-black"></p>
@@ -103,12 +103,12 @@ const IdeaManage = () => {
             </table>
           </div>
         </div>
+        <Image
+          src={GradientBackgroundmyPage}
+          alt="배경색"
+          className="w-full fixed bottom-0 object-cover bg-[#FAFAFA]"
+        />
       </div>
-      <Image
-        src={GradientBackgroundmyPage}
-        alt="배경색"
-        className="w-full bottom-0 fixed object-cover bg-[#FAFAFA]"
-      ></Image>
     </div>
   );
 };
