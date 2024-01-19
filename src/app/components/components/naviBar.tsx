@@ -107,14 +107,14 @@ export const NavBar = () => {
               style={{
                 backgroundColor: `${color}`,
               }}
-              className={`w-[40px] h-[40px] rounded-[100%] relative`}
-              onClick={() => router.push("/MyPage")}
+              className={`w-[40px] h-[40px] rounded-[100%] relative cursor-pointer`}
+              onClick={() => handleItemClick()}
             >
               <Image src={profileImage} alt="프로필이미지" className="mt-2" />
             </div>
             <div
               className="font-bold text-[18px] flex cursor-pointer"
-              onClick={() => router.push("/MyPage")}
+              onClick={() => handleItemClick()}
             >
               {nick}
             </div>
